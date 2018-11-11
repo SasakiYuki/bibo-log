@@ -1,4 +1,4 @@
-baseURL = "https：//sasakiyuki.github.io/"
+baseURL = "https://dream-plus-posts.netlify.com/"
 languageCode = "ja-jp"
 defaultContentLanguage = "jp"
 title = "備忘log"
@@ -18,7 +18,7 @@ enableEmoji=true
 [params]
 	author = "YukiYamada"
 	description = "Just a random blog for random stuff, mostly tech-related."
-	avatar = "https://raw.githubusercontent.com/UtkarshVerma/blog/source/static/images/myavatar.jpg"
+	avatar = "https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/_bibo-log/static/snowman_white.png"
 	motto = "Android Developer.Learning Android Kotlin-Spring Python-Django."
 	enableToc = true
 	enableShareCard = true

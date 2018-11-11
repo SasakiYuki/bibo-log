@@ -1,7 +1,7 @@
-baseURL = "https://dream-plus-cards.netlify.com/"
-languageCode = "en-us"
-defaultContentLanguage = "en"
-title = "UtkarshVerma's Site"
+baseURL = "https://dream-plus-posts.netlify.com/"
+languageCode = "ja-jp"
+defaultContentLanguage = "jp"
+title = "備忘log"
 theme = "dream-plus"
 
 googleAnalytics = "UA-112332904-3"
@@ -12,10 +12,10 @@ enableRobotsTXT = true
 enableEmoji=true
 
 [params]
-  author = "Utkarsh Verma"
-  description = "A hub for my works."
-  avatar = "https://raw.githubusercontent.com/UtkarshVerma/blog/source/static/images/myavatar.jpg"
-  motto = "A keen maker, programmer and an Instructables author."
+  author = "YukiYamada"
+  description = "Just a random blog for random stuff, mostly tech-related."
+  avatar = "https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/_bibo-log/static/snowman_white.png"
+  motto = "Android Developer.Learning Android Kotlin-Spring Python-Django."
 
   favicon = "/img/defaultFav.ico"
 
@@ -32,9 +32,8 @@ enableEmoji=true
   twitterEmoji=true
 
 [social]
-  email = "utkarshverma@pm.me"
-  github = "UtkarshVerma"
-  stackoverflow = "9271608/utkarsh-verma"
-  medium = "UtkarshVerma_"
-  twitter = "UtkarshVerma_"
+  email = "wacorggen@gmail.com"
+  github = "SasakiYuki"
+  medium = "wacorggen"
+  twitter = "YukiYamadaJP"
   siteStartYear = 2018
