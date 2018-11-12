@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
 	<title>
-	AndroidManifestについて
+	flutterTips-001-WebViewを使う
 </title><style>
 body {
 	display: block;
@@ -20,7 +20,7 @@ body, body.pushable {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="author" content="map[name:Yuki Sasaki]" />
-	<meta name="description" content="勉強会で説明する際に用いた追加資料です。AndroidManifestについて簡単なマトメになっています。" />
+	<meta name="description" content="flutterでWebViewを使う方法を説明します。導入から実装まで。" />
 <meta name="generator" content="Hugo 0.41" />
 
 <link rel="shortcut icon" href="/img/defaultFav.ico">
@@ -88,17 +88,17 @@ var bodyBgSwitchIndex = 0;var gradients = [
 </h3>
 </section><section class="ui attached center aligned inverted segment sidebar-dream-tags">
 
-	<a class="ui label brown " href="/tags/android" title="android">android</a>
+	<a class="ui label orange " href="/tags/android" title="android">android</a>
 
-	<a class="ui label green " href="/tags/androidtips" title="androidtips">androidtips</a>
+	<a class="ui label violet " href="/tags/androidtips" title="androidtips">androidtips</a>
 
-	<a class="ui label teal " href="/tags/django" title="django">django</a>
+	<a class="ui label brown " href="/tags/django" title="django">django</a>
 
 	<a class="ui label purple " href="/tags/flutter" title="flutter">flutter</a>
 
-	<a class="ui label purple " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+	<a class="ui label pink " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
 
-	<a class="ui label orange " href="/tags/python" title="python">python</a>
+	<a class="ui label olive " href="/tags/python" title="python">python</a>
 
 </section>
 	<section class="ui attached inverted segment sidebar-dream-categories both flexbox">
@@ -252,17 +252,17 @@ var bodyBgSwitchIndex = 0;var gradients = [
 			</div></div>
 		<div id="tag-category" class=" content"><section class="ui attached center aligned inverted segment dream-tags none flexbox">
 
-	<a class="ui label teal " href="/tags/android" title="android">android</a>
+	<a class="ui label purple " href="/tags/android" title="android">android</a>
 
-	<a class="ui label violet " href="/tags/androidtips" title="androidtips">androidtips</a>
+	<a class="ui label blue " href="/tags/androidtips" title="androidtips">androidtips</a>
 
-	<a class="ui label olive " href="/tags/django" title="django">django</a>
+	<a class="ui label violet " href="/tags/django" title="django">django</a>
 
-	<a class="ui label brown " href="/tags/flutter" title="flutter">flutter</a>
+	<a class="ui label violet " href="/tags/flutter" title="flutter">flutter</a>
 
-	<a class="ui label pink " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+	<a class="ui label green " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
 
-	<a class="ui label blue " href="/tags/python" title="python">python</a>
+	<a class="ui label orange " href="/tags/python" title="python">python</a>
 
 </section><section class="ui attached inverted segment dream-categories both flexbox">
 				<div class="inverted accordion">
@@ -357,24 +357,25 @@ var bodyBgSwitchIndex = 0;var gradients = [
 	<div class="sixteen wide mobile fifteen wide tablet twelve wide computer column post-list">
 		<section class="ui secondary top attached black segment post-head">
 			<h1 class="post-title">
-				AndroidManifestについて
+				flutterTips-001-WebViewを使う
 			</h1>
 			<div class="sub header">
-					<div><span><i class="calendar outline icon"></i>Oct 4, 2018</span></div><div><span class="disqusComment"><i class="comment outline icon"></i><a href="https://sasakiyuki.github.io/posts/android_document_android_manifest/#disqus_thread" class="disqus-comment-count" data-disqus-identifier="c1d0708dc462fa0ee33c5d6e056e2ef9"></a></span></div>
+					<div><span><i class="calendar outline icon"></i>Nov 12, 2018</span></div><div><span class="disqusComment"><i class="comment outline icon"></i><a href="https://sasakiyuki.github.io/posts/flutter_tips_001/#disqus_thread" class="disqus-comment-count" data-disqus-identifier="66ac531ed3d802170ff9ffab05241b58"></a></span></div>
 					<div><span><i class="clock outline icon"></i>1 min read</span></div>
-					<div><span><i class="angle double up icon"></i> Oct 4, 2018</span></div>
+					<div><span><i class="angle double up icon"></i> Nov 12, 2018</span></div>
 			</div>
 			<hr><div class="toc"><nav id="TableOfContents">
 <ul>
-<li><a href="#androidmanifestとは">AndroidManifestとは</a>
+<li><a href="#flutter-webview-plugin">flutter_webview_plugin</a></li>
+<li><a href="#実装">実装</a></li>
+<li><a href="#その他の使い方">その他の使い方</a>
 <ul>
-<li><a href="#androidmanifest内で行うこと">AndroidManifest内で行うこと</a></li>
-<li><a href="#ファイル内の規則">ファイル内の規則</a></li>
-<li><a href="#activityタグ">activityタグ</a></li>
-<li><a href="#intent-filterタグ">intent-filterタグ</a>
-<ul>
-<li><a href="#intent-filter">intent-filter</a></li>
-</ul></li>
+<li><a href="#webview内でページが移動した際のイベント">WebView内でページが移動した際のイベント</a></li>
+<li><a href="#webview内のスクロールイベント">WebView内のスクロールイベント</a></li>
+<li><a href="#webviewを隠す-隠されたやつを表示する">WebViewを隠す、隠されたやつを表示する</a></li>
+<li><a href="#リロード">リロード</a></li>
+<li><a href="#js実行">JS実行</a></li>
+<li><a href="#その他イベント">その他イベント</a></li>
 </ul></li>
 </ul>
 </nav></div>
@@ -382,148 +383,200 @@ var bodyBgSwitchIndex = 0;var gradients = [
 			<article class="post-content twemoji">
 				
 
-<h1 id="androidmanifestとは">AndroidManifestとは&nbsp;<a class="anchor" href="#androidmanifestとは"><i class="small linkify icon"></i></a> </h1>
+<p>cover : &ldquo;<a href="https://raw.githubusercontent.com/UtkarshVerma/blog/source/static/images/gci/gci-thumb.png&quot;">https://raw.githubusercontent.com/UtkarshVerma/blog/source/static/images/gci/gci-thumb.png&quot;</a>
+draft: false</p>
 
-<p>AndroidManifest.xmlはすべてのプロジェクトに等しく一つ存在するものです。</p>
+<p>FlutterでWebViewを使うためには少しいじる必要があります。</p>
 
-<p>作っているAndroidアプリに関する情報をAndroidのOS(システム）に伝える役目を担っており、コード実行の際に必要になる重要な情報を記述する必要があります。</p>
+<h1 id="flutter-webview-plugin">flutter_webview_plugin&nbsp;<a class="anchor" href="#flutter-webview-plugin"><i class="small linkify icon"></i></a> </h1>
 
-<p>プロジェクトの基底ディレクトリに <code>AndroidManifest.xml</code> として置く必要があり名前を変えることなどはできません。</p>
+<p>Flutterで Nativeの <code>WebView</code> を呼び出すには <code>flutter_webview_plugin</code> の依存を追加する必要があります。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-pubspec.yaml" data-lang="pubspec.yaml"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-pubspec.yaml" data-lang="pubspec.yaml">dependencies<span class="p">:</span><span class="w">
+</span><span class="w">  </span>flutter_webview_plugin<span class="p">:</span><span class="w"> </span><span class="s2">&#34;0.2.1+2&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>バージョンは<a href="https://pub.dartlang.org/packages/flutter_webview_plugin#-versions-tab-">こちら</a> からご覧ください。</p>
 
-<p><code>XML</code> で記述されており、タグで要素を構築します。</p>
+<p>ターミナル上で</p>
 
-<h2 id="androidmanifest内で行うこと">AndroidManifest内で行うこと&nbsp;<a class="anchor" href="#androidmanifest内で行うこと"><i class="small linkify icon"></i></a> </h2>
+<pre><code>flutter packages get
+</code></pre>
+
+<p>インストールすることで使えるようになります。</p>
+
+<p>また、WebViewはWdigetTreeには統合されていないためSnackBarやDialogを使うところはできません。</p>
+
+<p>インポート文は</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-dart" data-lang="dart"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dart" data-lang="dart"><span class="k">import</span> <span class="s1">&#39;package:flutter_webview_plugin/flutter_webview_plugin.dart&#39;</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="実装">実装&nbsp;<a class="anchor" href="#実装"><i class="small linkify icon"></i></a> </h1>
+
+<p>Flutter Navigationを利用して起動します。
+公式サンプルのままですが</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-dart" data-lang="dart"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dart" data-lang="dart"><span class="k">new</span> <span class="n">MaterialApp</span><span class="p">(</span>
+      <span class="nl">routes:</span> <span class="p">{</span>
+        <span class="s2">&#34;/&#34;</span><span class="o">:</span> <span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="n">WebviewScaffold</span><span class="p">(</span>
+              <span class="nl">url:</span> <span class="s2">&#34;https://www.google.com&#34;</span><span class="p">,</span>
+              <span class="nl">appBar:</span> <span class="k">new</span> <span class="n">AppBar</span><span class="p">(</span>
+                <span class="nl">title:</span> <span class="k">new</span> <span class="n">Text</span><span class="p">(</span><span class="s2">&#34;Widget webview&#34;</span><span class="p">),</span>
+              <span class="p">),</span>
+            <span class="p">)</span>
+      <span class="p">},</span>
+    <span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>WebviewScaffold</code> を使ってその中で諸々セットして使います。
+特に難しいことはありません。</p>
+
+<h1 id="その他の使い方">その他の使い方&nbsp;<a class="anchor" href="#その他の使い方"><i class="small linkify icon"></i></a> </h1>
+
+<p>WebViewはシングルトンインスタンスで提供されているのでどこからでもイベントをハンドリングできます。</p>
+
+<h2 id="webview内でページが移動した際のイベント">WebView内でページが移動した際のイベント&nbsp;<a class="anchor" href="#webview内でページが移動した際のイベント"><i class="small linkify icon"></i></a> </h2>
+
+<p>WebViewで移動するイベントをハンドリングできます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-dart" data-lang="dart"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dart" data-lang="dart">    <span class="kd">final</span> <span class="n">flutterWebViewPlugin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FlutterWebviewPlugin</span><span class="p">();</span>
+
+    <span class="n">flutterWebViewPlugin</span><span class="p">.</span><span class="n">onUrlChanged</span><span class="p">.</span><span class="n">listen</span><span class="p">((</span><span class="kt">String</span> <span class="n">url</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">print</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+    <span class="p">});</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="webview内のスクロールイベント">WebView内のスクロールイベント&nbsp;<a class="anchor" href="#webview内のスクロールイベント"><i class="small linkify icon"></i></a> </h2>
+
+<p>WebView内のスクロールイベントをハンドリングできます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-dart" data-lang="dart"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dart" data-lang="dart">    <span class="n">flutterWebViewPlugin</span><span class="p">.</span><span class="n">onScrollYChanged</span><span class="p">.</span><span class="n">listen</span><span class="p">((</span><span class="kt">double</span> <span class="n">offsetY</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">print</span><span class="p">(</span><span class="n">offsetY</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="n">flutterWebViewPlugin</span><span class="p">.</span><span class="n">onScrollXChanged</span><span class="p">.</span><span class="n">listen</span><span class="p">((</span><span class="kt">double</span> <span class="n">offsetX</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">print</span><span class="p">(</span><span class="n">offsetX</span><span class="p">);</span>
+    <span class="p">});</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="webviewを隠す-隠されたやつを表示する">WebViewを隠す、隠されたやつを表示する&nbsp;<a class="anchor" href="#webviewを隠す-隠されたやつを表示する"><i class="small linkify icon"></i></a> </h2>
+
+<p><code>WebView</code> を隠したり表示したりするには</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-dart" data-lang="dart"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dart" data-lang="dart">    <span class="c1">// 表示する
+</span><span class="c1"></span>    <span class="n">flutterWebViewPlugin</span><span class="p">.</span><span class="n">launch</span><span class="p">(</span><span class="s2">&#34;https://www.google.com&#34;</span><span class="p">,</span> <span class="nl">hidden:</span> <span class="kc">false</span><span class="p">);</span>
+
+    <span class="n">flutterWebViewPlugin</span><span class="p">.</span><span class="n">launch</span><span class="p">(</span><span class="s2">&#34;url&#34;</span><span class="p">,</span><span class="nl">hidden:</span><span class="kc">true</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>単純に隠したり表示したりするなら</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-dart" data-lang="dart"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dart" data-lang="dart">    <span class="n">flutterWebViewPlugin</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+    <span class="n">flutterWebViewPlugin</span><span class="p">.</span><span class="n">hide</span><span class="p">();</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>もあります。</p>
+
+<h2 id="リロード">リロード&nbsp;<a class="anchor" href="#リロード"><i class="small linkify icon"></i></a> </h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-dart" data-lang="dart"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dart" data-lang="dart"><span class="n">flutterWebViewPlugin</span><span class="p">.</span><span class="n">reloadUrl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="js実行">JS実行&nbsp;<a class="anchor" href="#js実行"><i class="small linkify icon"></i></a> </h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-dart" data-lang="dart"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dart" data-lang="dart"><span class="n">flutterWebViewPlugin</span><span class="p">.</span><span class="n">evalJavascript</span><span class="p">(</span><span class="n">code</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>code は String です。</p>
+
+<h2 id="その他イベント">その他イベント&nbsp;<a class="anchor" href="#その他イベント"><i class="small linkify icon"></i></a> </h2>
 
 <ul>
-<li>アプリを構成する要素</li>
-<li>ユーザーパーミッション</li>
-<li>スタイルや名前、アイコンなどを指定</li>
-<li>Intentのフィルター</li>
+<li>Stream<Null> onDestroy</li>
+<li>Stream<WebViewStateChanged> onStateChanged</li>
+<li>Stream<String> onError</li>
 </ul>
 
-<h2 id="ファイル内の規則">ファイル内の規則&nbsp;<a class="anchor" href="#ファイル内の規則"><i class="small linkify icon"></i></a> </h2>
-
-<p>AndroidManifestで必須の要素は <code>&lt;manifest&gt;</code> <code>&lt;application&gt;</code> のみです。
-これらは省くことはできず、逆にそれ以外は任意ということになります。（実質必要というものは存在します）
-また <code>manifest</code> と <code>application</code> はそれぞれ一回ずつのみ宣言され、階層は <code>manifest</code> -&gt; <code>application</code> の中に存在しないといけません。</p>
-
-<p>実際に見てみましょう。
-例えばAndroidStudioでプロジェクトを初期で作った時に生成されるmanifestは以下です。</p>
-
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    package=&quot;string&quot;&gt;
-
-    &lt;application
-        android:allowBackup=&quot;true&quot;
-        android:icon=&quot;@mipmap/ic_launcher&quot;
-        android:label=&quot;@string/app_name&quot;
-        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;
-        android:supportsRtl=&quot;true&quot;
-        android:theme=&quot;@style/AppTheme&quot;&gt;
-        &lt;activity android:name=&quot;.MainActivity&quot;&gt;
-            &lt;intent-filter&gt;
-                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
-
-                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
-            &lt;/intent-filter&gt;
-        &lt;/activity&gt;
-    &lt;/application&gt;
-
-&lt;/manifest&gt;
-</code></pre>
-
-<p>manifestタグの中にapplicationが存在しているのがわかると思います。</p>
-
-<p>注目してもらいたいのは２行目 <code>xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</code>
-この.xmlファイルはAndroidManifestですよ、と宣言しているということになります。
-また、xml上に <code>android</code> のネームスペースを定義しています。またこの中の属性は絶対に <code>&quot;http://schemas.android.com/apk/res/android&quot;</code> である必要がありますのでご注意ください。</p>
-
-<p>次に application内を見てみると様々な情報が書いてあることがわかると思います。
-上から</p>
-
-<ul>
-<li>バックアップ処理をするか</li>
-<li>アイコン</li>
-<li>アプリ名</li>
-<li>丸アプリアイコン</li>
-<li>RtLsupportの有無</li>
-<li>アプリ全体のテーマ設定</li>
-</ul>
-
-<p>を現しています。</p>
-
-<h2 id="activityタグ">activityタグ&nbsp;<a class="anchor" href="#activityタグ"><i class="small linkify icon"></i></a> </h2>
-
-<p>アプリ内で利用しているActivityはここで記述する必要があります。
-MainActivityが作られているのですでにここに <code>&lt;activity android:name=&quot;.MainActivity&quot;&gt;</code> と記述されていますが例えば SubActivityを作った場合は追加で <code>&lt;activity android:name=&quot;.SubActivity&quot;&gt;</code> と記述する必要があります。
-記述しないとビルド時にそのクラスが認識されずアプリが落ちることになります。現在はAndroidStudio上でActivityを生成すると自動で記述されることもあり忘れることは少なくなりました。</p>
-
-<h2 id="intent-filterタグ">intent-filterタグ&nbsp;<a class="anchor" href="#intent-filterタグ"><i class="small linkify icon"></i></a> </h2>
-
-<p>Activityタグ内に <code>intent-filter</code> というタグが存在しているのがわかると思います。</p>
-
-<pre><code>        &lt;activity android:name=&quot;.MainActivity&quot;&gt;
-            &lt;intent-filter&gt;
-                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
-
-                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
-            &lt;/intent-filter&gt;
-        &lt;/activity&gt;
-</code></pre>
-
-<p>MainActivityのintentに要素を付け加えるタグです。
-intentとはAndroidの用語でアプリの画面遷移時に使われる用語です。</p>
-
-<pre><code>使い方の例
-MainActivityからSubActivityにインテント（遷移）させるときにあのデータを渡す必要がある
-</code></pre>
-
-<h3 id="intent-filter">intent-filter&nbsp;<a class="anchor" href="#intent-filter"><i class="small linkify icon"></i></a> </h3>
-
-<p>まず必須で知る必要があるのはたったの二つです。</p>
-
-<pre><code>                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
-
-                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
-</code></pre>
-
-<p>これだけ。例ではMainActivityタグの中に入っていますがどういう意味か
-上が「メインの画面」であることを示す
-下が「アプリが起動した際はこいつを呼ぶ」という定義</p>
-
-<p>です。
-なので極端な例を出すと</p>
-
-<pre><code>        &lt;activity android:name=&quot;.MainActivity&quot; /&gt;
-        &lt;activity android:name=&quot;.SubActivity&quot;&gt;
-            &lt;intent-filter&gt;
-                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
-
-                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
-            &lt;/intent-filter&gt;
-        &lt;/activity&gt;
-</code></pre>
-
-<p><code>SubActivity</code> が定義されていて <code>MainActivity</code> という名前でも <code>SubActivity</code> にこれら二つの要素を付けたら <code>SubActivity</code> がメイン画面だし、アプリ起動時にはこちらが呼ばれます。</p>
-
-<p>その他にもintent-filterは<a href="https://medium.com/raccoonwallet/raccoonwallet%E3%81%AFdeeplink%E3%81%AB%E5%AF%BE%E5%BF%9C%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E8%A9%B1-21621a685fc3">deeplink</a>などの技術に用いられたりしますが、一旦忘れておいてください。</p>
+<p>WebViewが破壊されたとき
+WebViewのステータスが変わった時
+WebViewでエラーが起きた時　など。</p>
 
 			</article>
 		</section>
 		<section class="ui secondary attached segment dream-tags">
 
-	<a class="ui label purple " href="/tags/android" title="android">android</a>
+	<a class="ui label blue " href="/tags/android" title="android">android</a>
 
-	<a class="ui label green " href="/tags/androidtips" title="androidtips">androidtips</a>
+	<a class="ui label olive " href="/tags/androidtips" title="androidtips">androidtips</a>
 
-	<a class="ui label blue " href="/tags/django" title="django">django</a>
+	<a class="ui label pink " href="/tags/django" title="django">django</a>
 
-	<a class="ui label teal " href="/tags/flutter" title="flutter">flutter</a>
+	<a class="ui label blue " href="/tags/flutter" title="flutter">flutter</a>
 
-	<a class="ui label blue " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+	<a class="ui label orange " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
 
-	<a class="ui label pink " href="/tags/python" title="python">python</a>
+	<a class="ui label brown " href="/tags/python" title="python">python</a>
 
 
 		</section><section class="ui secondary  attached segment share row box"><div class="author"><img class="avatar" src="/img/avatar1.svg">
@@ -540,7 +593,7 @@ MainActivityからSubActivityにインテント（遷移）させるときにあ
 			'width=626,height=436'); return false;">
 		<button class="ui facebook button"><i class="facebook icon"></i>Share</button>
 	</div>
-	<div class="twitter none flexbox" onclick="window.open('https://twitter.com/intent/tweet?text=Read &quot;AndroidManifestについて &quot; by @YukiYamadaJP https:\/\/sasakiyuki.github.io\/posts\/android_document_android_manifest\/','_self')">
+	<div class="twitter none flexbox" onclick="window.open('https://twitter.com/intent/tweet?text=Read &quot;flutterTips-001-WebViewを使う &quot; by @YukiYamadaJP https:\/\/sasakiyuki.github.io\/posts\/flutter_tips_001\/','_self')">
 		<button class="ui twitter button"><i class="twitter icon"></i>Tweet</button>
 	</div>
 </section>
@@ -552,8 +605,8 @@ MainActivityからSubActivityにインテント（遷移）させるときにあ
 		<div class="ui secondary bottom attached stacked segment disqus"><div id="disqus_thread"></div>
 <script>
 	var disqus_config = function () {
-		this.page.url = 'https:\/\/sasakiyuki.github.io\/posts\/android_document_android_manifest\/';
-		this.page.identifier = 'c1d0708dc462fa0ee33c5d6e056e2ef9';
+		this.page.url = 'https:\/\/sasakiyuki.github.io\/posts\/flutter_tips_001\/';
+		this.page.identifier = '66ac531ed3d802170ff9ffab05241b58';
 	};
 	(function() {
    	var d = document, s = d.createElement('script');

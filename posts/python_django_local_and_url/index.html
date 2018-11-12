@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+<head>
+	<title>
+	Pythonにおけるオブジェクト指向
+</title><style>
+body {
+	display: block;
+	--colorBG: "#40e0d0, #ff8c00, #ff0080";background: linear-gradient(to right, var(--colorBG)) !important;
+	
+}
+
+body, body.pushable {
+	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: cover !important;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="author" content="map[name:Yuki Yamada]" />
+	<meta name="description" content="Python Django入門記事その１。簡単なpythonの説明から実際にdjangoを使ってみます。" />
+<meta name="generator" content="Hugo 0.41" />
+
+<link rel="shortcut icon" href="/img/defaultFav.ico">
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+<style>
+body.pushable {
+	display: block;background: linear-gradient(to right, var(--colorBG)) !important;
+	 ;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/css/site.css"><link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/UtkarshVerma/hugo-dream-plus/ae11561d/exampleSite/static/css/highlight.css">
+<script>
+	var colorBG =  true 
+	var enabledPost =  false 
+	var isMobile = ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+	console.log("The client device is a "+(isMobile?"mobile":"PC")+".")
+</script>
+</head>
+<body><script>
+var prevBgIndex = 0;
+var bodyBgSwitchIndex = 0;var gradients = [
+	  [],
+	  ['#40e0d0', '#ff8c00', '#ff0080'], 
+	  ['#3e5151', '#decba4'], 
+	  ['#11998e', '#38ef7d'], 
+	  ['#108dc7', '#ef8e38'], 
+	  ['#fc5c7d', '#6a82fb'], 
+	  ['#fc466b', '#3f5efb'], 
+	  ['#c94b4b', '#4b134f'], 
+	  ['#23074d', '#cc5333'] 
+	];
+	document.body.style.setProperty('--colorBG', connect(gradients[getRandomInt(0, gradients.length)]));
+	function getRandomInt(min, max) {
+	  min = Math.ceil(min);
+	  max = Math.floor(max);
+	  var random;
+	  while (1) {
+	    random = Math.floor(Math.random() * (max - min)) + min;
+	    if (random !== prevBgIndex) {
+	      prevBgIndex = random;
+	      break;
+	    }
+	  }
+	  return random;
+	}
+
+	function connect(arr) {
+	  var str = '';
+	  for (var i = 0; i < arr.length; i++) {
+	    if (i !== arr.length - 1) {
+	      str += arr[i] + ', ';
+	    } else {
+	      str += arr[i];
+	    }
+	  }
+	  return str;
+	}
+</script><div id="sidebar" class="ui sidebar inverted vertical menu">
+	<section id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
+		<img src="https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png">
+</div>
+<h3 class="ui header">YukiYamada
+	<div class="sub header">Android Developer.Learning Android Kotlin-Spring Python-Django.</div>
+</h3>
+</section><section class="ui attached center aligned inverted segment sidebar-dream-tags">
+
+	<a class="ui label olive " href="/tags/android" title="android">android</a>
+
+	<a class="ui label blue " href="/tags/androidtips" title="androidtips">androidtips</a>
+
+	<a class="ui label yellow " href="/tags/django" title="django">django</a>
+
+	<a class="ui label brown " href="/tags/flutter" title="flutter">flutter</a>
+
+	<a class="ui label pink " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+
+	<a class="ui label violet " href="/tags/python" title="python">python</a>
+
+</section>
+	<section class="ui attached inverted segment sidebar-dream-categories both flexbox">
+		<div class="ui inverted accordion">
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/blogging">blogging</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/flutter_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-001-WebViewを使う</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_003/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-003-リスト表示をしてみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_db/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-DBに触れる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tutorial_layout/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>アプリケーションのレイアウト</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_templetes/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-テンプレートを使ってみる </p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_local_and_url/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_object_oriented/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_document_android_manifest/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidManifestについて</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_002/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-002-画面移動してみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-001-押されたら何かをするを実装する</p>
+		</div>
+	</a>
+
+</div>
+
+</div>
+	</section>
+	
+	<section id="footer" class="ui bottom attached center aligned inverted segment">
+	<p>© 2018 ヤマダユキの備忘log</p>
+
+<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
+</section>
+</div>
+<div class="pusher">
+		<div class="flipper">
+			<div class="front">
+	
+	<nav class="ui top secondary menu bar">
+	<div class="item">
+		<i class="inverted big link bullseye icon dream-flip-toggle" title=""></i>
+	</div>
+<div class="item">
+			<a href="/">
+				<i class="inverted big link home icon" title=""></i>
+			</a>
+		</div>
+	<div class="item">
+			<a href="/posts">
+				<i class="inverted big link archive icon" title=""></i>
+			</a>
+		</div>
+	
+	<div class="item">
+			<a href="/tags">
+				<i class="inverted big link tags icon" title=""></i>
+			</a>
+		</div>
+	<div class="item">
+			<a href="/categories">
+				<i class="inverted big link cubes icon" title=""></i>
+			</a>
+    	</div>
+	
+	<div class="ui container tablet computer only grid">
+		<div class="item" onClick="$('.ui.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');">
+			<i class="inverted big link sidebar icon" title=""></i>
+		</div>
+	</div>
+	
+
+	
+	<div class="item right">
+		<a href="/posts/index.xml">
+			<i class="inverted big link rss icon" title=""></i>
+		</a>
+	</div>
+	
+</nav>
+
+
+<div class="ui centered grid">
+	<div class="sixteen wide mobile only column"><div class="ui inverted accordion">
+	<div id="header" class="ui inverted segment column box">
+		<header id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
+		<img src="https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png">
+</div>
+<h3 class="ui header">YukiYamada
+	<div class="sub header">Android Developer.Learning Android Kotlin-Spring Python-Django.</div>
+</h3>
+</header>
+		<div class=" title header-title"><div id="tag-category-pop" class="ui red right corner label">
+				<i class="hand point icon down"title=""></i>
+			</div></div>
+		<div id="tag-category" class=" content"><section class="ui attached center aligned inverted segment dream-tags none flexbox">
+
+	<a class="ui label yellow " href="/tags/android" title="android">android</a>
+
+	<a class="ui label purple " href="/tags/androidtips" title="androidtips">androidtips</a>
+
+	<a class="ui label violet " href="/tags/django" title="django">django</a>
+
+	<a class="ui label yellow " href="/tags/flutter" title="flutter">flutter</a>
+
+	<a class="ui label violet " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+
+	<a class="ui label green " href="/tags/python" title="python">python</a>
+
+</section><section class="ui attached inverted segment dream-categories both flexbox">
+				<div class="inverted accordion">
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/blogging">blogging</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/flutter_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-001-WebViewを使う</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_003/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-003-リスト表示をしてみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_db/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-DBに触れる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tutorial_layout/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>アプリケーションのレイアウト</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_templetes/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-テンプレートを使ってみる </p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_local_and_url/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_object_oriented/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_document_android_manifest/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidManifestについて</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_002/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-002-画面移動してみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-001-押されたら何かをするを実装する</p>
+		</div>
+	</a>
+
+</div>
+
+</div>
+			</section></div>
+		<footer class="ui bottom attached center aligned inverted segment">
+	<p>© 2018 ヤマダユキの備忘log</p>
+
+<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
+</footer>
+	</div>
+</div>
+</div>
+	<div class="sixteen wide mobile fifteen wide tablet twelve wide computer column post-list">
+		<section class="ui secondary top attached black segment post-head">
+			<h1 class="post-title">
+				Pythonにおけるオブジェクト指向
+			</h1>
+			<div class="sub header">
+					<div><span><i class="calendar outline icon"></i>Oct 20, 2018</span></div><div><span class="disqusComment"><i class="comment outline icon"></i><a href="https://sasakiyuki.github.io/posts/python_django_local_and_url/#disqus_thread" class="disqus-comment-count" data-disqus-identifier="023d5a91eca5c1da4936d4de1256d467"></a></span></div>
+					<div><span><i class="clock outline icon"></i>3 min read</span></div>
+					<div><span><i class="angle double up icon"></i> Oct 20, 2018</span></div>
+			</div>
+			<hr><div class="toc"><nav id="TableOfContents">
+<ul>
+<li><a href="#pythonの特徴">Pythonの特徴</a></li>
+<li><a href="#webフレームワークとは">Webフレームワークとは</a></li>
+<li><a href="#djangoとは">Djangoとは</a></li>
+<li><a href="#セットアップ">セットアップ</a></li>
+<li><a href="#新規djangoプロジェクトの作成">新規Djangoプロジェクトの作成</a>
+<ul>
+<li><a href="#プロジェクトファイル">プロジェクトファイル</a></li>
+<li><a href="#早速ハローワールド">早速ハローワールド</a></li>
+</ul></li>
+<li><a href="#mvcアーキテクチャ">MVCアーキテクチャ</a></li>
+<li><a href="#v-viewを作る">V Viewを作る</a>
+<ul>
+<li><a href="#index関数">index関数</a></li>
+</ul></li>
+<li><a href="#urls-py">Urls.py</a>
+<ul>
+<li><a href="#複数のアプリケーションのルーティング">複数のアプリケーションのルーティング</a>
+<ul>
+<li><a href="#設定ファイルを分ける">設定ファイルを分ける</a></li>
+<li><a href="#こぼれ話-urlの構成">【こぼれ話】URLの構成</a>
+<ul>
+<li><a href="#スキーム">スキーム</a></li>
+<li><a href="#ホスト">ホスト</a></li>
+<li><a href="#パス">パス</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#urlのクエリやhttpメソッドをさばく">URLのクエリやHTTPメソッドをさばく</a>
+<ul>
+<li><a href="#クエリではなくurl内のパスをそのまま扱う">クエリではなくURL内のパスをそのまま扱う</a></li>
+<li><a href="#httpメソッド">HTTPメソッド</a></li>
+</ul></li>
+</ul>
+</nav></div>
+			
+			<article class="post-content twemoji">
+				
+
+<h1 id="pythonの特徴">Pythonの特徴&nbsp;<a class="anchor" href="#pythonの特徴"><i class="small linkify icon"></i></a> </h1>
+
+<p>初期リリースは91年で開発当初はオブジェクト指向を意識した設計になっていませんでしたが、途中からオブジェクト指向が組み込まれリリースに合わせてそれらは含まれる形になりました。
+あまり日本では注目されることのなかった言語のようですが、機械学習やGoogle app engineにpythonが採用（そもそもGoogleでは社内標準言語としてpythonが採用されていますが）されたため日本でも注目を集め今では珍しくないレベルまで来ています。
+スクリプト言語であり学習に向いているとされています。その理由としてはそもそもスクリプト言語が実行しやすかったり（コンパイルが不要）、Pythonの記法がシンプルであることから言われています。中でもインデントブロックは大きな特徴の一つです。</p>
+
+<h1 id="webフレームワークとは">Webフレームワークとは&nbsp;<a class="anchor" href="#webフレームワークとは"><i class="small linkify icon"></i></a> </h1>
+
+<p>さて、では実際にPythonでWebアプリケーションを作ろうとなった時にWebフレームワークの選定が必要になります。
+そもそもWebフレームワークとは
+Webアプリケーションを作成する際に骨組み（足場）になってくれるもののことを指します。フレームワーク自体が機能群のことで、それのWb版だと思っていただければ問題ありません。最大のメリットは「書くコードが減る」ということです。フレームワークによって大なり小なりありますが作成に必要な機能が盛り込まれており１から書く必要がなくなります。また、書き方なども統一されるため可読性が上がるなどのメリットもあります。
+Pythonで有名なWebフレームワークは</p>
+
+<ul>
+<li>Django</li>
+<li>Flask</li>
+<li>Bottle</li>
+</ul>
+
+<p>などが有名どころです。
+下に行くほど軽量なフレームワークとなっていきます。</p>
+
+<p>今回はこの中でも実際に採用されている万能な大型フレームワークであるDJangoを使っていきたいと思います。</p>
+
+<h1 id="djangoとは">Djangoとは&nbsp;<a class="anchor" href="#djangoとは"><i class="small linkify icon"></i></a> </h1>
+
+<pre><code>Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.
+</code></pre>
+
+<p>公式からの引用ですがハイレベルなWebフレームワークで超スピードで実用的なWebアプリケーションを構築するぜ、と言っています。</p>
+
+<p>フルスタックフレームワークと言われる、いわゆる全部盛りフレームワークで、複雑なデーターベース主体のアプリケーションを簡単に書くことができたり、管理者用GUIを自動生成したりするなど便利な機能がたくさん載っています。
+また、プロジェクトの構成が単純で生成時のファイルが少ないのもメリットと言えるでしょう。</p>
+
+<h1 id="セットアップ">セットアップ&nbsp;<a class="anchor" href="#セットアップ"><i class="small linkify icon"></i></a> </h1>
+
+<p>早速セットアップしていきます</p>
+
+<p>雑にpythonのパスを通します。(TODO)</p>
+
+<p>IDEはPyCharmを使います</p>
+
+<h1 id="新規djangoプロジェクトの作成">新規Djangoプロジェクトの作成&nbsp;<a class="anchor" href="#新規djangoプロジェクトの作成"><i class="small linkify icon"></i></a> </h1>
+
+<p>ではさっそくPyCharmを起動してプロジェクトを作成します。</p>
+
+<p>New Project -&gt; Djangoを選択</p>
+
+<h2 id="プロジェクトファイル">プロジェクトファイル&nbsp;<a class="anchor" href="#プロジェクトファイル"><i class="small linkify icon"></i></a> </h2>
+
+<p>自動生成されるコードの紹介</p>
+
+<ul>
+<li><strong>init</strong>.py</li>
+</ul>
+
+<p>Pythonでは特別な意味を持つファイルで、このディレクトリをPythonパッケージであるということを伝えるために存在しています。</p>
+
+<ul>
+<li>settings.py</li>
+</ul>
+
+<p>Djangoで生成したアプリケーションの設定をつかさどっているファイルです。</p>
+
+<ul>
+<li>urls.py</li>
+</ul>
+
+<p>URL宣言が含まれているファイルでルーティングはここで行います。</p>
+
+<ul>
+<li>wsgi.py</li>
+</ul>
+
+<p>作ったPythonプロジェクトをWebサーバーにデプロイする際に使用されるファイルです（エントリポイントを定義している）
+Webアプリケーションのメインのプログラムとなります。</p>
+
+<ul>
+<li>manage.py</li>
+</ul>
+
+<p>プロジェクトで実行される機能に関するプログラムが入っています。</p>
+
+<h2 id="早速ハローワールド">早速ハローワールド&nbsp;<a class="anchor" href="#早速ハローワールド"><i class="small linkify icon"></i></a> </h2>
+
+<p>作られたDjangoプロジェクトをローカルサーバーで起動してみます。
+本来であれば先ほど紹介したWSGIをWebサーバーにアップロードして動作を確認、等のことをしなければならないのですがDjangoでは試験用にWebサーバーを起動してアプリケーションを動かすことができます。</p>
+
+<p><code>SHIFT ALT R</code> を押すと <code>manage.py</code> が実行されるので runserver してみましょう（ポートは任意で問題ありません。デフォルトだと8000番が開かれます。</p>
+
+<p>そして指定されたURLに飛ぶとハローワールドできていることが確認できると思います。</p>
+
+<p>以上でハローワールドは終了です。</p>
+
+<h1 id="mvcアーキテクチャ">MVCアーキテクチャ&nbsp;<a class="anchor" href="#mvcアーキテクチャ"><i class="small linkify icon"></i></a> </h1>
+
+<p>ハローワールドも終わったことですしさっそくDjangoでWebアプリケーションを作りたくなっているかと思いますが、その前に重要な「MVCアーキテクチャ」について理解しましょう。
+MVCとは</p>
+
+<p>M Model
+V View
+C Controller</p>
+
+<p>のイニシャルをとっていてそれぞれ</p>
+
+<p>Model データのアクセス関係の処理を担当している部分です　主にWebアプリとデータベースとのやり取りを担当してくれます</p>
+
+<p>View 見た目を担当しています。画面に表示されるものです。</p>
+
+<p>Controller ユーザーからの操作を受け付けたりこのWebアプリケーションではどうするべきかの処理などを制御する部分です</p>
+
+<p>例えば</p>
+
+<p>ユーザーがWebページにアクセスしました
+コントローラーはビューを参照して画面を表示しつつモデルにDBからデータを引っ張ってくるよう処理して結果を表示する、、</p>
+
+<p>などということが行われています。</p>
+
+<p>それぞれの担当を分けてロジックを当てはめよう、と簡単に覚えておいてください。</p>
+
+<p># プロジェクトとアプリケーション
+Djangoでプロジェクトを先ほど作りましたが、プロジェクト内に直接コードを書いていくわけではありません。このプロジェクト内に異なる複数のアプリケーションを作り、それらを組み合わせて一つのプロジェクトとします。それぞれのアプリケーションはＭＶＣを持ち、独立しています。</p>
+
+<h1 id="v-viewを作る">V Viewを作る&nbsp;<a class="anchor" href="#v-viewを作る"><i class="small linkify icon"></i></a> </h1>
+
+<p>今説明したアーキテクチャーの説明で Viewというものが出てきました。実際にこのViewを使ってハローワールドをしたいのですがプロジェクトを作った段階ではそれは存在しません。</p>
+
+<p><code>views.py</code> を作成しましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&#34;Hello World&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>まず初めの行では <code>HttpResponse</code> というクラスをインポートしています。
+Webブラウザなどからアクセスされた際に送り返す内容を管理することができるクラスです。</p>
+
+<h2 id="index関数">index関数&nbsp;<a class="anchor" href="#index関数"><i class="small linkify icon"></i></a> </h2>
+
+<p>引数にrequestをもらっています。これはアクセスされた際に渡される <code>HttpRequest</code> というクラスのインスタンスが渡されるわけですが、今は一旦何かが渡されている、というくらいにとどめておきましょう。</p>
+
+<p>でその戻り値としてテキストのHello Worldを今回は渡しています。</p>
+
+<p>これでViewの準備はできましたが、まだアプリケーションに反映はされていません。
+なぜかというとURLが特定のパスと関連づいていないからです。</p>
+
+<p>ではどうすればいいいか urls.pyをいじります。</p>
+
+<h1 id="urls-py">Urls.py&nbsp;<a class="anchor" href="#urls-py"><i class="small linkify icon"></i></a> </h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+<span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>初期状態では管理画面を呼び出すための <code>admin</code> のみがある状態となっています。
+足らないので追加しましょう</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>先ほど作ったviewsをインポートします。
+そしてpathにルートパス（つまり空）を用意して、呼び出す関数を指定します。</p>
+
+<p>path(アドレス,処理)</p>
+
+<p>実際に runserverしてみるとルートパスにてハロワされているのがわかると思います。</p>
+
+<h2 id="複数のアプリケーションのルーティング">複数のアプリケーションのルーティング&nbsp;<a class="anchor" href="#複数のアプリケーションのルーティング"><i class="small linkify icon"></i></a> </h2>
+
+<p>前の項でdjangoに限らずWebサービスは複数のアプリケーションを組み合わせてできているといいました。
+複数のアプリケーションを作りそれらを Urls.pyでルーティングしてみましょう。</p>
+
+<h3 id="設定ファイルを分ける">設定ファイルを分ける&nbsp;<a class="anchor" href="#設定ファイルを分ける"><i class="small linkify icon"></i></a> </h3>
+
+<p>まずはアプリケーションを追加してみましょう。
+サンプルアプリを追加します</p>
+
+<p><code>CRT SHIFT R</code></p>
+
+<pre><code>startapp sample
+</code></pre>
+
+<p>すると必要なコード群が生成されるのでその中の views.pyを書き換えましょう。
+注意しなければならないのは 最初に作ったアプリケーションのディレクトリではなく今作った sample/views.pyを参照します。</p>
+
+<p>処理内容自体は先ほど作った views.py と代わり映えのしないもので問題ありませんが関数を二つ定義してみましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&#34;index page&#34;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">simple</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&#34;Simple page&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>index page</code> と表示するやつと <code>Simple page</code> と表示するものの二種類です。</p>
+
+<p>作ったこれらの関数を先ほどと同様 urls.pyにルーティングします。こちらも同様に気を付けてほしいのですがsample/urls.pyに書き加えます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&#34;simple&#34;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">simple</span><span class="p">)</span>
+<span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>ほぼ先ほどと変わりませんが、今回はsimple path を使うことにしました。</p>
+
+<p>そして /urls.pyも修正しましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">include</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&#34;sample/&#34;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s2">&#34;sample.urls&#34;</span><span class="p">))</span>
+<span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>urlsのインポートに今まではpathだけでしたが、特定のパスを関連付けるための includeも追加します。
+<code>sample</code> パスに先ほど作ったulrsを使うよというものを追加して実行してみましょう。</p>
+
+<p>開いたポートに対してパスを指定します。今回だったら <code>sample/simple</code> のように追加して画面が正しく表示されれば実装は成功です。</p>
+
+<h3 id="こぼれ話-urlの構成">【こぼれ話】URLの構成&nbsp;<a class="anchor" href="#こぼれ話-urlの構成"><i class="small linkify icon"></i></a> </h3>
+
+<p><code>scheme://host.domain[:port]/path/dataname</code></p>
+
+<p>URLはこのような構成によって成り立ちます。
+今回はこの中でよく利用されるスキームとホストとパスについて簡単に説明します。</p>
+
+<h4 id="スキーム">スキーム&nbsp;<a class="anchor" href="#スキーム"><i class="small linkify icon"></i></a> </h4>
+
+<p>URLの先頭に来るもので使用するプロトコルを指定する部分です。１０個ほど存在しますが基本的には <code>http</code> や<code>https</code> を使用します。</p>
+
+<h4 id="ホスト">ホスト&nbsp;<a class="anchor" href="#ホスト"><i class="small linkify icon"></i></a> </h4>
+
+<p>そのままホスト名を指しホストとはリソースを提供しているサーバーのことです。ドメインとサブドメインを掛け合わせたもので、 <code>http://twitter.com</code> なら twitter.com の部分</p>
+
+<h4 id="パス">パス&nbsp;<a class="anchor" href="#パス"><i class="small linkify icon"></i></a> </h4>
+
+<p>先ほどから指定しまくっているパスはホスト以降のスラッシュで区切られている部分を指しています。
+パスに応じてどういうアイテムを返すのかはプログラムの処理次第です。
+ApacheなどのWebサーバーはディレクトリーに紐づいているためそのファイルを指定しなければいけません。</p>
+
+<h1 id="urlのクエリやhttpメソッドをさばく">URLのクエリやHTTPメソッドをさばく&nbsp;<a class="anchor" href="#urlのクエリやhttpメソッドをさばく"><i class="small linkify icon"></i></a> </h1>
+
+<p>今までの例ではURLは静的なもので呼び出していましたが、実際のURLは</p>
+
+<p><a href="http://example.com/photo/{id">http://example.com/photo/{id</a>}</p>
+
+<p>といった形や</p>
+
+<p><a href="http://example.com/photo?id=1">http://example.com/photo?id=1</a></p>
+
+<p>といったように動的にアクセスしたい情報へのURLが変わってきます。</p>
+
+<p>このようなものをクエリパラメータと言います。
+実際にクエリ内容の入ったURLを処理してみましょう。</p>
+
+<pre><code>?id=119 
+</code></pre>
+
+<p>views.pyの中のメソッドを書き換えてみましょう
+先ほど 引数に渡されている <code>request</code> は <code>HttpRequest</code> のインスタンスですよ、といいましたがこの中にクエリの情報が入っているので出してみます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">photoId</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">[</span><span class="s2">&#34;id&#34;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&#34;query id is &#34;</span> <span class="o">+</span> <span class="n">photoId</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Responseも何がクエリされていたのかわかるようにちょっと変えてみました。</p>
+
+<p>実際に上のURLのように叩いてみるとクエリから値を受け取ったことがわかると思います。
+うまくは行きましたが、完全ではありません。クエリ内容をとってURLを叩くとエラーが出てきてしまうかと思います</p>
+
+<p><code>MultiValueDictKeyError</code></p>
+
+<p>まぁ要するにコード上で必要とされているものがねーぞというエラーです。
+もしかしたらidが渡されないなんてことはあり得そうなので処理を分けないといけません。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">if</span> <span class="s2">&#34;id&#34;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&#34;query id is &#34;</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">[</span><span class="s2">&#34;id&#34;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&#34;plz send id&#34;</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>requestのGETに id というものが含まれていますか？というのを <code>in</code> で確認します</p>
+
+<p><a href="https://babylonian-tec.kibe.la/shared/entries/46b058fb-deb3-4270-bf5e-a585ef1480ce">https://babylonian-tec.kibe.la/shared/entries/46b058fb-deb3-4270-bf5e-a585ef1480ce</a></p>
+
+<p>制御構文の基本でやった辞書型がここ(GET)で使われているため in が使えるわけです。</p>
+
+<h2 id="クエリではなくurl内のパスをそのまま扱う">クエリではなくURL内のパスをそのまま扱う&nbsp;<a class="anchor" href="#クエリではなくurl内のパスをそのまま扱う"><i class="small linkify icon"></i></a> </h2>
+
+<p>上の例ではクエリにidを渡してそれを使用しましたが、URLのパスに含まれた値をそのまま使ってみます。</p>
+
+<pre><code>def pattern(request, user_id, photo_id):
+    return HttpResponse(&quot;userId = &quot; + user_id + &quot;\nphotoId = &quot; + str(photo_id))
+</code></pre>
+
+<p>新規で関数を作ってみました。引数はrequestのみでなく userId:String　と photo_id:Int を想定しています。
+こちらは特別なことは特にしていません。
+キモはURLPattersnのほうです。</p>
+
+<pre><code>    path(&quot;&lt;user_id&gt;/&lt;int:photo_id&gt;&quot;, views.pattern)
+</code></pre>
+
+<p>そのままですが渡された値をuser_idという変数に入れたり、photo_id(int)をpatternに渡しています。
+intを指定することでもし文字列がきたらそもそもURLが間違っている判定になり処理されることはありません。</p>
+
+<h2 id="httpメソッド">HTTPメソッド&nbsp;<a class="anchor" href="#httpメソッド"><i class="small linkify icon"></i></a> </h2>
+
+<p>HTTPでは同じパスに対して異なる処理を提供することが可能です。</p>
+
+<ul>
+<li>GET   データの取得</li>
+<li>POST データの作成　データの追加</li>
+<li>PUT   データの更新、データの作成</li>
+<li>DELETE    データの削除</li>
+</ul>
+
+<p>主なのはこの辺です。</p>
+
+<p>POSTメソッドの生成及び受け取りは次回テンプレートを使ってフロントを整えてから確認するので今回は送られてきたメソッドが何かを判断する処理を追加します。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">http_method</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&#34;GET&#34;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&#34;GET Method&#34;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&#34;POST&#34;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&#34;POST Method&#34;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&#34;PUT&#34;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&#34;PUT Method&#34;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&#34;DELETE&#34;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&#34;DELETE Method&#34;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&#34;Other Method&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>次回テンプレートを使って色々する</p>
+
+			</article>
+		</section>
+		<section class="ui secondary attached segment dream-tags">
+
+	<a class="ui label blue " href="/tags/android" title="android">android</a>
+
+	<a class="ui label yellow " href="/tags/androidtips" title="androidtips">androidtips</a>
+
+	<a class="ui label blue " href="/tags/django" title="django">django</a>
+
+	<a class="ui label yellow " href="/tags/flutter" title="flutter">flutter</a>
+
+	<a class="ui label red " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+
+	<a class="ui label olive " href="/tags/python" title="python">python</a>
+
+
+		</section><section class="ui secondary  attached segment share row box"><div class="author"><img class="avatar" src="/img/avatar1.svg">
+	
+</div>
+<div class="info grow flexbox">
+	<p class="name">Yuki Yamada</p>
+	<p class="desc">Android Developer.Learning Android Kotlin-Spring Python-Django.</p>
+</div>
+<section class="buttons row box">
+	<div class="facebook none flexbox" href="#" onclick="window.open(
+			'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+			'facebook-share-dialog',
+			'width=626,height=436'); return false;">
+		<button class="ui facebook button"><i class="facebook icon"></i>Share</button>
+	</div>
+	<div class="twitter none flexbox" onclick="window.open('https://twitter.com/intent/tweet?text=Read &quot;Pythonにおけるオブジェクト指向 &quot; by @YukiYamadaJP https:\/\/sasakiyuki.github.io\/posts\/python_django_local_and_url\/','_self')">
+		<button class="ui twitter button"><i class="twitter icon"></i>Tweet</button>
+	</div>
+</section>
+</section>
+		<section class="ui secondary attached segment copyright">
+			
+
+		</section>
+		<div class="ui secondary bottom attached stacked segment disqus"><div id="disqus_thread"></div>
+<script>
+	var disqus_config = function () {
+		this.page.url = 'https:\/\/sasakiyuki.github.io\/posts\/python_django_local_and_url\/';
+		this.page.identifier = '023d5a91eca5c1da4936d4de1256d467';
+	};
+	(function() {
+   	var d = document, s = d.createElement('script');
+   	s.src = 'https://' + 'dream-plus' + '.disqus.com/embed.js';
+   	s.setAttribute('data-timestamp', +new Date());
+   	(d.head || d.body).appendChild(s);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+		
+	</div>
+</div>
+
+			</div>
+			<div class="back">
+<nav class="ui top secondary menu bar">
+	<div class="item">
+		<i class="inverted big link bullseye icon dream-flip-toggle" title=""></i>
+	</div>
+
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+	
+	
+	
+		
+		
+		<div class="item">
+			<a href="https://github.com/SasakiYuki" target="	_blank">
+				<i id="ico" class="inverted big link github icon" title="GitHub"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+		<div class="item">
+			<a href="mailto:wacorggen@gmail.com" target="	_blank">
+				<i id="ico" class="inverted big link mail icon" title="Email"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+		<div class="item">
+			<a href="https://twitter.com/YukiYamadaJP" target="	_blank">
+				<i id="ico" class="inverted big link twitter icon" title="Twitter"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+	
+		
+		
+		<div class="item">
+			<a href="https://medium.com/@wacorggen" target="	_blank">
+				<i id="ico" class="inverted big link medium icon" title="Medium"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+
+	
+	<div class="item right">
+		<a href="/posts/index.xml">
+			<i class="inverted big link rss icon" title=""></i>
+		</a>
+	</div>
+	
+</nav>
+
+<div class="ui centered grid about">
+	<div class="sixteen wide mobile fifteen wide tablet fifteen wide computer column about">
+		<section class="ui stacked segments">
+			<div class="ui inverted segment">
+				<article class="twemoji"><h1>So, Who Am I?</h1>
+
+<hr />
+
+<p><br>
+ヤマダユキと申します。</p>
+
+<p>都内に住むソフトウェアエンジニアです。
+技術ブログや日々の話など雑多に書きます。</p>
+
+<p>基本休日もコード書いてることが多いですが、その他の趣味にカメラとDTM civ6などもあります。</p>
+
+<p>経歴等は<a href="https://www.wantedly.com/users/17800328">Wantedly</a>をご確認ください。
+相談は上部mailやtwitterDMなどどこでもどうぞ。</p>
+</article>
+			</div>
+		</section>
+	</div>
+</div>
+</div>
+		</div>
+	</div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/site.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script><script src="https://twemoji.maxcdn.com/2/twemoji.min.js?2.6"></script>
+
+<script id="dsq-count-scr" src="//dream-plus.disqus.com/count.js" async></script>
+
+
+<script>
+	(function () {
+	  console.log("Twemoji up and making stuff colourful!");
+	  for (var b = document.getElementsByClassName("twemoji"), a = 0; a < b.length; a++) {
+		twemoji.parse(b[a]);
+	  }
+	})();
+</script>
+
+</body>
+</html>

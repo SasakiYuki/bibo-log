@@ -6,7 +6,7 @@
     <description>Recent content in Tags on ヤマダユキの備忘log</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Thu, 04 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 09 Nov 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://sasakiyuki.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,54 @@
     <item>
       <title>Android</title>
       <link>https://sasakiyuki.github.io/tags/android/</link>
-      <pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 09 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>https://sasakiyuki.github.io/tags/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Androidtips</title>
+      <link>https://sasakiyuki.github.io/tags/androidtips/</link>
+      <pubDate>Fri, 09 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/tags/androidtips/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Django</title>
+      <link>https://sasakiyuki.github.io/tags/django/</link>
+      <pubDate>Mon, 05 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/tags/django/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Flutter</title>
+      <link>https://sasakiyuki.github.io/tags/flutter/</link>
+      <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/tags/flutter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Fluttertips</title>
+      <link>https://sasakiyuki.github.io/tags/fluttertips/</link>
+      <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/tags/fluttertips/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://sasakiyuki.github.io/tags/python/</link>
+      <pubDate>Mon, 05 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/tags/python/</guid>
       <description></description>
     </item>
     

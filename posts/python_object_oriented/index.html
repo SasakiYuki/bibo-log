@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+<head>
+	<title>
+	Pythonにおけるオブジェクト指向
+</title><style>
+body {
+	display: block;
+	--colorBG: "#40e0d0, #ff8c00, #ff0080";background: linear-gradient(to right, var(--colorBG)) !important;
+	
+}
+
+body, body.pushable {
+	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: cover !important;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="author" content="map[name:Yuki Yamada]" />
+	<meta name="description" content="Python Djangoを勉強する際にPythonを知らなったので勉強しました。その際にPythonはどのような言語使用でオブジェクト指向を実現しているのか気になったので調べつつ纏めました。" />
+<meta name="generator" content="Hugo 0.41" />
+
+<link rel="shortcut icon" href="/img/defaultFav.ico">
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+<style>
+body.pushable {
+	display: block;background: linear-gradient(to right, var(--colorBG)) !important;
+	 ;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/css/site.css"><link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/UtkarshVerma/hugo-dream-plus/ae11561d/exampleSite/static/css/highlight.css">
+<script>
+	var colorBG =  true 
+	var enabledPost =  false 
+	var isMobile = ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+	console.log("The client device is a "+(isMobile?"mobile":"PC")+".")
+</script>
+</head>
+<body><script>
+var prevBgIndex = 0;
+var bodyBgSwitchIndex = 0;var gradients = [
+	  [],
+	  ['#40e0d0', '#ff8c00', '#ff0080'], 
+	  ['#3e5151', '#decba4'], 
+	  ['#11998e', '#38ef7d'], 
+	  ['#108dc7', '#ef8e38'], 
+	  ['#fc5c7d', '#6a82fb'], 
+	  ['#fc466b', '#3f5efb'], 
+	  ['#c94b4b', '#4b134f'], 
+	  ['#23074d', '#cc5333'] 
+	];
+	document.body.style.setProperty('--colorBG', connect(gradients[getRandomInt(0, gradients.length)]));
+	function getRandomInt(min, max) {
+	  min = Math.ceil(min);
+	  max = Math.floor(max);
+	  var random;
+	  while (1) {
+	    random = Math.floor(Math.random() * (max - min)) + min;
+	    if (random !== prevBgIndex) {
+	      prevBgIndex = random;
+	      break;
+	    }
+	  }
+	  return random;
+	}
+
+	function connect(arr) {
+	  var str = '';
+	  for (var i = 0; i < arr.length; i++) {
+	    if (i !== arr.length - 1) {
+	      str += arr[i] + ', ';
+	    } else {
+	      str += arr[i];
+	    }
+	  }
+	  return str;
+	}
+</script><div id="sidebar" class="ui sidebar inverted vertical menu">
+	<section id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
+		<img src="https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png">
+</div>
+<h3 class="ui header">YukiYamada
+	<div class="sub header">Android Developer.Learning Android Kotlin-Spring Python-Django.</div>
+</h3>
+</section><section class="ui attached center aligned inverted segment sidebar-dream-tags">
+
+	<a class="ui label orange " href="/tags/android" title="android">android</a>
+
+	<a class="ui label brown " href="/tags/androidtips" title="androidtips">androidtips</a>
+
+	<a class="ui label pink " href="/tags/django" title="django">django</a>
+
+	<a class="ui label orange " href="/tags/flutter" title="flutter">flutter</a>
+
+	<a class="ui label green " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+
+	<a class="ui label olive " href="/tags/python" title="python">python</a>
+
+</section>
+	<section class="ui attached inverted segment sidebar-dream-categories both flexbox">
+		<div class="ui inverted accordion">
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/blogging">blogging</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/flutter_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-001-WebViewを使う</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_003/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-003-リスト表示をしてみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_db/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-DBに触れる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tutorial_layout/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>アプリケーションのレイアウト</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_templetes/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-テンプレートを使ってみる </p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_local_and_url/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_object_oriented/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_document_android_manifest/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidManifestについて</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_002/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-002-画面移動してみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-001-押されたら何かをするを実装する</p>
+		</div>
+	</a>
+
+</div>
+
+</div>
+	</section>
+	
+	<section id="footer" class="ui bottom attached center aligned inverted segment">
+	<p>© 2018 ヤマダユキの備忘log</p>
+
+<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
+</section>
+</div>
+<div class="pusher">
+		<div class="flipper">
+			<div class="front">
+	
+	<nav class="ui top secondary menu bar">
+	<div class="item">
+		<i class="inverted big link bullseye icon dream-flip-toggle" title=""></i>
+	</div>
+<div class="item">
+			<a href="/">
+				<i class="inverted big link home icon" title=""></i>
+			</a>
+		</div>
+	<div class="item">
+			<a href="/posts">
+				<i class="inverted big link archive icon" title=""></i>
+			</a>
+		</div>
+	
+	<div class="item">
+			<a href="/tags">
+				<i class="inverted big link tags icon" title=""></i>
+			</a>
+		</div>
+	<div class="item">
+			<a href="/categories">
+				<i class="inverted big link cubes icon" title=""></i>
+			</a>
+    	</div>
+	
+	<div class="ui container tablet computer only grid">
+		<div class="item" onClick="$('.ui.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');">
+			<i class="inverted big link sidebar icon" title=""></i>
+		</div>
+	</div>
+	
+
+	
+	<div class="item right">
+		<a href="/posts/index.xml">
+			<i class="inverted big link rss icon" title=""></i>
+		</a>
+	</div>
+	
+</nav>
+
+
+<div class="ui centered grid">
+	<div class="sixteen wide mobile only column"><div class="ui inverted accordion">
+	<div id="header" class="ui inverted segment column box">
+		<header id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
+		<img src="https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png">
+</div>
+<h3 class="ui header">YukiYamada
+	<div class="sub header">Android Developer.Learning Android Kotlin-Spring Python-Django.</div>
+</h3>
+</header>
+		<div class=" title header-title"><div id="tag-category-pop" class="ui red right corner label">
+				<i class="hand point icon down"title=""></i>
+			</div></div>
+		<div id="tag-category" class=" content"><section class="ui attached center aligned inverted segment dream-tags none flexbox">
+
+	<a class="ui label purple " href="/tags/android" title="android">android</a>
+
+	<a class="ui label red " href="/tags/androidtips" title="androidtips">androidtips</a>
+
+	<a class="ui label olive " href="/tags/django" title="django">django</a>
+
+	<a class="ui label red " href="/tags/flutter" title="flutter">flutter</a>
+
+	<a class="ui label violet " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+
+	<a class="ui label yellow " href="/tags/python" title="python">python</a>
+
+</section><section class="ui attached inverted segment dream-categories both flexbox">
+				<div class="inverted accordion">
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/blogging">blogging</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/flutter_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-001-WebViewを使う</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_003/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-003-リスト表示をしてみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_db/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-DBに触れる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tutorial_layout/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>アプリケーションのレイアウト</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_templetes/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-テンプレートを使ってみる </p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_local_and_url/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_object_oriented/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_document_android_manifest/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidManifestについて</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_002/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-002-画面移動してみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-001-押されたら何かをするを実装する</p>
+		</div>
+	</a>
+
+</div>
+
+</div>
+			</section></div>
+		<footer class="ui bottom attached center aligned inverted segment">
+	<p>© 2018 ヤマダユキの備忘log</p>
+
+<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
+</footer>
+	</div>
+</div>
+</div>
+	<div class="sixteen wide mobile fifteen wide tablet twelve wide computer column post-list">
+		<section class="ui secondary top attached black segment post-head">
+			<h1 class="post-title">
+				Pythonにおけるオブジェクト指向
+			</h1>
+			<div class="sub header">
+					<div><span><i class="calendar outline icon"></i>Oct 16, 2018</span></div><div><span class="disqusComment"><i class="comment outline icon"></i><a href="https://sasakiyuki.github.io/posts/python_object_oriented/#disqus_thread" class="disqus-comment-count" data-disqus-identifier="025c2e9b5a29a8b7ff0e1e4c4729e6b0"></a></span></div>
+					<div><span><i class="clock outline icon"></i>4 min read</span></div>
+					<div><span><i class="angle double up icon"></i> Oct 16, 2018</span></div>
+			</div>
+			<hr><div class="toc"><nav id="TableOfContents">
+<ul>
+<li><a href="#オブジェクト指向とは">オブジェクト指向とは</a>
+<ul>
+<li><a href="#オブジェクト指向を構成する要素">オブジェクト指向を構成する要素</a></li>
+</ul></li>
+<li><a href="#クラス">クラス</a>
+<ul>
+<li><a href="#memo-カラのclass">[memo] カラのclass</a></li>
+<li><a href="#memo-クラスの命名規則">[memo] クラスの命名規則</a></li>
+</ul></li>
+<li><a href="#メソッドの定義">メソッドの定義</a>
+<ul>
+<li><a href="#実際にクラス-メソッドを作ってみる">実際にクラス、メソッドを作ってみる</a></li>
+<li><a href="#なぜ関数ではなくメソッドで実装するのか">なぜ関数ではなくメソッドで実装するのか</a></li>
+</ul></li>
+<li><a href="#データ">データ</a></li>
+<li><a href="#カプセル化">カプセル化</a>
+<ul>
+<li>
+<ul>
+<li><a href="#memo-定数">[memo]定数</a></li>
+</ul></li>
+<li><a href="#クラス変数">クラス変数</a></li>
+<li><a href="#定数をカプセル化したい">定数をカプセル化したい</a>
+<ul>
+<li><a href="#memo-おさらい-クラス変数とインスタンス変数とは">[memo]おさらい クラス変数とインスタンス変数とは</a></li>
+</ul></li>
+<li><a href="#プロパティ">プロパティ</a></li>
+<li><a href="#マングリング">マングリング</a></li>
+</ul></li>
+<li><a href="#継承">継承</a></li>
+<li><a href="#ポリモーフィズムとは">ポリモーフィズムとは</a></li>
+<li><a href="#まとめ">まとめ</a></li>
+</ul>
+</nav></div>
+			
+			<article class="post-content twemoji">
+				
+
+<h1 id="オブジェクト指向とは">オブジェクト指向とは&nbsp;<a class="anchor" href="#オブジェクト指向とは"><i class="small linkify icon"></i></a> </h1>
+
+<p>プログラミングを効率的に行うための考え方、手法の一つ。概念。
+効率的に行うには <code>共通の設計思想</code> が大切で現在では主流の一つ。</p>
+
+<p>関連のあるデータや処理をまとめて「オブジェクト」にし、コードを管理しやすくすることである。</p>
+
+<p>pythonはオブジェクト指向言語だが、関数があったりと割と自由な言語である。
+javaから来た人間としてはオー自由だなーと思うことが多い。（どっちがいいとかそういう話ではない）</p>
+
+<h2 id="オブジェクト指向を構成する要素">オブジェクト指向を構成する要素&nbsp;<a class="anchor" href="#オブジェクト指向を構成する要素"><i class="small linkify icon"></i></a> </h2>
+
+<ul>
+<li>クラス</li>
+<li>メソッド</li>
+<li>データ</li>
+<li>プロパティ</li>
+<li>インスタンス</li>
+<li>カプセル化</li>
+<li>継承</li>
+<li>ポリモーフィズム</li>
+</ul>
+
+<p>では説明していきましょう。</p>
+
+<h1 id="クラス">クラス&nbsp;<a class="anchor" href="#クラス"><i class="small linkify icon"></i></a> </h1>
+
+<p><code>Class</code> とは<code>オブジェクトの設計図</code> です。
+クラス内にはオブジェクトを作る際に必要なデータやメソッド（後述、処理）などが記述されています。</p>
+
+<p>定義の方法は簡単で</p>
+
+<pre><code>class `クラス名` :
+</code></pre>
+
+<p>これらの中にデータやメソッド追加していくことで一つのクラスになります。</p>
+
+<h2 id="memo-カラのclass">[memo] カラのclass&nbsp;<a class="anchor" href="#memo-カラのclass"><i class="small linkify icon"></i></a> </h2>
+
+<p>空のクラスというのも存在します
+仕組み的にpythonでは <code>:</code>  以降何もないのは無理なので</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">EmptyClass</span><span class="p">:</span>
+    <span class="k">pass</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>と記述します。</p>
+
+<h2 id="memo-クラスの命名規則">[memo] クラスの命名規則&nbsp;<a class="anchor" href="#memo-クラスの命名規則"><i class="small linkify icon"></i></a> </h2>
+
+<p>ThisIsClass のように単語区切りで先頭は大文字に</p>
+
+<h1 id="メソッドの定義">メソッドの定義&nbsp;<a class="anchor" href="#メソッドの定義"><i class="small linkify icon"></i></a> </h1>
+
+<p><code>method</code> とはクラス内に記述された<code>処理</code>。
+定義されたデータを使って何かしたり、クラスに関する何かを定義したりします。
+関数との大きな違いはクラスに属しているという点です。</p>
+
+<pre><code>class ClassName:
+    def MethodName(self,その他引数):
+        処理
+</code></pre>
+
+<p>メソッドは必ず一つの引数を持ちその一つとは <code>self</code>　です。
+ただし呼び出し自体は</p>
+
+<pre><code>インスタンス化（後述）されたクラス.MethodName()
+</code></pre>
+
+<p>でselfは記述する必要がありません。
+このselfとは自身を指しており、 <code>.java</code> なら <code>this</code> みたいなものです。
+勝手に参照されるから不要なわけです。</p>
+
+<h2 id="実際にクラス-メソッドを作ってみる">実際にクラス、メソッドを作ってみる&nbsp;<a class="anchor" href="#実際にクラス-メソッドを作ってみる"><i class="small linkify icon"></i></a> </h2>
+
+<p>身近な例であるモンスターストライクのモンスターをオブジェクトにしてみましょう</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Monster</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Name:&#34;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Luck:&#34;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">luck</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>Moster</code> というクラスに<code>display</code>というメソッドを作りました、
+自身のnameとluckを表示するメソッドです。</p>
+
+<p>これを実際に使ってみましょう</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">monster</span> <span class="o">=</span> <span class="n">Monster</span><span class="p">()</span>
+<span class="n">monster</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;クイバタ&#34;</span>
+<span class="n">monster</span><span class="o">.</span><span class="n">luck</span> <span class="o">=</span> <span class="mi">99</span>
+<span class="n">monster</span><span class="o">.</span><span class="n">display</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>クイバタを定義し、実際にdisplayを行うと</p>
+
+<pre><code>Name: クイバタ
+Luck: 99
+</code></pre>
+
+<p>こんな具合で表示されます。成功です。</p>
+
+<p>ちなみに オブジェクトを作り出すことを <code>インスタンス化</code> といいます
+<code>monster = Monster()</code> この部分</p>
+
+<p>インスタンス化したあとに名前やラックを付与していますが名前とラックは絶対に欲しい情報なので後から入れる形にすると忘れちゃいそうで怖いです。実際入れずに <code>display()</code> するとエラーが出ます。ではどうするか。
+名前やラックはインスタンス化されたときにすでに付与されていてる形なら絶対に忘れません。
+インスタンス化するときにそのままnameもluckも代入するためにはどのようにやればいいか。その際は <code>__init__</code> メソッドを使います。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">luck</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">luck</span> <span class="o">=</span> <span class="n">luck</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>initメソッドにnameとluckを渡してこのインスタンス自身の nameとluckに代入します。</p>
+
+<p>もちろんですがインスタンス化するところも変化します。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-ptyhon" data-lang="ptyhon"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ptyhon" data-lang="ptyhon">monster = Monster(&#34;クイバタ&#34;, 12)
+monster.display()</code></pre></td></tr></table>
+</div>
+</div>
+<p>これでモンスターを　オブジェクト化　することができました。</p>
+
+<h2 id="なぜ関数ではなくメソッドで実装するのか">なぜ関数ではなくメソッドで実装するのか&nbsp;<a class="anchor" href="#なぜ関数ではなくメソッドで実装するのか"><i class="small linkify icon"></i></a> </h2>
+
+<p>関数としてもこの <code>display</code> は実装できます。</p>
+
+<pre><code>def display(monster):
+    print(&quot;Name:&quot;, monster.name)
+    print(&quot;Luck:&quot;, monster.luck)
+</code></pre>
+
+<p>この関数を用意すれば同じものが実装できます。一見どこからでも使えて、便利そうです。
+しかし、例えば今後 Monsterクラスだけではなくユーザー情報をdisplayしたりアイテム情報をdisplayしようとしたときこのメソッド名が重複しそうです。</p>
+
+<pre><code>displayMonsterData()
+displayUserData()
+displayItemData()
+</code></pre>
+
+<p>解決策としてはこうなるでしょう。確かに何をdisplayするかメソッド名から一目でわかります。しかし今は三つだからいいですがこれがより複雑になった時、、、例えばモンスターも味方モンスターなのか敵モンスターなのかはたまたボスモンスターなのか&hellip;考えだしたらキリはありませんがそうなるたびにメソッド名が複雑になっていきそうです。</p>
+
+<p>これらをそれぞれのクラスにしてみましょう。</p>
+
+<pre><code>Monster.display() // モンスターをdisplayしそうと一目でわかる
+User.display()
+Item.display()
+</code></pre>
+
+<p>それぞれの処理をクラスにカプセル化（後述）できた上にメソッド名も簡素になりました。これらがオブジェクト化する利点です。</p>
+
+<p>のように命名がかぶって中の処理が大変なことになりそうです。
+これらも</p>
+
+<pre><code>Monster.display()
+User.display()
+Item.display()
+</code></pre>
+
+<p>それぞれのクラスにメソッドがあるほうが処理が明確になり、可読性も上がるでしょう。</p>
+
+<h1 id="データ">データ&nbsp;<a class="anchor" href="#データ"><i class="small linkify icon"></i></a> </h1>
+
+<p>オブジェクトが持っている変数のことをデータと言います。</p>
+
+<h1 id="カプセル化">カプセル化&nbsp;<a class="anchor" href="#カプセル化"><i class="small linkify icon"></i></a> </h1>
+
+<p>オブジェクト指向では外からいじられる必要のないものを隠すことをカプセル化と言います。Pythonでデータを定義すると基本的に外からいじることができます。一番最初に名前やラックは外から入れましたがあのようなことです。</p>
+
+<p>外からいじられる必要のないものとは何か、またそうするとどのような効果が見込めるか。
+まずはいじられる必要のないものの例を挙げます。</p>
+
+<p>今回使用している例では Monster は LevelとLuckを持っています。Luckの上限値は99です。
+まずはそれを指定しましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Monster</span><span class="p">:</span>
+    <span class="n">LUCK_LIMIT</span> <span class="o">=</span> <span class="mi">99</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">luck</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">luck</span> <span class="o">&gt;</span> <span class="n">Monster</span><span class="o">.</span><span class="n">LUCK_LIMIT</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">Monster</span><span class="o">.</span><span class="n">LUCK_LIMIT</span><span class="p">)</span> <span class="o">+</span>
+                <span class="s2">&#34;より上は指定できません。&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">Monster</span><span class="o">.</span><span class="n">LUCK_LIMIT</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;に設定します。&#34;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">luck</span> <span class="o">=</span> <span class="n">Monster</span><span class="o">.</span><span class="n">LUCK_LIMIT</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">luck</span> <span class="o">=</span> <span class="n">luck</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>まずは上部 <code>Luck_LIMIT = 99</code> を見てください。
+変数名通り 運の上限値を99としています。このようにクラス内に定義した変数をクラス変数と言います。
+で、それを利用してラックの上限を99にするようなコードがinstance時に行われているわけですが、今のコードではカプセル化できていません。
+LUCK_LIMITは外からいじられたくない値ですが、今のように通常のクラス変数ではどこからでもアクセスして書き換えられてしまいます。まずはクラス変数の特性を確認しつつどうやってカプセル化するかを確認していきましょう。</p>
+
+<h3 id="memo-定数">[memo]定数&nbsp;<a class="anchor" href="#memo-定数"><i class="small linkify icon"></i></a> </h3>
+
+<p>定数を定義するときは可読性を考慮して
+- 大文字
+- 文字の区切りはアンダースコア　
+などをすると未来の自分や他の人が見た際にすぐに定数だと気が付けます
+pythonには定数を定義する文法は存在しない模様
+javaなら private static などと指定します。</p>
+
+<h2 id="クラス変数">クラス変数&nbsp;<a class="anchor" href="#クラス変数"><i class="small linkify icon"></i></a> </h2>
+
+<p>クラス変数はどこからでもアクセスできます。</p>
+
+<p>例えば今回の例ではLuckは99ですが10に変更できちゃったりするわけです。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">Monster</span><span class="o">.</span><span class="n">LUCK_LIMIT</span><span class="p">)</span>
+<span class="n">Monster</span><span class="o">.</span><span class="n">LUCK_LIMIT</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">monster</span> <span class="o">=</span> <span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;クイバタ&#34;</span><span class="p">,</span> <span class="mi">122</span><span class="p">)</span>
+<span class="n">monster</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Monster</span><span class="o">.</span><span class="n">LUCK_LIMIT</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>実行結果</p>
+
+<pre><code>99
+10より上は指定できません。10に設定します。
+Name: クイバタ
+Luck: 10
+10
+</code></pre>
+
+<p>初めはLuck99ですがLUCK_LIMITに外からアクセスして10を指定した結果上限が10になっているのがわかると思います。</p>
+
+<h2 id="定数をカプセル化したい">定数をカプセル化したい&nbsp;<a class="anchor" href="#定数をカプセル化したい"><i class="small linkify icon"></i></a> </h2>
+
+<p>上のようにそのままのクラス変数では読み、書きがどっちもできる状態になっています。
+これはptyhonでは作られた変数のアクセス制限がpublicだから発生します。これではカプセル化されているとは言えません。
+ただし、どうやらpythonにはprivateな変数はないようです。pythonエンジニアの慣習として <code>_</code> を一つつけて　「これはprivateな変数やぞ」という風に良心に任せる設計になっているようです。
+個人的にはめちゃめちゃ気持ち悪いのでそれをなんとか！と思い少し調べてみると後述するマングリングでお茶を濁すパターンが多いらしい&hellip;</p>
+
+<pre><code>    __LUCK_LIMIT = 99
+</code></pre>
+
+<p>アンダースコアを二つつけるとマングリングによって疑似的にprivateにできます。</p>
+
+<p>これでビルド時にエラーを出すことができました。しかしまだカプセル化は出来ていません。
+モンスターのラックの上限値をインスタンス時は制御できていますが、その後制御できていません。具体的には</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">monster</span> <span class="o">=</span> <span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;クイバタ&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">monster</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+<span class="n">monster</span><span class="o">.</span><span class="n">luck</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="n">monster</span><span class="o">.</span><span class="n">display</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>こういうことをされちゃうと</p>
+
+<pre><code>Name: クイバタ
+Luck: 120
+</code></pre>
+
+<p>ラックが上限を突破します。何が起きているかというとインスタンス変数が直接書き直されてしまっているため発生しています。
+先ほどはクラス変数をprivateにしましたが、今度はインスタンス変数を__にしましょう。プロパティを用います。</p>
+
+<h3 id="memo-おさらい-クラス変数とインスタンス変数とは">[memo]おさらい クラス変数とインスタンス変数とは&nbsp;<a class="anchor" href="#memo-おさらい-クラス変数とインスタンス変数とは"><i class="small linkify icon"></i></a> </h3>
+
+<p>ザックリ説明すると
+クラス変数はすべてのインスタンスで使用する変数です。
+一方でインスタンス変数はインスタンス毎に値が管理されています。</p>
+
+<p>クラスを介せばインスタンス化せずに扱える値で、.javaではstaticな変数です。
+一方でインスタンス変数はインスタンスされた際に初めて生成されるのでインスタンス毎に別のものがメモリに記憶されます。</p>
+
+<p>// TODO 追記　例</p>
+
+<h2 id="プロパティ">プロパティ&nbsp;<a class="anchor" href="#プロパティ"><i class="small linkify icon"></i></a> </h2>
+
+<p>プロパティはデータの参照や設定をするものを制御するときに使います。今回の例だと不適切な値（luckを上限を超えた120などがセットされてします）を制御するために使います。</p>
+
+<p>使い方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Class名</span><span class="p">:</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="err">変数名</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="err">処理</span>
+    <span class="nd">@変数.setter</span>
+     <span class="k">def</span> <span class="err">変数名</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="err">変数</span><span class="p">);</span>
+        <span class="err">処理</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>今回の例だとこうです</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">luck</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__level</span>
+
+    <span class="nd">@luck.setter</span>
+    <span class="k">def</span> <span class="nf">luck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">__LUCK_LIMIT</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__LUCK_LIMIT</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__luck</span> <span class="o">=</span> <span class="n">value</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>ここでもアンダースコアを付与することでprivateなインスタンス変数にしています。
+LUCK_LIMITよりも高い時にLUCK_LIMITを代入するような処理にしています。このように代入を制御するようなものをPythonに限らずセッターと呼びます。</p>
+
+<p>これで実際にLUCK_LIMITより多いものを代入しようとしても</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">monster</span> <span class="o">=</span> <span class="n">Monster</span><span class="p">(</span><span class="s2">&#34;クイバタ&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">monster</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+<span class="n">monster</span><span class="o">.</span><span class="n">luck</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="n">monster</span><span class="o">.</span><span class="n">display</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-実行結果" data-lang="実行結果"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-実行結果" data-lang="実行結果">Name: クイバタ
+Luck: 1
+Name: クイバタ
+Luck: 99</code></pre></td></tr></table>
+</div>
+</div>
+<p>120を指定していますが99になっています。成功です。</p>
+
+<p>ではやっとマングリングについて話しましょう。</p>
+
+<h2 id="マングリング">マングリング&nbsp;<a class="anchor" href="#マングリング"><i class="small linkify icon"></i></a> </h2>
+
+<p>先ほど話した通りpythonでは基本的に定義されたものは明示しない限りpublicなものでどこからでも参照できます。これではオブジェクト指向にのっとったプログラミングはできません。ではどのようにカプセル化するか。pythonではマングリングという機能で行います。
+今までやってきたように __ （アンダースコア二つ）をすることでマングリングはできます。これを行うことでprivateなメソッド　メンバー（変数）　にすることができていたわけです。
+ちなみに <code>__init__</code> はアンスコ２つからスタートしていますが末尾にアンスコ２つ以上ついている場合はマングリングは無効化されます。</p>
+
+<p>ただし厳密にはマングリングを行うことでprivateになっているというわけではなく _クラス<strong>名前という風に変換されるため外部から呼び出すことはできなくなっているということで、上のような書式にしてしまえばエラーもでずにアクセスできてしまいます。
+それに気が付いてアクセスするのはもうオブジェクト指向が理解できていないか設計がうまくいっていないので考え直しましょう。
+少なくとも</strong>名前では呼べなくなるのでうっかり呼ぶことはなくなるので十分privateだろう？というのがpythonの考え方のようです。</p>
+
+<h1 id="継承">継承&nbsp;<a class="anchor" href="#継承"><i class="small linkify icon"></i></a> </h1>
+
+<p>クラスは既存のクラスを使用して、新しいクラスを作ることができます。
+意味わかんないですね。
+例えばモンストだと友情コンボっていう弾いたときに自分以外のキャラにあたった時に攻撃が出てくるものがあります。
+友情コンボの種類は無限にあります。
+ほとんどのケースで１弾きに一回しか出ないという仕様は共通しています。まずはそれを書いてみます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">FriendAttack</span><span class="p">:</span>
+    <span class="n">__FRIEND_ATTACK_COUNT</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">attack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__attack</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__attack</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">on_hitted</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__attack</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">__FRIEND_ATTACK_COUNT</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">active_friend_attack</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__attack</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">active_friend_attack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;友情コンボ発動&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>最大回数、つまり一回以上は発動しないような処理になっています。これは友情コンボの共通仕様です。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">attack</span> <span class="o">=</span> <span class="n">FriendAttack</span><span class="p">()</span>
+<span class="n">attack</span><span class="o">.</span><span class="n">on_hitted</span><span class="p">()</span>
+<span class="n">attack</span><span class="o">.</span><span class="n">on_hitted</span><span class="p">()</span>
+<span class="n">attack</span><span class="o">.</span><span class="n">on_hitted</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>なんど呼び出しても一回の</p>
+
+<pre><code>友情コンボ
+</code></pre>
+
+<p>しか出てきません。</p>
+
+<p>友情コンボは無限に種類はありますが一回しか呼び出されない、これだけは不変です。なのでこの仕様を「継承」しながらホーミングや十字レーザーを実装してみましょう。</p>
+
+<p>継承方法</p>
+
+<pre><code>class 派生クラス(基底クラス):
+    処理
+</code></pre>
+
+<p>では実際にFriendAttackを継承したホーミングクラスを作ります。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Homing</span><span class="p">(</span><span class="n">FriendAttack</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">active_friend_attack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;ホーミング友情&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Homingクラスを作り FriendAttackを継承しています。
+そして先ほど定義したものと同じ <code>active_friend_attack()</code> を再定義しています。
+これはオーバーライドと言い処理を上書きしているような感じです。</p>
+
+<pre><code>homing = Homing()
+homing.on_hitted()
+homing.on_hitted()
+</code></pre>
+
+<p>上と同じように呼び出してみると</p>
+
+<pre><code>ホーミング友情
+</code></pre>
+
+<p>指定したように表示されます。
+継承することで　一回だけしか発動しないよ　という部分の処理や　発動するタイミング(on_hitted())処理などを省け、active_friend_attack()の中身のみを記述すればよくなりました。</p>
+
+<p>このように共通した処理を基底クラスに記述して、派生クラスでそれ独自のものを記述することを継承を使ってオブジェクト指向プログラミングでは設計していきます。</p>
+
+<h1 id="ポリモーフィズムとは">ポリモーフィズムとは&nbsp;<a class="anchor" href="#ポリモーフィズムとは"><i class="small linkify icon"></i></a> </h1>
+
+<p>日本語では多態性。意味不明ですね。
+もうちょっとかみ砕いた意味にすると同じメソッドでも与えるクラスによって処理が違うこと。意味不明ですね。
+実例を出してみましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">FriendAttack</span><span class="p">:</span>
+    <span class="n">__FRIEND_ATTACK_COUNT</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">attack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__attack</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__attack</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">on_hitted</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__attack</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">__FRIEND_ATTACK_COUNT</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">active_friend_attack</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__attack</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">active_friend_attack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;友情コンボ&#34;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Homing</span><span class="p">(</span><span class="n">FriendAttack</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">active_friend_attack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;ホーミング友情&#34;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">CrossLaser</span><span class="p">(</span><span class="n">FriendAttack</span><span class="p">):</span> 
+    <span class="k">def</span> <span class="nf">active_friend_attack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;クロスレーザー&#34;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">friend_attack</span><span class="p">(</span><span class="n">friend_attack</span><span class="p">):</span>
+    <span class="n">friend_attack</span><span class="o">.</span><span class="n">active_friend_attack</span><span class="p">()</span>
+
+<span class="n">homing</span> <span class="o">=</span> <span class="n">Homing</span><span class="p">()</span>
+<span class="n">friend_attack</span><span class="p">(</span><span class="n">Homing</span><span class="p">())</span>
+<span class="n">friend_attack</span><span class="p">(</span><span class="n">CrossLaser</span><span class="p">())</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-実行結果" data-lang="実行結果"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-実行結果" data-lang="実行結果">ホーミング友情
+クロスレーザー</code></pre></td></tr></table>
+</div>
+</div>
+<p><code>def frined_attack(frined_attack)</code>　に渡すClassによって実行結果が変わっていることがわかると思います。</p>
+
+<p>オブジェクトを気にせずメソッドを実行できるようにする、というのが大事なわけです。</p>
+
+<p>より具体的な使い方にしてみましょう。
+実際にはモンスターによって発動される友情コンボは違います。外から渡してあげましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Monster</span><span class="p">:</span>
+
+    <span class="n">__LUCK_LIMIT</span> <span class="o">=</span> <span class="mi">99</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">luck</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__level</span>
+
+    <span class="nd">@luck.setter</span>
+    <span class="k">def</span> <span class="nf">luck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">__LUCK_LIMIT</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__LUCK_LIMIT</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__luck</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">luck</span><span class="p">,</span> <span class="n">friend_attack</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">luck</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">__LUCK_LIMIT</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span>
+                <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__LUCK_LIMIT</span><span class="p">)</span> <span class="o">+</span>
+                <span class="s2">&#34;より上は指定できません。&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">Monster</span><span class="o">.</span><span class="n">LUCK_LIMIT</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;に設定します。&#34;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">luck</span> <span class="o">=</span> <span class="n">Monster</span><span class="o">.</span><span class="n">LUCK_LIMIT</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">luck</span> <span class="o">=</span> <span class="n">luck</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">friend_attack</span> <span class="o">=</span> <span class="n">friend_attack</span>
+
+    <span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Name:&#34;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Luck:&#34;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__luck</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_hitted</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">friend_attack</span><span class="o">.</span><span class="n">on_hitted</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>インスタンス化する際にFriendAttackをくれ、としています。
+今回のケースではHomingを渡しました。それがなぜまかり通るかというとHomingはFriendAttackを継承しているからです。そして<code>on_hitted()</code> はHomingではオーバーライドされているため <code>ホーミング友情</code> が表示されるわけです。</p>
+
+<h1 id="まとめ">まとめ&nbsp;<a class="anchor" href="#まとめ"><i class="small linkify icon"></i></a> </h1>
+
+<p>あんまり <code>Python</code> はオブジェクト指向の学習には向かないかもしれないと思った。
+この説明も.javaを知っているから理解できてる～みたいなのもあるかもしれない。</p>
+
+			</article>
+		</section>
+		<section class="ui secondary attached segment dream-tags">
+
+	<a class="ui label yellow " href="/tags/android" title="android">android</a>
+
+	<a class="ui label yellow " href="/tags/androidtips" title="androidtips">androidtips</a>
+
+	<a class="ui label yellow " href="/tags/django" title="django">django</a>
+
+	<a class="ui label pink " href="/tags/flutter" title="flutter">flutter</a>
+
+	<a class="ui label pink " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+
+	<a class="ui label red " href="/tags/python" title="python">python</a>
+
+
+		</section><section class="ui secondary  attached segment share row box"><div class="author"><img class="avatar" src="/img/avatar3.svg">
+	
+</div>
+<div class="info grow flexbox">
+	<p class="name">Yuki Yamada</p>
+	<p class="desc">Android Developer.Learning Android Kotlin-Spring Python-Django.</p>
+</div>
+<section class="buttons row box">
+	<div class="facebook none flexbox" href="#" onclick="window.open(
+			'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+			'facebook-share-dialog',
+			'width=626,height=436'); return false;">
+		<button class="ui facebook button"><i class="facebook icon"></i>Share</button>
+	</div>
+	<div class="twitter none flexbox" onclick="window.open('https://twitter.com/intent/tweet?text=Read &quot;Pythonにおけるオブジェクト指向 &quot; by @YukiYamadaJP https:\/\/sasakiyuki.github.io\/posts\/python_object_oriented\/','_self')">
+		<button class="ui twitter button"><i class="twitter icon"></i>Tweet</button>
+	</div>
+</section>
+</section>
+		<section class="ui secondary attached segment copyright">
+			
+
+		</section>
+		<div class="ui secondary bottom attached stacked segment disqus"><div id="disqus_thread"></div>
+<script>
+	var disqus_config = function () {
+		this.page.url = 'https:\/\/sasakiyuki.github.io\/posts\/python_object_oriented\/';
+		this.page.identifier = '025c2e9b5a29a8b7ff0e1e4c4729e6b0';
+	};
+	(function() {
+   	var d = document, s = d.createElement('script');
+   	s.src = 'https://' + 'dream-plus' + '.disqus.com/embed.js';
+   	s.setAttribute('data-timestamp', +new Date());
+   	(d.head || d.body).appendChild(s);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+		
+	</div>
+</div>
+
+			</div>
+			<div class="back">
+<nav class="ui top secondary menu bar">
+	<div class="item">
+		<i class="inverted big link bullseye icon dream-flip-toggle" title=""></i>
+	</div>
+
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+	
+	
+	
+		
+		
+		<div class="item">
+			<a href="https://github.com/SasakiYuki" target="	_blank">
+				<i id="ico" class="inverted big link github icon" title="GitHub"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+		<div class="item">
+			<a href="mailto:wacorggen@gmail.com" target="	_blank">
+				<i id="ico" class="inverted big link mail icon" title="Email"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+		<div class="item">
+			<a href="https://twitter.com/YukiYamadaJP" target="	_blank">
+				<i id="ico" class="inverted big link twitter icon" title="Twitter"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+	
+		
+		
+		<div class="item">
+			<a href="https://medium.com/@wacorggen" target="	_blank">
+				<i id="ico" class="inverted big link medium icon" title="Medium"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+
+	
+	<div class="item right">
+		<a href="/posts/index.xml">
+			<i class="inverted big link rss icon" title=""></i>
+		</a>
+	</div>
+	
+</nav>
+
+<div class="ui centered grid about">
+	<div class="sixteen wide mobile fifteen wide tablet fifteen wide computer column about">
+		<section class="ui stacked segments">
+			<div class="ui inverted segment">
+				<article class="twemoji"><h1>So, Who Am I?</h1>
+
+<hr />
+
+<p><br>
+ヤマダユキと申します。</p>
+
+<p>都内に住むソフトウェアエンジニアです。
+技術ブログや日々の話など雑多に書きます。</p>
+
+<p>基本休日もコード書いてることが多いですが、その他の趣味にカメラとDTM civ6などもあります。</p>
+
+<p>経歴等は<a href="https://www.wantedly.com/users/17800328">Wantedly</a>をご確認ください。
+相談は上部mailやtwitterDMなどどこでもどうぞ。</p>
+</article>
+			</div>
+		</section>
+	</div>
+</div>
+</div>
+		</div>
+	</div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/site.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script><script src="https://twemoji.maxcdn.com/2/twemoji.min.js?2.6"></script>
+
+<script id="dsq-count-scr" src="//dream-plus.disqus.com/count.js" async></script>
+
+
+<script>
+	(function () {
+	  console.log("Twemoji up and making stuff colourful!");
+	  for (var b = document.getElementsByClassName("twemoji"), a = 0; a < b.length; a++) {
+		twemoji.parse(b[a]);
+	  }
+	})();
+</script>
+
+</body>
+</html>

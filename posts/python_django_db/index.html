@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+<head>
+	<title>
+	PythonDjango入門-DBに触れる
+</title><style>
+body {
+	display: block;
+	--colorBG: "#40e0d0, #ff8c00, #ff0080";background: linear-gradient(to right, var(--colorBG)) !important;
+	
+}
+
+body, body.pushable {
+	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: cover !important;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="author" content="map[name:Yuki Yamada]" />
+	<meta name="description" content="Python Django入門記事その3。DBを使ってみます。" />
+<meta name="generator" content="Hugo 0.41" />
+
+<link rel="shortcut icon" href="/img/defaultFav.ico">
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+<style>
+body.pushable {
+	display: block;background: linear-gradient(to right, var(--colorBG)) !important;
+	 ;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/css/site.css"><link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/UtkarshVerma/hugo-dream-plus/ae11561d/exampleSite/static/css/highlight.css">
+<script>
+	var colorBG =  true 
+	var enabledPost =  false 
+	var isMobile = ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+	console.log("The client device is a "+(isMobile?"mobile":"PC")+".")
+</script>
+</head>
+<body><script>
+var prevBgIndex = 0;
+var bodyBgSwitchIndex = 0;var gradients = [
+	  [],
+	  ['#40e0d0', '#ff8c00', '#ff0080'], 
+	  ['#3e5151', '#decba4'], 
+	  ['#11998e', '#38ef7d'], 
+	  ['#108dc7', '#ef8e38'], 
+	  ['#fc5c7d', '#6a82fb'], 
+	  ['#fc466b', '#3f5efb'], 
+	  ['#c94b4b', '#4b134f'], 
+	  ['#23074d', '#cc5333'] 
+	];
+	document.body.style.setProperty('--colorBG', connect(gradients[getRandomInt(0, gradients.length)]));
+	function getRandomInt(min, max) {
+	  min = Math.ceil(min);
+	  max = Math.floor(max);
+	  var random;
+	  while (1) {
+	    random = Math.floor(Math.random() * (max - min)) + min;
+	    if (random !== prevBgIndex) {
+	      prevBgIndex = random;
+	      break;
+	    }
+	  }
+	  return random;
+	}
+
+	function connect(arr) {
+	  var str = '';
+	  for (var i = 0; i < arr.length; i++) {
+	    if (i !== arr.length - 1) {
+	      str += arr[i] + ', ';
+	    } else {
+	      str += arr[i];
+	    }
+	  }
+	  return str;
+	}
+</script><div id="sidebar" class="ui sidebar inverted vertical menu">
+	<section id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
+		<img src="https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png">
+</div>
+<h3 class="ui header">YukiYamada
+	<div class="sub header">Android Developer.Learning Android Kotlin-Spring Python-Django.</div>
+</h3>
+</section><section class="ui attached center aligned inverted segment sidebar-dream-tags">
+
+	<a class="ui label orange " href="/tags/android" title="android">android</a>
+
+	<a class="ui label teal " href="/tags/androidtips" title="androidtips">androidtips</a>
+
+	<a class="ui label violet " href="/tags/django" title="django">django</a>
+
+	<a class="ui label purple " href="/tags/flutter" title="flutter">flutter</a>
+
+	<a class="ui label pink " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+
+	<a class="ui label green " href="/tags/python" title="python">python</a>
+
+</section>
+	<section class="ui attached inverted segment sidebar-dream-categories both flexbox">
+		<div class="ui inverted accordion">
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/blogging">blogging</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/flutter_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-001-WebViewを使う</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_003/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-003-リスト表示をしてみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_db/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-DBに触れる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tutorial_layout/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>アプリケーションのレイアウト</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_templetes/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-テンプレートを使ってみる </p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_local_and_url/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_object_oriented/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_document_android_manifest/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidManifestについて</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_002/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-002-画面移動してみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-001-押されたら何かをするを実装する</p>
+		</div>
+	</a>
+
+</div>
+
+</div>
+	</section>
+	
+	<section id="footer" class="ui bottom attached center aligned inverted segment">
+	<p>© 2018 ヤマダユキの備忘log</p>
+
+<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
+</section>
+</div>
+<div class="pusher">
+		<div class="flipper">
+			<div class="front">
+	
+	<nav class="ui top secondary menu bar">
+	<div class="item">
+		<i class="inverted big link bullseye icon dream-flip-toggle" title=""></i>
+	</div>
+<div class="item">
+			<a href="/">
+				<i class="inverted big link home icon" title=""></i>
+			</a>
+		</div>
+	<div class="item">
+			<a href="/posts">
+				<i class="inverted big link archive icon" title=""></i>
+			</a>
+		</div>
+	
+	<div class="item">
+			<a href="/tags">
+				<i class="inverted big link tags icon" title=""></i>
+			</a>
+		</div>
+	<div class="item">
+			<a href="/categories">
+				<i class="inverted big link cubes icon" title=""></i>
+			</a>
+    	</div>
+	
+	<div class="ui container tablet computer only grid">
+		<div class="item" onClick="$('.ui.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');">
+			<i class="inverted big link sidebar icon" title=""></i>
+		</div>
+	</div>
+	
+
+	
+	<div class="item right">
+		<a href="/posts/index.xml">
+			<i class="inverted big link rss icon" title=""></i>
+		</a>
+	</div>
+	
+</nav>
+
+
+<div class="ui centered grid">
+	<div class="sixteen wide mobile only column"><div class="ui inverted accordion">
+	<div id="header" class="ui inverted segment column box">
+		<header id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
+		<img src="https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png">
+</div>
+<h3 class="ui header">YukiYamada
+	<div class="sub header">Android Developer.Learning Android Kotlin-Spring Python-Django.</div>
+</h3>
+</header>
+		<div class=" title header-title"><div id="tag-category-pop" class="ui red right corner label">
+				<i class="hand point icon down"title=""></i>
+			</div></div>
+		<div id="tag-category" class=" content"><section class="ui attached center aligned inverted segment dream-tags none flexbox">
+
+	<a class="ui label olive " href="/tags/android" title="android">android</a>
+
+	<a class="ui label teal " href="/tags/androidtips" title="androidtips">androidtips</a>
+
+	<a class="ui label brown " href="/tags/django" title="django">django</a>
+
+	<a class="ui label brown " href="/tags/flutter" title="flutter">flutter</a>
+
+	<a class="ui label purple " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+
+	<a class="ui label violet " href="/tags/python" title="python">python</a>
+
+</section><section class="ui attached inverted segment dream-categories both flexbox">
+				<div class="inverted accordion">
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/blogging">blogging</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/flutter_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-001-WebViewを使う</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_003/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-003-リスト表示をしてみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_db/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-DBに触れる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tutorial_layout/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>アプリケーションのレイアウト</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_templetes/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-テンプレートを使ってみる </p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_local_and_url/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_object_oriented/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_document_android_manifest/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidManifestについて</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_002/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-002-画面移動してみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-001-押されたら何かをするを実装する</p>
+		</div>
+	</a>
+
+</div>
+
+</div>
+			</section></div>
+		<footer class="ui bottom attached center aligned inverted segment">
+	<p>© 2018 ヤマダユキの備忘log</p>
+
+<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
+</footer>
+	</div>
+</div>
+</div>
+	<div class="sixteen wide mobile fifteen wide tablet twelve wide computer column post-list">
+		<section class="ui secondary top attached black segment post-head">
+			<h1 class="post-title">
+				PythonDjango入門-DBに触れる
+			</h1>
+			<div class="sub header">
+					<div><span><i class="calendar outline icon"></i>Nov 5, 2018</span></div><div><span class="disqusComment"><i class="comment outline icon"></i><a href="https://sasakiyuki.github.io/posts/python_django_db/#disqus_thread" class="disqus-comment-count" data-disqus-identifier="3b8054a9ac9aee48f0631c3956914756"></a></span></div>
+					<div><span><i class="clock outline icon"></i>3 min read</span></div>
+					<div><span><i class="angle double up icon"></i> Nov 5, 2018</span></div>
+			</div>
+			<hr><div class="toc"><nav id="TableOfContents">
+<ul>
+<li><a href="#データベースが必要になる理由">データベースが必要になる理由</a></li>
+<li><a href="#djangoでdbを使う">DjangoでDBを使う</a></li>
+<li><a href="#djangoにてpostgresqlを設定をする">djangoにてPostgreSQLを設定をする</a>
+<ul>
+<li>
+<ul>
+<li><a href="#no-module-named-psycopg2">No module named &lsquo;psycopg2&rsquo;</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#モデルを作る">モデルを作る</a></li>
+<li><a href="#マイグレーション">マイグレーション</a></li>
+<li><a href="#dbのcrud">DBのCRUD</a></li>
+<li><a href="#c-create">C Create</a></li>
+<li><a href="#r-read">R Read</a>
+<ul>
+<li><a href="#管理画面編">管理画面編</a></li>
+<li><a href="#コード上で">コード上で</a></li>
+</ul></li>
+<li><a href="#u-update">U Update</a></li>
+<li><a href="#d-delete">D Delete</a></li>
+</ul>
+</nav></div>
+			
+			<article class="post-content twemoji">
+				
+
+<h1 id="データベースが必要になる理由">データベースが必要になる理由&nbsp;<a class="anchor" href="#データベースが必要になる理由"><i class="small linkify icon"></i></a> </h1>
+
+<p>前回までにユーザーの登録フォームなどを作ってきましたが、特にデータの保存等はしてきませんでした。
+Webアプリケーションを作る上で何かしらのデータを保存することは絶対に必要になってきます。データを個人で永続的に使うというだけであればデータベースでなくとも何かしらの形でファイルにアウトプットすればいいでしょうが、Webアプリケーションでは同時に別のユーザーから開かれる可能性があるのでファイルを開いていたら何か障害が起きかねません。そもそもアクセス速度やデータ分類などの面で問題がありそうです。</p>
+
+<p>データベースはそれらを解決するために長年進化を続けてきました。特にRDBMS(リレーショナルデータベースマネジメントシステム　説明するにはちょっとDBの知識がいるので今は要するに『普通のDB』とでも思っていてください）は長く、現在も使われています。現在ではNoSQLなどRDBMSとは違うDBも出てきていますが、今回はこのRDBを学んでいきます。</p>
+
+<p>データベース全体の特徴は</p>
+
+<ul>
+<li>なんといってもデータアクセス速度が速い</li>
+<li>高度な検索が可能</li>
+<li>同時アクセスされることを前提に作られている</li>
+</ul>
+
+<h1 id="djangoでdbを使う">DjangoでDBを使う&nbsp;<a class="anchor" href="#djangoでdbを使う"><i class="small linkify icon"></i></a> </h1>
+
+<p>上記の通りDBを使うことにメリットが非常にあることがわかりましたが、一口にDBといっても色々なものが存在します。
+Djangoだと使われがちなのは</p>
+
+<ul>
+<li>SQLite</li>
+<li>MySQL</li>
+<li>PostgreSQL</li>
+</ul>
+
+<p>でしょうか。
+それぞれ特徴があります。すごく雑に説明すると（上から）</p>
+
+<ul>
+<li>djnagoプロジェクトを作ると初期設定はこれ　軽い、高速　だけど大規模に向いてないので学習や小規模など　ちなみにAndroidで採用されている</li>
+<li>最も多く採用されているんじゃないかと言われている</li>
+<li>導入コストが低く済む　</li>
+</ul>
+
+<p>すべて共通してオープンソースで、SQLというデータアクセス言語を使っています。</p>
+
+<p>今回はPostgreSQLでいきましょう！</p>
+
+<h1 id="djangoにてpostgresqlを設定をする">djangoにてPostgreSQLを設定をする&nbsp;<a class="anchor" href="#djangoにてpostgresqlを設定をする"><i class="small linkify icon"></i></a> </h1>
+
+<p>まずはインストールをします。
+MacOSなら Homebrewを使ってすぐに終わります。</p>
+
+<pre><code>brew install postgresql
+</code></pre>
+
+<p>Winだったらまずはインストーラーを<a href="https://www.enterprisedb.com/downloads/postgres-postgresql-downloads">こちら</a>からダウンロードしてください。</p>
+
+<p>インストーラー起動するとディレクトリとかの設定は基本デフォルトで問題ないですが見慣れないスーパーユーザーのパスワードの設定をしてください、という項目があると思うので任意のものを設定してください。
+またポートはデフォルトの5432でいいでしょう。
+ロケールは デフォルトで</p>
+
+<p>で、パスを通します。</p>
+
+<p>環境変数設定で　C:\Program Files\PostgreSQL\11\bin　先ほどインストールした bin を通して</p>
+
+<p>パスが通ってることを確認。</p>
+
+<pre><code>psql --version
+</code></pre>
+
+<p>通ってたら成功です。</p>
+
+<p><code>settings.py</code> をご覧ください。デフォルトのままであれば</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.sqlite3&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s1">&#39;db.sqlite3&#39;</span><span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>このような記述をしてあるところがあると思います。
+今はSQLiteで設定されているのでここをPostgreSQLに置き換えます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.postgresql&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="n">DB名</span><span class="p">,</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="err">ユーザー名</span><span class="p">,</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="err">パスワード</span><span class="p">,</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="mi">5432</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>さぁ実際にモデルを作っていきましょう。</p>
+
+<h3 id="no-module-named-psycopg2">No module named &lsquo;psycopg2&rsquo;&nbsp;<a class="anchor" href="#no-module-named-psycopg2"><i class="small linkify icon"></i></a> </h3>
+
+<p>って言われたら <code>pip install psycopg2</code> しましょう！</p>
+
+<h1 id="モデルを作る">モデルを作る&nbsp;<a class="anchor" href="#モデルを作る"><i class="small linkify icon"></i></a> </h1>
+
+<p>DBの設定ができたので実際に入れていくデータの構造を定義していきたいですね。この「データ構造」のことをモデルと言います。前々回MVCアーキテクチャの話をしましたがそれのMに相当する部分です。</p>
+
+<p>実際に作ってみましょう。</p>
+
+<p><code>models.py</code> に書きます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Member</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">AutoField</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">isAdmin</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">()</span>
+    <span class="n">birthday</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">()</span>
+    <span class="n">home_page_url</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">URLField</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>そんなに特別な部分はないのでわかるかと思いますが、idだけ補足しておくと名前付き引数で <code>primary_key</code> にTrueを渡しています。これはこのidという要素にはAuto(自動的)に重複しない値をいれてくれるようになるように書いてあります。</p>
+
+<p>ではモデルができたところで <code>マイグレーション</code> をしていきましょう。</p>
+
+<p>マイグレーションとは開発の途中でデータベースの構造を変更した際にどのような変更がされたか書くことです。
+都度必要なので忘れないように。</p>
+
+<p>最初に行うのはマイグレーションの設定ファイルをプロジェクト内に作成することです。</p>
+
+<h1 id="マイグレーション">マイグレーション&nbsp;<a class="anchor" href="#マイグレーション"><i class="small linkify icon"></i></a> </h1>
+
+<p>（マイグレーションファイルがない場合）
+マイグレーションファイルを作る必要があります。</p>
+
+<pre><code>python manage.py makemigrations AppName
+</code></pre>
+
+<pre><code>    - Create model Member
+</code></pre>
+
+<p>これが出てれば問題ないです。</p>
+
+<p>migration管理ファイルが完成したら実際にマイグレーションを実行します。</p>
+
+<pre><code>python manage.py migrate 
+</code></pre>
+
+<p>これで実際にマイグレーションを行います。</p>
+
+<h1 id="dbのcrud">DBのCRUD&nbsp;<a class="anchor" href="#dbのcrud"><i class="small linkify icon"></i></a> </h1>
+
+<p>データベースでの基本動作は</p>
+
+<ul>
+<li>create</li>
+<li>read</li>
+<li>update</li>
+<li>delete</li>
+</ul>
+
+<p>の４つです。</p>
+
+<p>それらをやっていきましょう。</p>
+
+<h1 id="c-create">C Create&nbsp;<a class="anchor" href="#c-create"><i class="small linkify icon"></i></a> </h1>
+
+<p>ではさっそく保存ロジックを書いてみましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">post_form</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&#34;POST&#34;</span> <span class="ow">and</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&#34;name&#34;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&#34;birthday&#34;</span><span class="p">]</span> <span class="ow">and</span> \
+            <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&#34;home_page_url&#34;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="s2">&#34;isAdmin&#34;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">:</span>
+            <span class="n">is_admin</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">is_admin</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&#34;name&#34;</span><span class="p">],</span>
+            <span class="n">isAdmin</span><span class="o">=</span><span class="n">is_admin</span><span class="p">,</span>
+            <span class="n">birthday</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&#34;birthday&#34;</span><span class="p">],</span>
+            <span class="n">home_page_url</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&#34;home_page_url&#34;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">member</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&#34;保存完了&#34;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&#34;必須項目がPOSTされていません&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>インスタンス化して.save()を呼ぶだけです。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">MemberForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&#34;name&#34;</span><span class="p">)</span>
+    <span class="n">isAdmin</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&#34;isAdmin&#34;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">birthday</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&#34;birthday&#34;</span><span class="p">)</span>
+    <span class="n">home_page_url</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">URLField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&#34;home_page_url&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>今までの知識を使うと Formクラスを継承したFormを作り、そこからPOSTさせて受け取って処理、、ということになりそうですがちょっとイケてないですね。せっかくフォームを独自で作ったのでPOSTメソッドから自分でparseして..ちょっと煩雑です。
+そこで、ModelFormクラスを継承したフォーム作成を使ってみます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python:views.py" data-lang="python:views.py"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python:views.py" data-lang="python:views.py"><span class="k">def</span> <span class="nf">post_model_form</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&#34;POST&#34;</span><span class="p">:</span>
+        <span class="n">instance_member</span> <span class="o">=</span> <span class="n">Member</span><span class="p">()</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="n">MemberModelForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">instance_member</span><span class="p">)</span>
+        <span class="n">member</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="s2">&#34;/dbman/index&#34;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&#34;必須項目がPOSTされていません&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>バリデーションはちょっと雑になりましたがかなりsave回りがすっきりしたことがわかると思います。
+空のMemberクラスをインスタンス化して、それをFormのinsntanceに渡します。第一引数であるrequest.POSTは言わずもがなですがPOSTの情報が入っているのでこのMemberModelFormのコンストラクタ内で自動的にPOSTがパースされてい入力されています。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python:MemberModelForm" data-lang="python:MemberModelForm"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python:MemberModelForm" data-lang="python:MemberModelForm">class MemberModelForm(forms.ModelForm):
+    class Meta:
+        model = Member
+        fields = [&#34;name&#34;, &#34;isAdmin&#34;, &#34;birthday&#34;, &#34;home_page_url&#34;]</code></pre></td></tr></table>
+</div>
+</div>
+<p>ModelFormは中にMetaクラスを持っています。フォームに関する情報が用意されており、<code>model =</code> に使用するモデルクラスを、 <code>fields =</code> にフォームで表示する値をセットします。</p>
+
+<h1 id="r-read">R Read&nbsp;<a class="anchor" href="#r-read"><i class="small linkify icon"></i></a> </h1>
+
+<h2 id="管理画面編">管理画面編&nbsp;<a class="anchor" href="#管理画面編"><i class="small linkify icon"></i></a> </h2>
+
+<p>モデルを作っただけでは管理画面から編集はできません。「このモデルは管理画面から編集できますよ」という宣言をするにはそれぞれのアプリケーションの<code>admin.py</code> を編集します。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+
+<span class="kn">from</span> <span class="nn">dbman.models</span> <span class="kn">import</span> <span class="n">Member</span>
+
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Member</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>これで編集できるようになりますのでadmin画面を開いてみましょう。</p>
+
+<p>ユーザーを作っていませんでしたね。作りましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>作ったアカウントで入ってみると作ったモデルが表示されているかと思います。
+ここから追加することもできるのでぜひ確認してみてください。</p>
+
+<h2 id="コード上で">コード上で&nbsp;<a class="anchor" href="#コード上で"><i class="small linkify icon"></i></a> </h2>
+
+<p>パーセントコーディングのfor文でリストをさばきます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-jinja" data-lang="jinja"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-jinja" data-lang="jinja"><span class="x">&lt;!DOCTYPE html&gt;
+</span><span class="x">&lt;html lang=&#34;en&#34;&gt;
+</span><span class="x">&lt;head&gt;
+</span><span class="x">    &lt;meta charset=&#34;UTF-8&#34;&gt;
+</span><span class="x">    &lt;title&gt;Title&lt;/title&gt;
+</span><span class="x">&lt;/head&gt;
+</span><span class="x">&lt;body&gt;
+</span><span class="x">&lt;table&gt;
+</span><span class="x">    &lt;tr&gt;
+</span><span class="x">        &lt;th&gt;id&lt;/th&gt;
+</span><span class="x">        &lt;th&gt;名前&lt;/th&gt;
+</span><span class="x">        &lt;th&gt;管理者か&lt;/th&gt;
+</span><span class="x">        &lt;th&gt;誕生日&lt;/th&gt;
+</span><span class="x">        &lt;th&gt;ホームページURL&lt;/th&gt;
+</span><span class="x">    &lt;/tr&gt;
+</span><span class="x">    </span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">member</span> <span class="k">in</span> <span class="nv">members</span> <span class="cp">%}</span><span class="x">
+</span><span class="x">        &lt;tr&gt;
+</span><span class="x">            &lt;th&gt;</span><span class="cp">{{</span> <span class="nv">member.id</span> <span class="cp">}}</span><span class="x">&lt;/th&gt;
+</span><span class="x">            &lt;th&gt;</span><span class="cp">{{</span> <span class="nv">member.name</span> <span class="cp">}}</span><span class="x">&lt;/th&gt;
+</span><span class="x">            &lt;th&gt;</span><span class="cp">{{</span> <span class="nv">member.isAdmin</span> <span class="cp">}}</span><span class="x">&lt;/th&gt;
+</span><span class="x">            &lt;th&gt;</span><span class="cp">{{</span> <span class="nv">member.birthday</span> <span class="cp">}}</span><span class="x">&lt;/th&gt;
+</span><span class="x">            &lt;th&gt;</span><span class="cp">{{</span> <span class="nv">member.home_page_url</span> <span class="cp">}}</span><span class="x">&lt;/th&gt;
+</span><span class="x">        &lt;/tr&gt;
+</span><span class="x">    </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span><span class="x">
+</span><span class="x">&lt;/table&gt;
+</span><span class="x">&lt;/body&gt;
+</span><span class="x">&lt;/html&gt;</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">post_form</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&#34;POST&#34;</span> <span class="ow">and</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&#34;name&#34;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&#34;birthday&#34;</span><span class="p">]</span> <span class="ow">and</span> \
+            <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&#34;home_page_url&#34;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="s2">&#34;isAdmin&#34;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">:</span>
+            <span class="n">is_admin</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">is_admin</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&#34;name&#34;</span><span class="p">],</span>
+            <span class="n">isAdmin</span><span class="o">=</span><span class="n">is_admin</span><span class="p">,</span>
+            <span class="n">birthday</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&#34;birthday&#34;</span><span class="p">],</span>
+            <span class="n">home_page_url</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&#34;home_page_url&#34;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">member</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="s2">&#34;/dbman/index&#34;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&#34;必須項目がPOSTされていません&#34;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">render_index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">members</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="nb">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&#34;dbman/index.html&#34;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&#34;members&#34;</span><span class="p">:</span> <span class="n">members</span><span class="p">})</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>urlsももちろん変更しますがsave後にリダイレクトされるように修正します。</p>
+
+<h1 id="u-update">U Update&nbsp;<a class="anchor" href="#u-update"><i class="small linkify icon"></i></a> </h1>
+
+<p>情報のアップデートを行います。
+基本的な流れとしては
+対象のidをpathなどから取得　そのidのアイテムを取得してその情報をformに表示 postされたら変更情報を保存する</p>
+
+<p>この流れでいきたいと思います。</p>
+
+<p>まずは <code>urls.py</code> の変更からいきましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python:urls.py" data-lang="python:urls.py"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python:urls.py" data-lang="python:urls.py">    <span class="n">path</span><span class="p">(</span><span class="s2">&#34;edit/&lt;int:user_id&gt;&#34;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">render_edit</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;edit&#34;</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&#34;post_edit/&lt;int:user_id&gt;&#34;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">post_edit</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;post_edit&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>一覧画面からのidを渡されることを想定してフォームを表示する法の画面にはnameを先に設定しておいてみました。</p>
+
+<p>Edit用のフォームを用意します。基本的には登録フォームと同じです</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-jinja" data-lang="jinja"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-jinja" data-lang="jinja"><span class="x">&lt;!DOCTYPE html&gt;
+</span><span class="x">&lt;html lang=&#34;en&#34;&gt;
+</span><span class="x">&lt;head&gt;
+</span><span class="x">    &lt;meta charset=&#34;UTF-8&#34;&gt;
+</span><span class="x">    &lt;title&gt;TITLE&lt;/title&gt;
+</span><span class="x">&lt;/head&gt;
+</span><span class="x">
+</span><span class="x">&lt;body&gt;
+</span><span class="x">&lt;h1&gt;ユーザー情報の編集&lt;/h1&gt;
+</span><span class="x">&lt;form method=&#34;POST&#34; action=&#34;</span><span class="cp">{%</span> <span class="k">url</span>  <span class="s2">&#34;post_edit&#34;</span> <span class="nv">id</span> <span class="cp">%}</span><span class="x">&#34;&gt;
+</span><span class="x">    </span><span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span><span class="x">
+</span><span class="x">    </span><span class="cp">{{</span> <span class="nv">form</span> <span class="cp">}}</span><span class="x">
+</span><span class="x">    &lt;input value=&#34;post&#34; type=&#34;submit&#34;&gt;
+</span><span class="x">&lt;/form&gt;
+</span><span class="x">&lt;/body&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>違うところは actionのところで <code>post_edit</code> のほかにも id を 引数として受け取っているところでしょう。これはurlのpathに相当します。</p>
+
+<p>次にviewsをいじって実際にDBから対象のデータを取得してみましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python:views.py" data-lang="python:views.py"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python:views.py" data-lang="python:views.py"><span class="k">def</span> <span class="nf">render_edit</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+    <span class="n">member</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&#34;dbman/edit.html&#34;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span> <span class="s2">&#34;form&#34;</span><span class="p">:</span> <span class="n">MemberModelForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">member</span><span class="p">)})</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>urls.py</code> から受け取ったパスのidを使ってそのまま <code>Member.objects.get(id=user_id)</code> で取得します。
+あとは基本いつも通りです。</p>
+
+<p>実際の更新処理に関しても</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">post_edit</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+    <span class="n">member</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="n">member_form</span> <span class="o">=</span> <span class="n">MemberModelForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">member</span><span class="p">)</span>
+    <span class="n">member_form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">redirect_index</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Createとほぼ一緒です。インスタンスを作るのではなくprimaryKeyであるIDを指定してあげてsaveを呼ぶだけです。</p>
+
+<h1 id="d-delete">D Delete&nbsp;<a class="anchor" href="#d-delete"><i class="small linkify icon"></i></a> </h1>
+
+<p>DeleteもCreateやUpdateと特に違うことはしません。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python:views.py" data-lang="python:views.py"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python:views.py" data-lang="python:views.py"><span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+    <span class="n">member</span> <span class="o">=</span> <span class="n">Member</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="n">member</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">redirect_index</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>関数だけ用意してみました。あとはpathから呼んでも、どんな形でもいいので実装してみてください。</p>
+
+			</article>
+		</section>
+		<section class="ui secondary attached segment dream-tags">
+
+	<a class="ui label teal " href="/tags/android" title="android">android</a>
+
+	<a class="ui label red " href="/tags/androidtips" title="androidtips">androidtips</a>
+
+	<a class="ui label yellow " href="/tags/django" title="django">django</a>
+
+	<a class="ui label orange " href="/tags/flutter" title="flutter">flutter</a>
+
+	<a class="ui label orange " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+
+	<a class="ui label brown " href="/tags/python" title="python">python</a>
+
+
+		</section><section class="ui secondary  attached segment share row box"><div class="author"><img class="avatar" src="/img/avatar4.svg">
+	
+</div>
+<div class="info grow flexbox">
+	<p class="name">Yuki Yamada</p>
+	<p class="desc">Android Developer.Learning Android Kotlin-Spring Python-Django.</p>
+</div>
+<section class="buttons row box">
+	<div class="facebook none flexbox" href="#" onclick="window.open(
+			'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+			'facebook-share-dialog',
+			'width=626,height=436'); return false;">
+		<button class="ui facebook button"><i class="facebook icon"></i>Share</button>
+	</div>
+	<div class="twitter none flexbox" onclick="window.open('https://twitter.com/intent/tweet?text=Read &quot;PythonDjango入門-DBに触れる &quot; by @YukiYamadaJP https:\/\/sasakiyuki.github.io\/posts\/python_django_db\/','_self')">
+		<button class="ui twitter button"><i class="twitter icon"></i>Tweet</button>
+	</div>
+</section>
+</section>
+		<section class="ui secondary attached segment copyright">
+			
+
+		</section>
+		<div class="ui secondary bottom attached stacked segment disqus"><div id="disqus_thread"></div>
+<script>
+	var disqus_config = function () {
+		this.page.url = 'https:\/\/sasakiyuki.github.io\/posts\/python_django_db\/';
+		this.page.identifier = '3b8054a9ac9aee48f0631c3956914756';
+	};
+	(function() {
+   	var d = document, s = d.createElement('script');
+   	s.src = 'https://' + 'dream-plus' + '.disqus.com/embed.js';
+   	s.setAttribute('data-timestamp', +new Date());
+   	(d.head || d.body).appendChild(s);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+		
+	</div>
+</div>
+
+			</div>
+			<div class="back">
+<nav class="ui top secondary menu bar">
+	<div class="item">
+		<i class="inverted big link bullseye icon dream-flip-toggle" title=""></i>
+	</div>
+
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+	
+	
+	
+		
+		
+		<div class="item">
+			<a href="https://github.com/SasakiYuki" target="	_blank">
+				<i id="ico" class="inverted big link github icon" title="GitHub"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+		<div class="item">
+			<a href="mailto:wacorggen@gmail.com" target="	_blank">
+				<i id="ico" class="inverted big link mail icon" title="Email"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+		<div class="item">
+			<a href="https://twitter.com/YukiYamadaJP" target="	_blank">
+				<i id="ico" class="inverted big link twitter icon" title="Twitter"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+	
+		
+		
+		<div class="item">
+			<a href="https://medium.com/@wacorggen" target="	_blank">
+				<i id="ico" class="inverted big link medium icon" title="Medium"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+
+	
+	<div class="item right">
+		<a href="/posts/index.xml">
+			<i class="inverted big link rss icon" title=""></i>
+		</a>
+	</div>
+	
+</nav>
+
+<div class="ui centered grid about">
+	<div class="sixteen wide mobile fifteen wide tablet fifteen wide computer column about">
+		<section class="ui stacked segments">
+			<div class="ui inverted segment">
+				<article class="twemoji"><h1>So, Who Am I?</h1>
+
+<hr />
+
+<p><br>
+ヤマダユキと申します。</p>
+
+<p>都内に住むソフトウェアエンジニアです。
+技術ブログや日々の話など雑多に書きます。</p>
+
+<p>基本休日もコード書いてることが多いですが、その他の趣味にカメラとDTM civ6などもあります。</p>
+
+<p>経歴等は<a href="https://www.wantedly.com/users/17800328">Wantedly</a>をご確認ください。
+相談は上部mailやtwitterDMなどどこでもどうぞ。</p>
+</article>
+			</div>
+		</section>
+	</div>
+</div>
+</div>
+		</div>
+	</div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/site.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script><script src="https://twemoji.maxcdn.com/2/twemoji.min.js?2.6"></script>
+
+<script id="dsq-count-scr" src="//dream-plus.disqus.com/count.js" async></script>
+
+
+<script>
+	(function () {
+	  console.log("Twemoji up and making stuff colourful!");
+	  for (var b = document.getElementsByClassName("twemoji"), a = 0; a < b.length; a++) {
+		twemoji.parse(b[a]);
+	  }
+	})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+<head>
+	<title>
+	アプリケーションのレイアウト
+</title><style>
+body {
+	display: block;
+	--colorBG: "#40e0d0, #ff8c00, #ff0080";background: linear-gradient(to right, var(--colorBG)) !important;
+	
+}
+
+body, body.pushable {
+	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: cover !important;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="author" content="map[name:Yuki Yamada]" />
+	<meta name="description" content="Android入門記事。レイアウト、つまり.xmlについて語ります。" />
+<meta name="generator" content="Hugo 0.41" />
+
+<link rel="shortcut icon" href="/img/defaultFav.ico">
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+<style>
+body.pushable {
+	display: block;background: linear-gradient(to right, var(--colorBG)) !important;
+	 ;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/css/site.css"><link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/UtkarshVerma/hugo-dream-plus/ae11561d/exampleSite/static/css/highlight.css">
+<script>
+	var colorBG =  true 
+	var enabledPost =  false 
+	var isMobile = ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+	console.log("The client device is a "+(isMobile?"mobile":"PC")+".")
+</script>
+</head>
+<body><script>
+var prevBgIndex = 0;
+var bodyBgSwitchIndex = 0;var gradients = [
+	  [],
+	  ['#40e0d0', '#ff8c00', '#ff0080'], 
+	  ['#3e5151', '#decba4'], 
+	  ['#11998e', '#38ef7d'], 
+	  ['#108dc7', '#ef8e38'], 
+	  ['#fc5c7d', '#6a82fb'], 
+	  ['#fc466b', '#3f5efb'], 
+	  ['#c94b4b', '#4b134f'], 
+	  ['#23074d', '#cc5333'] 
+	];
+	document.body.style.setProperty('--colorBG', connect(gradients[getRandomInt(0, gradients.length)]));
+	function getRandomInt(min, max) {
+	  min = Math.ceil(min);
+	  max = Math.floor(max);
+	  var random;
+	  while (1) {
+	    random = Math.floor(Math.random() * (max - min)) + min;
+	    if (random !== prevBgIndex) {
+	      prevBgIndex = random;
+	      break;
+	    }
+	  }
+	  return random;
+	}
+
+	function connect(arr) {
+	  var str = '';
+	  for (var i = 0; i < arr.length; i++) {
+	    if (i !== arr.length - 1) {
+	      str += arr[i] + ', ';
+	    } else {
+	      str += arr[i];
+	    }
+	  }
+	  return str;
+	}
+</script><div id="sidebar" class="ui sidebar inverted vertical menu">
+	<section id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
+		<img src="https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png">
+</div>
+<h3 class="ui header">YukiYamada
+	<div class="sub header">Android Developer.Learning Android Kotlin-Spring Python-Django.</div>
+</h3>
+</section><section class="ui attached center aligned inverted segment sidebar-dream-tags">
+
+	<a class="ui label violet " href="/tags/android" title="android">android</a>
+
+	<a class="ui label brown " href="/tags/androidtips" title="androidtips">androidtips</a>
+
+	<a class="ui label purple " href="/tags/django" title="django">django</a>
+
+	<a class="ui label pink " href="/tags/flutter" title="flutter">flutter</a>
+
+	<a class="ui label violet " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+
+	<a class="ui label orange " href="/tags/python" title="python">python</a>
+
+</section>
+	<section class="ui attached inverted segment sidebar-dream-categories both flexbox">
+		<div class="ui inverted accordion">
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/blogging">blogging</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/flutter_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-001-WebViewを使う</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_003/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-003-リスト表示をしてみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_db/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-DBに触れる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tutorial_layout/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>アプリケーションのレイアウト</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_templetes/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-テンプレートを使ってみる </p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_local_and_url/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_object_oriented/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_document_android_manifest/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidManifestについて</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_002/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-002-画面移動してみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-001-押されたら何かをするを実装する</p>
+		</div>
+	</a>
+
+</div>
+
+</div>
+	</section>
+	
+	<section id="footer" class="ui bottom attached center aligned inverted segment">
+	<p>© 2018 ヤマダユキの備忘log</p>
+
+<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
+</section>
+</div>
+<div class="pusher">
+		<div class="flipper">
+			<div class="front">
+	
+	<nav class="ui top secondary menu bar">
+	<div class="item">
+		<i class="inverted big link bullseye icon dream-flip-toggle" title=""></i>
+	</div>
+<div class="item">
+			<a href="/">
+				<i class="inverted big link home icon" title=""></i>
+			</a>
+		</div>
+	<div class="item">
+			<a href="/posts">
+				<i class="inverted big link archive icon" title=""></i>
+			</a>
+		</div>
+	
+	<div class="item">
+			<a href="/tags">
+				<i class="inverted big link tags icon" title=""></i>
+			</a>
+		</div>
+	<div class="item">
+			<a href="/categories">
+				<i class="inverted big link cubes icon" title=""></i>
+			</a>
+    	</div>
+	
+	<div class="ui container tablet computer only grid">
+		<div class="item" onClick="$('.ui.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');">
+			<i class="inverted big link sidebar icon" title=""></i>
+		</div>
+	</div>
+	
+
+	
+	<div class="item right">
+		<a href="/posts/index.xml">
+			<i class="inverted big link rss icon" title=""></i>
+		</a>
+	</div>
+	
+</nav>
+
+
+<div class="ui centered grid">
+	<div class="sixteen wide mobile only column"><div class="ui inverted accordion">
+	<div id="header" class="ui inverted segment column box">
+		<header id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
+		<img src="https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png">
+</div>
+<h3 class="ui header">YukiYamada
+	<div class="sub header">Android Developer.Learning Android Kotlin-Spring Python-Django.</div>
+</h3>
+</header>
+		<div class=" title header-title"><div id="tag-category-pop" class="ui red right corner label">
+				<i class="hand point icon down"title=""></i>
+			</div></div>
+		<div id="tag-category" class=" content"><section class="ui attached center aligned inverted segment dream-tags none flexbox">
+
+	<a class="ui label olive " href="/tags/android" title="android">android</a>
+
+	<a class="ui label teal " href="/tags/androidtips" title="androidtips">androidtips</a>
+
+	<a class="ui label pink " href="/tags/django" title="django">django</a>
+
+	<a class="ui label purple " href="/tags/flutter" title="flutter">flutter</a>
+
+	<a class="ui label purple " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+
+	<a class="ui label brown " href="/tags/python" title="python">python</a>
+
+</section><section class="ui attached inverted segment dream-categories both flexbox">
+				<div class="inverted accordion">
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/blogging">blogging</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/flutter_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-001-WebViewを使う</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_003/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-003-リスト表示をしてみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_db/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-DBに触れる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tutorial_layout/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>アプリケーションのレイアウト</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_templetes/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-テンプレートを使ってみる </p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_local_and_url/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_object_oriented/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_document_android_manifest/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidManifestについて</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_002/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-002-画面移動してみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-001-押されたら何かをするを実装する</p>
+		</div>
+	</a>
+
+</div>
+
+</div>
+			</section></div>
+		<footer class="ui bottom attached center aligned inverted segment">
+	<p>© 2018 ヤマダユキの備忘log</p>
+
+<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
+</footer>
+	</div>
+</div>
+</div>
+	<div class="sixteen wide mobile fifteen wide tablet twelve wide computer column post-list">
+		<section class="ui secondary top attached black segment post-head">
+			<h1 class="post-title">
+				アプリケーションのレイアウト
+			</h1>
+			<div class="sub header">
+					<div><span><i class="calendar outline icon"></i>Oct 26, 2018</span></div><div><span class="disqusComment"><i class="comment outline icon"></i><a href="https://sasakiyuki.github.io/posts/android_tutorial_layout/#disqus_thread" class="disqus-comment-count" data-disqus-identifier="8b85e7377aae490006355dcce7b6a8e7"></a></span></div>
+					<div><span><i class="clock outline icon"></i>4 min read</span></div>
+					<div><span><i class="angle double up icon"></i> Oct 26, 2018</span></div>
+			</div>
+			<hr><div class="toc"><nav id="TableOfContents">
+<ul>
+<li><a href="#レイアウトとは">レイアウトとは</a></li>
+<li><a href="#レイアウトを構成する要素">レイアウトを構成する要素</a>
+<ul>
+<li>
+<ul>
+<li><a href="#wedget">Wedget</a></li>
+<li><a href="#layout">Layout</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#どちらにも共通する要素">どちらにも共通する要素</a>
+<ul>
+<li><a href="#サイズの指定方法">サイズの指定方法</a>
+<ul>
+<li><a href="#match-parent">match_parent</a></li>
+<li><a href="#wrap-content">wrap_content</a></li>
+<li><a href="#サイズを直接指定する">サイズを直接指定する</a></li>
+</ul></li>
+<li><a href="#tips">tips</a></li>
+<li><a href="#dp">dp</a></li>
+<li><a href="#px">px</a></li>
+<li><a href="#sp">sp</a></li>
+<li><a href="#余白">余白</a>
+<ul>
+<li><a href="#margin">margin</a></li>
+<li><a href="#padding">padding</a></li>
+</ul></li>
+<li><a href="#tips-1">tips</a></li>
+<li><a href="#id-名前付け">id 名前付け</a></li>
+</ul></li>
+<li><a href="#layoutとは">Layoutとは</a></li>
+<li><a href="#それぞれのレイアウトの特徴">それぞれのレイアウトの特徴</a>
+<ul>
+<li><a href="#linearlayout">LinearLayout</a>
+<ul>
+<li><a href="#補足-gravity">【補足】Gravity</a></li>
+</ul></li>
+<li><a href="#gravityの種類">gravityの種類</a></li>
+<li><a href="#framelayout">FrameLayout</a></li>
+<li><a href="#constraintlayout">ConstraintLayout</a>
+<ul>
+<li><a href="#constraintlayoutではmatch-parentは使わない">ConstraintLayoutではmatch_parentは使わない</a></li>
+<li><a href="#中央に寄せる">中央に寄せる</a></li>
+<li><a href="#chain">chain</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav></div>
+			
+			<article class="post-content twemoji">
+				
+
+<h1 id="レイアウトとは">レイアウトとは&nbsp;<a class="anchor" href="#レイアウトとは"><i class="small linkify icon"></i></a> </h1>
+
+<p>レイアウトとは、GUIの配置を決めるための仕組みです。
+このレイアウトを使うことによって、Androidアプリの画面を簡単に作成することができます。</p>
+
+<h1 id="レイアウトを構成する要素">レイアウトを構成する要素&nbsp;<a class="anchor" href="#レイアウトを構成する要素"><i class="small linkify icon"></i></a> </h1>
+
+<p>画面を構成する要素（パーツ）は大きくわけて２種類あります。</p>
+
+<ul>
+<li>Wedget(ウィジェット）</li>
+<li>Layout(レイアウト）</li>
+</ul>
+
+<p>です。これらの要素をまとめてViewといいます。</p>
+
+<p>WedgetとLayoutの違いを超わかりやすく説明します。
+ざっくり言うと、Layoutの中（要素）にWedgetを配置していくイメージです。
+枯山水で例えると一番親要素のLayoutを「寺院」全体として、その中の小要素のレイアウトが「庭園」、さらにその中に配置される孫要素が「砂紋」や「石」です。</p>
+
+<p>それぞれ具体的にどのような種類があるか。</p>
+
+<h3 id="wedget">Wedget&nbsp;<a class="anchor" href="#wedget"><i class="small linkify icon"></i></a> </h3>
+
+<ul>
+<li>TextView</li>
+<li>EditText</li>
+<li>Button</li>
+<li>ImageView</li>
+<li>ListView</li>
+</ul>
+
+<h3 id="layout">Layout&nbsp;<a class="anchor" href="#layout"><i class="small linkify icon"></i></a> </h3>
+
+<ul>
+<li>FrameLayout</li>
+<li>LinearLayout</li>
+<li>TableLayout</li>
+<li>GridLayout</li>
+<li>RelativeLayout</li>
+<li>ConstraintLayout(new!)</li>
+</ul>
+
+<p>以上が代表的なViewとなります。もちろんこれ以外にもたくさんありますが、必要な時に覚えていけば問題ありません。</p>
+
+<h1 id="どちらにも共通する要素">どちらにも共通する要素&nbsp;<a class="anchor" href="#どちらにも共通する要素"><i class="small linkify icon"></i></a> </h1>
+
+<h2 id="サイズの指定方法">サイズの指定方法&nbsp;<a class="anchor" href="#サイズの指定方法"><i class="small linkify icon"></i></a> </h2>
+
+<p>.xmlでの指定は大きく分けて三つあります
+- 画面いっぱいに表示する
+- その要素を表示するのに必要なだけ大きさを確保する
+- サイズを直接指定する</p>
+
+<p>の三つです。ではそれぞれやっていきましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span class="nt">&lt;LinearLayout</span>
+    <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:background=</span><span class="s">&#34;@android:color/holo_blue_bright&#34;</span>
+        <span class="na">android:text=</span><span class="s">&#34;テキストを表示します&#34;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/LinearLayout&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>まず一旦 LinearLayoutとは何ぞやということなどは忘れてもらってこれを実際に画面に映してみると</p>
+
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/59803/173b8f58-19d2-b24c-179e-3265e372fcfa.png" alt="a1.png" /></p>
+
+<h3 id="match-parent">match_parent&nbsp;<a class="anchor" href="#match-parent"><i class="small linkify icon"></i></a> </h3>
+
+<p>指定したViewを画面いっぱいに表示するサイズ指定です。</p>
+
+<p>今回の例ではLinearLayout（枯山水でいうところの庭園）を画面いっぱいにするために <code>layout_width</code> つまり横画面を <code>match_parent</code> に <code>layout_height</code> も <code>match_parent</code> 立て画面いっぱいにサイズ指定しています。</p>
+
+<h3 id="wrap-content">wrap_content&nbsp;<a class="anchor" href="#wrap-content"><i class="small linkify icon"></i></a> </h3>
+
+<p>指定したViewを表示するのに十分なサイズを指定できます。</p>
+
+<p>今回の例では TextView(テキストを表示するView 枯山水でいうところの石) のサイズを横幅も高さも <code>wrap_content</code> にしています。画像を見ていただければわかると思いますが水色で塗られている部分がViewのサイズです。 <code>テキストを表示します</code> という文を表示するためだけの高さや横幅が取られているのがわかると思います。</p>
+
+<h3 id="サイズを直接指定する">サイズを直接指定する&nbsp;<a class="anchor" href="#サイズを直接指定する"><i class="small linkify icon"></i></a> </h3>
+
+<p>上のTextVIewを書き換えてサイズを直接してみましょう</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml">    <span class="nt">&lt;TextView</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;200dp&#34;</span>
+        <span class="na">android:background=</span><span class="s">&#34;@android:color/holo_blue_bright&#34;</span>
+        <span class="na">android:text=</span><span class="s">&#34;テキストを表示します&#34;</span> <span class="nt">/&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>横を 100dp 縦を 200dp としているのがわかると思います。ちなみにプレビューでは</p>
+
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/59803/9c800abb-02d1-541e-f9b0-3625424042ce.png" alt="a2.png" />
+&gt;</p>
+
+<p>こんな感じで縦長のサイズを指定できていると思います。</p>
+
+<p>DPとは density-independent pixels の略です。解像度が違っていても同じサイズを指定できる方法です。</p>
+
+<h2 id="tips">tips&nbsp;<a class="anchor" href="#tips"><i class="small linkify icon"></i></a> </h2>
+
+<p>Viewのサイズはwrapやmatchの他に数値で指定することができます。
+その場合用いられるのは</p>
+
+<ul>
+<li>dp</li>
+<li>sp</li>
+<li>px</li>
+</ul>
+
+<p>の三つです。</p>
+
+<h2 id="dp">dp&nbsp;<a class="anchor" href="#dp"><i class="small linkify icon"></i></a> </h2>
+
+<p>画面の密度に応じて変化する値で「比較的」相対的に用いることのできる単位です。「比較的」と含みを持たせました。基本的にはレイアウトはこれで指定するといいでしょう。</p>
+
+<h2 id="px">px&nbsp;<a class="anchor" href="#px"><i class="small linkify icon"></i></a> </h2>
+
+<p>pxはpixelの略で絶対的な指定となります。ただし、Androidの場合は解像度がまちまちなので解像度の低い画面ではいい感じのサイズで表示されても解像度が高い画面ではめちゃくちゃ小さく表示されたりとあんまり搭乗頻度は高くないかと思われます。</p>
+
+<h2 id="sp">sp&nbsp;<a class="anchor" href="#sp"><i class="small linkify icon"></i></a> </h2>
+
+<p>spは基本的にはdpと同じです。フォント向けのサイズ指定の単位なんですがユーザーがandroidOSレベルで設定しているフォントのサイズによってスケールする単位です。ぜひフォントはこれで設定してあげてください。</p>
+
+<p>詳しくは非常に参考になる資料があるのでぜひご覧ください。
+<a href="https://qiita.com/nein37/items/0a92556a80c6c14503b2">【Android】いまさら聞けないdp入門</a></p>
+
+<h2 id="余白">余白&nbsp;<a class="anchor" href="#余白"><i class="small linkify icon"></i></a> </h2>
+
+<p>Viewへの余白の付け方は２通りあります。</p>
+
+<ul>
+<li>padding</li>
+<li>margin</li>
+</ul>
+
+<p>です。</p>
+
+<h3 id="margin">margin&nbsp;<a class="anchor" href="#margin"><i class="small linkify icon"></i></a> </h3>
+
+<p>marginはViewの外側に余白を作ります。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml">    <span class="nt">&lt;TextView</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:layout_margin=</span><span class="s">&#34;20dp&#34;</span>
+        <span class="na">android:background=</span><span class="s">&#34;@android:color/holo_blue_bright&#34;</span>
+        <span class="na">android:text=</span><span class="s">&#34;テキストを表示します&#34;</span> <span class="nt">/&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/59803/bf3e1368-6212-0216-365e-1c090e4fc0eb.png" alt="a4.png" /></p>
+
+<p>VIewのサイズはそのままにVIewの回りに余白ができたのがわかると思います。
+その余白のサイズを 20dp にするよ、という指定です。これは上下左右全てにmarginを設けていますがそれぞれ別に指定することもできます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml">    <span class="nt">&lt;TextView</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:layout_marginBottom=</span><span class="s">&#34;3dp&#34;</span>
+        <span class="na">android:layout_marginEnd=</span><span class="s">&#34;10dp&#34;</span>
+        <span class="na">android:layout_marginStart=</span><span class="s">&#34;10dp&#34;</span>
+        <span class="na">android:layout_marginTop=</span><span class="s">&#34;3dp&#34;</span>
+        <span class="na">android:background=</span><span class="s">&#34;@android:color/holo_blue_bright&#34;</span>
+        <span class="na">android:text=</span><span class="s">&#34;テキストを表示します&#34;</span> <span class="nt">/&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>上に余白を作るなら <code>layout_margin_top</code>
+下に余白を作るなら <code>layout_margin_bottom</code>
+左に余白を作るなら <code>layout_margin_start</code> or <code>layout_margin_left</code>
+右に余白を作るなら <code>layout_margin_end</code> or <code>layout_maring_right</code></p>
+
+<h3 id="padding">padding&nbsp;<a class="anchor" href="#padding"><i class="small linkify icon"></i></a> </h3>
+
+<p>paddingはViewの内側に余白を作ります。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml">    <span class="nt">&lt;TextView</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:padding=</span><span class="s">&#34;20dp&#34;</span>
+        <span class="na">android:background=</span><span class="s">&#34;@android:color/holo_blue_bright&#34;</span>
+        <span class="na">android:text=</span><span class="s">&#34;テキストを表示します&#34;</span> <span class="nt">/&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/59803/564f5e61-407c-6bc4-963e-c850771c46c7.png" alt="a3.png" /></p>
+
+<p>Viewのサイズが変わり、Viewの内側に余白ができているのがわかると思います。</p>
+
+<p>これもmarginと同じく各種paddingを設けることができます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml">        android:paddingLeft=&#34;&#34;
+        android:paddingRight=&#34;&#34;
+        android:paddingEnd=&#34;&#34;
+        android:paddingStart=&#34;&#34;
+        android:paddingTop=&#34;&#34;
+        android:paddingBottom=&#34;&#34;</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="tips-1">tips&nbsp;<a class="anchor" href="#tips-1"><i class="small linkify icon"></i></a> </h2>
+
+<p>なぜ <code>start</code> と <code>left</code> みたいに同じことをするのに二つあるか疑問に思いませんか。
+Android 4.2から RTL(右から左へ読む言語）のサポートを開始しました。
+その結果Viewが逆になる可能性が発生したため Leftで指定していた時にもしRTL言語設定でアプリを起動した場合レイアウトが意図した結果にならないケースが発生するようになりました。
+そこで相対的に配置するためにstartやendを使うようになったのです。
+APIレベル17より下をサポートしている場合は startとleftを記述する必要がありますが、そうでない場合は基本的にはleftではなくstartを使うようにするといいですね。</p>
+
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/59803/6fc83b8f-f3f4-f6fa-c2a0-cb246313069b.png" alt="a5.png" /></p>
+
+<p>Androidではバッチリ弾いてくれるので忘れることもないでしょう。</p>
+
+<h2 id="id-名前付け">id 名前付け&nbsp;<a class="anchor" href="#id-名前付け"><i class="small linkify icon"></i></a> </h2>
+
+<p>Viewには名前をつけることができます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml">    <span class="nt">&lt;ImageView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/blueImageView&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;50dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;50dp&#34;</span>
+        <span class="na">android:src=</span><span class="s">&#34;@android:color/holo_blue_bright&#34;</span> <span class="nt">/&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>android:id=&quot;@+id/blueImageView&quot;</code> の部分です。</p>
+
+<p>idをViewにつけてどうするかというと今はピントこないかもしれませんが.java(.kt)からこのViewを取り出して、例えばImageViewなら画像を変更したいとなったらこの名前で呼んであげます。</p>
+
+<h1 id="layoutとは">Layoutとは&nbsp;<a class="anchor" href="#layoutとは"><i class="small linkify icon"></i></a> </h1>
+
+<p>Viewを並べる際にはLayout属性でView属性を囲みます。
+例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;LinearLayout&gt;</span>
+    <span class="nt">&lt;TextView</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;TextView</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/LinearLayout&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="それぞれのレイアウトの特徴">それぞれのレイアウトの特徴&nbsp;<a class="anchor" href="#それぞれのレイアウトの特徴"><i class="small linkify icon"></i></a> </h1>
+
+<h2 id="linearlayout">LinearLayout&nbsp;<a class="anchor" href="#linearlayout"><i class="small linkify icon"></i></a> </h2>
+
+<p>規則にしたがって順に並べていくレイアウトです。
+規則は二つ存在して「縦に順に並べていく」か「横に順に並べていくか」のどちらかです。
+実際に並べてみましょう。</p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:orientation=&quot;vertical&quot;&gt;
+
+    &lt;TextView
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;TextView1&quot; /&gt;
+
+    &lt;TextView
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;TextView2&quot; /&gt;
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>重要なのは <code>android:orientation=&quot;vertical&quot;</code> こいつです。
+orientationは方向　的な意味で使っています。　で、肝心な方向は先ほど言った通り２種類</p>
+
+<ul>
+<li>vertical(縦)</li>
+<li>horizontal(横)</li>
+</ul>
+
+<p>の二つです。</p>
+
+<p>未設定の場合 <code>vertical</code> が指定されています。</p>
+
+<p>今回の例では <code>vertical</code> つまり　縦方向に並べてねということになっているので TextViewは縦に並びます。previewはこういう感じです</p>
+
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/59803/b228278d-3c16-67bf-8955-19481836d214.png" alt="a6.png" /></p>
+
+<p>では horizontal を指定してみましょう。</p>
+
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/59803/b2c20740-f19e-6035-ab39-90930c65fb94.png" alt="a7.png" /></p>
+
+<p>横に並びます。</p>
+
+<h3 id="補足-gravity">【補足】Gravity&nbsp;<a class="anchor" href="#補足-gravity"><i class="small linkify icon"></i></a> </h3>
+
+<p>VIewはそれぞれGravityをかけることができます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+    <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span>
+    <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:text=</span><span class="s">&#34;TextView1&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:text=</span><span class="s">&#34;TextView2&#34;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/LinearLayout&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/59803/bfddabfa-ef12-a56a-3c20-93289b590529.png" alt="a14.png" /></p>
+
+<p>LinearLayoutでgravitiy を center にしているのがわかると思います。
+このように android:gravity=&ldquo;&rdquo; をすると中の要素をどこにそろえるかを指定することができます。</p>
+
+<h2 id="gravityの種類">gravityの種類&nbsp;<a class="anchor" href="#gravityの種類"><i class="small linkify icon"></i></a> </h2>
+
+<ul>
+<li>top</li>
+<li>bottom</li>
+<li>right</li>
+<li>left</li>
+<li>center</li>
+<li>center_vertical</li>
+<li>center_horizontal</li>
+</ul>
+
+<p>上から説明</p>
+
+<ul>
+<li>viewの上部に配置</li>
+<li>viewの下部に配置</li>
+<li>viewの右側に配置</li>
+<li>viewの左側に配置</li>
+<li>viewの中央に配置</li>
+<li>viewの上下中央に配置</li>
+<li>viewの左右中央に配置</li>
+</ul>
+
+<p>また、gravityにはもう一種類存在して 自分自身にgravityをかけるものがあります。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+    <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:layout_gravity=</span><span class="s">&#34;center&#34;</span>
+        <span class="na">android:text=</span><span class="s">&#34;TextView1&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:text=</span><span class="s">&#34;TextView2&#34;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/LinearLayout&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>TextView1に <code>layout_gravitiy=&quot;center&quot;</code> をしているのが確認できると思いますがこのようにすると</p>
+
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/59803/a44afbcb-ac5e-c798-0fe0-ea1b8a3bef7c.png" alt="a15.png" /></p>
+
+<p>自分自身が center　によります。
+うまいこと使い分けてください。</p>
+
+<h2 id="framelayout">FrameLayout&nbsp;<a class="anchor" href="#framelayout"><i class="small linkify icon"></i></a> </h2>
+
+<p>中のViewを重ねて表示するLayoutです。</p>
+
+<p>実際にコードで確認してみましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span class="nt">&lt;FrameLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;ImageView</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:src=</span><span class="s">&#34;@android:color/holo_red_dark&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;ImageView</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;50dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;50dp&#34;</span>
+        <span class="na">android:src=</span><span class="s">&#34;@android:color/holo_blue_bright&#34;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/FrameLayout&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/59803/f6f2e80d-bc82-c9ed-7e15-e7209e172857.png" alt="a8.png" /></p>
+
+<p>ImageViewを二つ置いていることがわかると思います。コード上、上のImageViewが赤、サイズが大きめ
+またコード上、下のImageViewが青、サイズ小さめです。</p>
+
+<p>FrameLayoutではコード上で下に書かれたものが上に覆いかぶさる形で描画されるためサイズの小さい青いImageViewが隠れずに表示できています。確認してみるためにImageViewの順番を逆にしてみると&hellip;</p>
+
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/59803/9c11a38f-1f9d-a820-be05-3a46c4fa6b5e.png" alt="a9.png" /></p>
+
+<p>このように真っ赤になってしまうことが確認できると思います。</p>
+
+<h2 id="constraintlayout">ConstraintLayout&nbsp;<a class="anchor" href="#constraintlayout"><i class="small linkify icon"></i></a> </h2>
+
+<p>相対的な配置を行うLayoutで、もっとも最近に追加されたLayoutです。
+ 中のViewを決めるとこに　このView A は そのView B とこういう位置関係にあるよ、ということをコードで示してあげることで位置を決定するレイアウトです。実際に使ってみましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span class="nt">&lt;android.support.constraint.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;ImageView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/blueImageView&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;50dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;50dp&#34;</span>
+        <span class="na">android:src=</span><span class="s">&#34;@android:color/holo_blue_bright&#34;</span>
+        <span class="na">app:layout_constraintLeft_toLeftOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;ImageView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/redImageView&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:src=</span><span class="s">&#34;@android:color/holo_red_dark&#34;</span>
+        <span class="na">app:layout_constraintLeft_toRightOf=</span><span class="s">&#34;@id/blueImageView&#34;</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/android.support.constraint.ConstraintLayout&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/59803/bc7197a0-2661-a536-ca0c-89fc02a7af4d.png" alt="a10.png" /></p>
+
+<p>相対位置を指定するための記述は何通りか存在します。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml">        app:layout_constraintBottom_toBottomOf=&#34;&#34;
+        app:layout_constraintBottom_toTopOf=&#34;&#34;
+        app:layout_constraintLeft_toLeftOf=&#34;&#34;
+        app:layout_constraintLeft_toRightOf=&#34;&#34;
+        app:layout_constraintRight_toLeftOf=&#34;&#34;
+        app:layout_constraintRight_toRightOf=&#34;&#34;
+        app:layout_constraintTop_toBottomOf=&#34;&#34;
+        app:layout_constraintTop_toTopOf=&#34;&#34;</code></pre></td></tr></table>
+</div>
+</div>
+<p>これは何が書かれているかというと
+layout_constraint <code>自分のどこかを</code> _to <code>対象のどこかと</code>Of = &ldquo;対象のid&rdquo; としています。
+例えば <code>app:layout_constraintBottom_toBottomOf=&quot;blueImageView&quot;</code> だったら
+これを指定したViewの一番下を<code>blueImageView</code> の下に合わせて　という記述になります。</p>
+
+<p>サンプルで示したコードはではどのようなことをやっているかというと</p>
+
+<p><code>redImageView</code> さんは <code>app:layout_constraintLeft_toRightOf=&quot;@id/blueImageView&quot;</code>
+つまり
+redImageViewの左を <code>blueImageView</code> の右に合わせて</p>
+
+<p>ということが書いてあります。改めてpreview画像を見ていただけるとわかるかと思いますが赤いImageViewが青のImageViewの右に来ていると思います。</p>
+
+<p>で、blueImageViewは layout_constraintLeft_toLeftOf に <code>parent</code> なるものを指定していますが、文字通り親（つまりConstraintLayout）に合わせて、ということになります。</p>
+
+<p>ですので上のxmlを日本語に訳すと</p>
+
+<p>青いイメージビューの左側を親の左側に寄せて表示　赤いイメージビューを青いイメージビューの右と左に合わせて表示してください</p>
+
+<p>という感じになります。</p>
+
+<p>これが基本的な使い方になりますが、もう少し深く使い方を説明します。</p>
+
+<h3 id="constraintlayoutではmatch-parentは使わない">ConstraintLayoutではmatch_parentは使わない&nbsp;<a class="anchor" href="#constraintlayoutではmatch-parentは使わない"><i class="small linkify icon"></i></a> </h3>
+
+<p>タイトルの通りですが <code>match_parent</code> は使いません。
+では</p>
+
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/59803/22e04b78-eed5-fd9e-a831-b861d01d7a49.png" alt="a11.png" /></p>
+
+<p>こういうことをしたいときどうするの？というと</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml">    <span class="nt">&lt;ImageView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/redImageView&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;0dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:src=</span><span class="s">&#34;@android:color/holo_red_dark&#34;</span>
+        <span class="na">app:layout_constraintLeft_toLeftOf=</span><span class="s">&#34;parent&#34;</span>
+        <span class="na">app:layout_constraintRight_toRightOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>サイズの大きさを0dpにして左右をparentに合わせる形で指定することでできます。</p>
+
+<h3 id="中央に寄せる">中央に寄せる&nbsp;<a class="anchor" href="#中央に寄せる"><i class="small linkify icon"></i></a> </h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml">    <span class="nt">&lt;ImageView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/redImageView&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:src=</span><span class="s">&#34;@android:color/holo_red_dark&#34;</span>
+        <span class="na">app:layout_constraintLeft_toLeftOf=</span><span class="s">&#34;parent&#34;</span>
+        <span class="na">app:layout_constraintRight_toRightOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Viewの左右をparentに指定して、といっています。
+サイズの大きさを <code>wrap_content</code> や サイズ指定　などしていないと上のように引き延ばされてしまいますが指定されている場合はこのように中央に寄せられます。</p>
+
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/59803/d7d04bed-c0f7-cef8-f19b-ab3d411999d3.png" alt="a12.png" /></p>
+
+<h3 id="chain">chain&nbsp;<a class="anchor" href="#chain"><i class="small linkify icon"></i></a> </h3>
+
+<p>それぞれがViewでつながっている状態をまずは記述します。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span class="nt">&lt;android.support.constraint.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;ImageView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/blueImageView&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:src=</span><span class="s">&#34;@android:color/holo_blue_bright&#34;</span>
+        <span class="na">app:layout_constraintLeft_toLeftOf=</span><span class="s">&#34;parent&#34;</span>
+        <span class="na">app:layout_constraintRight_toLeftOf=</span><span class="s">&#34;@id/redImageView&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;ImageView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/redImageView&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:src=</span><span class="s">&#34;@android:color/holo_red_dark&#34;</span>
+        <span class="na">app:layout_constraintLeft_toRightOf=</span><span class="s">&#34;@id/blueImageView&#34;</span>
+        <span class="na">app:layout_constraintRight_toLeftOf=</span><span class="s">&#34;@id/greenImageView&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;ImageView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/greenImageView&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:src=</span><span class="s">&#34;@android:color/holo_green_dark&#34;</span>
+        <span class="na">app:layout_constraintLeft_toRightOf=</span><span class="s">&#34;@id/redImageView&#34;</span>
+        <span class="na">app:layout_constraintRight_toRightOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/android.support.constraint.ConstraintLayout&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>それぞれが相互にチェインしている状態です。</p>
+
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/59803/5900a64a-cdcb-c0f0-7b6f-d108598d2ec0.png" alt="a13.png" /></p>
+
+<p>そうすると中央に寄せた時の同じことが発生して均等感覚に中央寄せになります。
+でも全部の要素を真ん中に寄せたいこともあると思います。</p>
+
+<p>そこでチェインを使います。</p>
+
+<p>chainStyleは２種類
+- layout_constraintHorizontal_chainStyle=
+- layout_constraintVertical_chainStyle</p>
+
+<p>です。</p>
+
+<p>中の要素としては
+- spread_inside（均等）
+- packed（中央寄せ）
+- spread (デフォルト）</p>
+
+<p>中央寄せにしたい場合はpackedを指定してみます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span class="nt">&lt;android.support.constraint.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;ImageView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/blueImageView&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">app:layout_constraintHorizontal_chainStyle=</span><span class="s">&#34;spread&#34;</span>
+        <span class="na">android:src=</span><span class="s">&#34;@android:color/holo_blue_bright&#34;</span>
+        <span class="na">app:layout_constraintLeft_toLeftOf=</span><span class="s">&#34;parent&#34;</span>
+        <span class="na">app:layout_constraintRight_toLeftOf=</span><span class="s">&#34;@id/redImageView&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;ImageView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/redImageView&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:src=</span><span class="s">&#34;@android:color/holo_red_dark&#34;</span>
+        <span class="na">app:layout_constraintLeft_toRightOf=</span><span class="s">&#34;@id/blueImageView&#34;</span>
+        <span class="na">app:layout_constraintRight_toLeftOf=</span><span class="s">&#34;@id/greenImageView&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;ImageView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/greenImageView&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:src=</span><span class="s">&#34;@android:color/holo_green_dark&#34;</span>
+        <span class="na">app:layout_constraintLeft_toRightOf=</span><span class="s">&#34;@id/redImageView&#34;</span>
+        <span class="na">app:layout_constraintRight_toRightOf=</span><span class="s">&#34;parent&#34;</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/android.support.constraint.ConstraintLayout&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>それぞれ変更してみて挙動を確認してみてください。</p>
+
+			</article>
+		</section>
+		<section class="ui secondary attached segment dream-tags">
+
+	<a class="ui label blue " href="/tags/android" title="android">android</a>
+
+	<a class="ui label brown " href="/tags/androidtips" title="androidtips">androidtips</a>
+
+	<a class="ui label pink " href="/tags/django" title="django">django</a>
+
+	<a class="ui label green " href="/tags/flutter" title="flutter">flutter</a>
+
+	<a class="ui label orange " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+
+	<a class="ui label olive " href="/tags/python" title="python">python</a>
+
+
+		</section><section class="ui secondary  attached segment share row box"><div class="author"><img class="avatar" src="/img/avatar3.svg">
+	
+</div>
+<div class="info grow flexbox">
+	<p class="name">Yuki Yamada</p>
+	<p class="desc">Android Developer.Learning Android Kotlin-Spring Python-Django.</p>
+</div>
+<section class="buttons row box">
+	<div class="facebook none flexbox" href="#" onclick="window.open(
+			'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+			'facebook-share-dialog',
+			'width=626,height=436'); return false;">
+		<button class="ui facebook button"><i class="facebook icon"></i>Share</button>
+	</div>
+	<div class="twitter none flexbox" onclick="window.open('https://twitter.com/intent/tweet?text=Read &quot;アプリケーションのレイアウト &quot; by @YukiYamadaJP https:\/\/sasakiyuki.github.io\/posts\/android_tutorial_layout\/','_self')">
+		<button class="ui twitter button"><i class="twitter icon"></i>Tweet</button>
+	</div>
+</section>
+</section>
+		<section class="ui secondary attached segment copyright">
+			
+
+		</section>
+		<div class="ui secondary bottom attached stacked segment disqus"><div id="disqus_thread"></div>
+<script>
+	var disqus_config = function () {
+		this.page.url = 'https:\/\/sasakiyuki.github.io\/posts\/android_tutorial_layout\/';
+		this.page.identifier = '8b85e7377aae490006355dcce7b6a8e7';
+	};
+	(function() {
+   	var d = document, s = d.createElement('script');
+   	s.src = 'https://' + 'dream-plus' + '.disqus.com/embed.js';
+   	s.setAttribute('data-timestamp', +new Date());
+   	(d.head || d.body).appendChild(s);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+		
+	</div>
+</div>
+
+			</div>
+			<div class="back">
+<nav class="ui top secondary menu bar">
+	<div class="item">
+		<i class="inverted big link bullseye icon dream-flip-toggle" title=""></i>
+	</div>
+
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+	
+	
+	
+		
+		
+		<div class="item">
+			<a href="https://github.com/SasakiYuki" target="	_blank">
+				<i id="ico" class="inverted big link github icon" title="GitHub"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+		<div class="item">
+			<a href="mailto:wacorggen@gmail.com" target="	_blank">
+				<i id="ico" class="inverted big link mail icon" title="Email"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+		<div class="item">
+			<a href="https://twitter.com/YukiYamadaJP" target="	_blank">
+				<i id="ico" class="inverted big link twitter icon" title="Twitter"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+	
+		
+		
+		<div class="item">
+			<a href="https://medium.com/@wacorggen" target="	_blank">
+				<i id="ico" class="inverted big link medium icon" title="Medium"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+
+	
+	<div class="item right">
+		<a href="/posts/index.xml">
+			<i class="inverted big link rss icon" title=""></i>
+		</a>
+	</div>
+	
+</nav>
+
+<div class="ui centered grid about">
+	<div class="sixteen wide mobile fifteen wide tablet fifteen wide computer column about">
+		<section class="ui stacked segments">
+			<div class="ui inverted segment">
+				<article class="twemoji"><h1>So, Who Am I?</h1>
+
+<hr />
+
+<p><br>
+ヤマダユキと申します。</p>
+
+<p>都内に住むソフトウェアエンジニアです。
+技術ブログや日々の話など雑多に書きます。</p>
+
+<p>基本休日もコード書いてることが多いですが、その他の趣味にカメラとDTM civ6などもあります。</p>
+
+<p>経歴等は<a href="https://www.wantedly.com/users/17800328">Wantedly</a>をご確認ください。
+相談は上部mailやtwitterDMなどどこでもどうぞ。</p>
+</article>
+			</div>
+		</section>
+	</div>
+</div>
+</div>
+		</div>
+	</div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/site.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script><script src="https://twemoji.maxcdn.com/2/twemoji.min.js?2.6"></script>
+
+<script id="dsq-count-scr" src="//dream-plus.disqus.com/count.js" async></script>
+
+
+<script>
+	(function () {
+	  console.log("Twemoji up and making stuff colourful!");
+	  for (var b = document.getElementsByClassName("twemoji"), a = 0; a < b.length; a++) {
+		twemoji.parse(b[a]);
+	  }
+	})();
+</script>
+
+</body>
+</html>
