@@ -1,29 +1,37 @@
-language: python
+language: go
+dist: trusty
 
-python:
-    - "3.6"
+# これでdockerコンテナとして立ち上がるので起動が速い
+sudo: false
 
-install:
-    # install latest release version
-    # - wget $(wget -qO- https://api.github.com/repos/gohugoio/hugo/releases/latest | sed -r -n '/browser_download_url/{/Linux-64bit.deb/{s@[^:]*:[[:space:]]*"([^"]*)".*@\1@g;p}}')
-    - wget -qO- https://api.github.com/repos/gohugoio/hugo/releases/latest | sed -r -n '/browser_download_url/{/Linux-64bit.deb/{s@[^:]*:[[:space:]]*"([^"]*)".*@\1@g;p}}' | xargs wget
-    - sudo dpkg -i hugo*.deb
-    - pip install Pygments
-    - rm -rf public 2> /dev/null
+env:
+  # 良い方法が思い浮かばないのでバージョンを固定
+  - HUGO_VERSION=0.41
 
+# このセクションを挟まないと勝手にgo getを走らせようとしてこける
+install: true
+
+# .debパッケージをダウンロードしてインストール
+before_script:
+  - wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.deb
+  - sudo dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb
+
+# ビルドを実行
 script:
-    - hugo
-    - echo 'axdlog.com' > public/CNAME
+  - hugo -v
 
+# デプロイの設定
 deploy:
+  # github pages用のプロバイダを設定
   provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
-  email: $GITHUB_EMAIL
-  name: $GITHUB_USERNAME
-  verbose: true
-  keep-history: true
+  # 公開するファイルがあるディレクトリを指定
   local-dir: public
-  target_branch: master  # branch contains blog content
+  # scriptセクションで実行したビルド結果をそのまま残す
+  skip-cleanup: true
+  # githubから取得したpersonal access token
+  github-token: $GITHUB_TOKEN
+  # force pushせずにcommitを重ねる
+  keep-history: true
+  # masterブランチへのpush時のみに限る
   on:
-    branch: code  # branch contains Hugo generator code
+    branch: master
