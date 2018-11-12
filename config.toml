@@ -38,7 +38,7 @@ enableEmoji=true
 	itemsPerPage = 4
 
 	#Set whether you're hosting "cards" or "post"
-	contentType = "posts"
+	contentType = "cards"
 
 	#Enable Twitter Emoji
 	twitterEmoji=true
