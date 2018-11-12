@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>AndroidManifestについて</title>
+      <link>https://sasakiyuki.github.io/posts/android_document_android_manifest/</link>
+      <pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/android_document_android_manifest/</guid>
+      <description>勉強会で説明する際に用いた追加資料です。AndroidManifestについて簡単なマトメになっています。</description>
+    </item>
+    
+    <item>
       <title>AndroidTips-003-リスト表示をしてみる</title>
       <link>https://sasakiyuki.github.io/posts/android_tips_003/</link>
       <pubDate>Fri, 09 Nov 2018 00:00:00 +0000</pubDate>
@@ -72,15 +81,6 @@
       
       <guid>https://sasakiyuki.github.io/posts/python_object_oriented/</guid>
       <description>Python Djangoを勉強する際にPythonを知らなったので勉強しました。その際にPythonはどのような言語使用でオブジェクト指向を実現しているのか気になったので調べつつ纏めました。</description>
-    </item>
-    
-    <item>
-      <title>AndroidManifestについて</title>
-      <link>https://sasakiyuki.github.io/posts/android_document_android_manifest/</link>
-      <pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/android_document_android_manifest/</guid>
-      <description>勉強会で説明する際に用いた追加資料です。AndroidManifestについて簡単なマトメになっています。</description>
     </item>
     
     <item>
