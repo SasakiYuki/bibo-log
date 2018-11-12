@@ -65,6 +65,27 @@ RecyclerViewで表示するレイアウトを作る リストとして表示す�
     </item>
     
     <item>
+      <title>Pythonにおけるオブジェクト指向</title>
+      <link>https://sasakiyuki.github.io/posts/python_object_oriented/</link>
+      <pubDate>Tue, 16 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/python_object_oriented/</guid>
+      <description>オブジェクト指向とは プログラミングを効率的に行うための考え方、手法の一つ。概念。 効率的に行うには 共通の設計思想 が大切で現在では主流の一つ。
+関連のあるデータや処理をまとめて「オブジェクト」にし、コードを管理しやすくすることである。
+pythonはオブジェクト指向言語だが、関数があったりと割と自由な言語である。 javaから来た人間としてはオー自由だなーと思うことが多い。（どっちがいいとかそういう話ではない）
+オブジェクト指向を構成する要素  クラス メソッド データ プロパティ インスタンス カプセル化 継承 ポリモーフィズム  では説明していきましょう。
+クラス Class とはオブジェクトの設計図 です。 クラス内にはオブジェクトを作る際に必要なデータやメソッド（後述、処理）などが記述されています。
+定義の方法は簡単で
+class `クラス名` :  これらの中にデータやメソッド追加していくことで一つのクラスになります。
+[memo] カラのclass 空のクラスというのも存在します 仕組み的にpythonでは : 以降何もないのは無理なので
+1 2  class EmptyClass: pass   と記述します。
+[memo] クラスの命名規則 ThisIsClass のように単語区切りで先頭は大文字に
+メソッドの定義 method とはクラス内に記述された処理。 定義されたデータを使って何かしたり、クラスに関する何かを定義したりします。 関数との大きな違いはクラスに属しているという点です。
+class ClassName: def MethodName(self,その他引数): 処理  メソッドは必ず一つの引数を持ちその一つとは self　です。 ただし呼び出し自体は
+インスタンス化（後述）されたクラス.MethodName()  でselfは記述する必要がありません。 このselfとは自身を指しており、 .</description>
+    </item>
+    
+    <item>
       <title>AndroidManifestについて</title>
       <link>https://sasakiyuki.github.io/posts/android_tips_android_manifest/</link>
       <pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate>
