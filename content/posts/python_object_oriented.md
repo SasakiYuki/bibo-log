@@ -4,7 +4,7 @@ description: "Python Djangoを勉強する際にPythonを知らなったので�
 author:
   name: "Yuki Yamada"
 date: 2018-10-16
-draft: false
+draft: false	
 categories:
 - python
 ---
