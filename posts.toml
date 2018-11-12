@@ -12,6 +12,7 @@ disqusShortname = "dream-plus"
 
 enableRobotsTXT = true
 
+#Enable Hugo Emoji Conversion
 enableEmoji=true
 
 [params]
@@ -25,8 +26,10 @@ enableEmoji=true
 
 	favicon = "/img/defaultFav.ico"
 
+  	#Background settings
 	enableColorBG= true
 
+	#Post-displaying Settings
 	enableTags = true
 	enableCategories = true
 
@@ -36,7 +39,7 @@ enableEmoji=true
 	itemsPerPage = 4
 
 	#Set whether you're hosting "cards" or "post"
-	contentType = "cards"
+	contentType = "posts"
 
 	#Enable Twitter Emoji
 	twitterEmoji=true
