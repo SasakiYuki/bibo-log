@@ -6,19 +6,10 @@
     <description>Recent content in Posts on ヤマダユキの備忘log</description>
     <meta name="generator" content="Hugo 0.41" />
     <language>ja-jp</language>
-    <lastBuildDate>Mon, 12 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 04 Oct 2018 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://sasakiyuki.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>flutterTips-001-WebViewを使う</title>
-      <link>https://sasakiyuki.github.io/posts/flutter_tips_001/</link>
-      <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/flutter_tips_001/</guid>
-      <description>flutterでWebViewを使う方法を説明します。導入から実装まで。</description>
-    </item>
     
     <item>
       <title>AndroidManifestについて</title>
@@ -27,78 +18,6 @@
       
       <guid>https://sasakiyuki.github.io/posts/android_document_android_manifest/</guid>
       <description>勉強会で説明する際に用いた追加資料です。AndroidManifestについて簡単なマトメになっています。</description>
-    </item>
-    
-    <item>
-      <title>AndroidTips-003-リスト表示をしてみる</title>
-      <link>https://sasakiyuki.github.io/posts/android_tips_003/</link>
-      <pubDate>Fri, 09 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/android_tips_003/</guid>
-      <description>Android初心者向け記事。リスト表示をするための資料です。</description>
-    </item>
-    
-    <item>
-      <title>PythonDjango入門-DBに触れる</title>
-      <link>https://sasakiyuki.github.io/posts/python_django_db/</link>
-      <pubDate>Mon, 05 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/python_django_db/</guid>
-      <description>Python Django入門記事その3。DBを使ってみます。</description>
-    </item>
-    
-    <item>
-      <title>アプリケーションのレイアウト</title>
-      <link>https://sasakiyuki.github.io/posts/android_tutorial_layout/</link>
-      <pubDate>Fri, 26 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/android_tutorial_layout/</guid>
-      <description>Android入門記事。レイアウト、つまり.xmlについて語ります。</description>
-    </item>
-    
-    <item>
-      <title>PythonDjango入門-テンプレートを使ってみる </title>
-      <link>https://sasakiyuki.github.io/posts/python_django_templetes/</link>
-      <pubDate>Sat, 20 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/python_django_templetes/</guid>
-      <description>Python Django入門記事その２。テンプレートを使ってそれらしいものを表示します。</description>
-    </item>
-    
-    <item>
-      <title>Pythonにおけるオブジェクト指向</title>
-      <link>https://sasakiyuki.github.io/posts/python_django_local_and_url/</link>
-      <pubDate>Sat, 20 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/python_django_local_and_url/</guid>
-      <description>Python Django入門記事その１。簡単なpythonの説明から実際にdjangoを使ってみます。</description>
-    </item>
-    
-    <item>
-      <title>Pythonにおけるオブジェクト指向</title>
-      <link>https://sasakiyuki.github.io/posts/python_object_oriented/</link>
-      <pubDate>Tue, 16 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/python_object_oriented/</guid>
-      <description>Python Djangoを勉強する際にPythonを知らなったので勉強しました。その際にPythonはどのような言語使用でオブジェクト指向を実現しているのか気になったので調べつつ纏めました。</description>
-    </item>
-    
-    <item>
-      <title>AndroidTips-002-画面移動してみる</title>
-      <link>https://sasakiyuki.github.io/posts/android_tips_002/</link>
-      <pubDate>Wed, 03 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/android_tips_002/</guid>
-      <description>Android初心者向け記事。Intentの説明</description>
-    </item>
-    
-    <item>
-      <title>AndroidTips-001-押されたら何かをするを実装する</title>
-      <link>https://sasakiyuki.github.io/posts/android_tips_001/</link>
-      <pubDate>Tue, 02 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/android_tips_001/</guid>
-      <description>Android初心者向け記事。OnClickListenerの説明。</description>
     </item>
     
   </channel>

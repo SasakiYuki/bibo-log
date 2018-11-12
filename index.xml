@@ -6,28 +6,10 @@
     <description>Recent content on ヤマダユキの備忘log</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Mon, 12 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 04 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://sasakiyuki.github.io/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>flutterTips-001-WebViewを使う</title>
-      <link>https://sasakiyuki.github.io/posts/flutter_tips_001/</link>
-      <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/flutter_tips_001/</guid>
-      <description>cover : &amp;ldquo;https://raw.githubusercontent.com/UtkarshVerma/blog/source/static/images/gci/gci-thumb.png&amp;quot; draft: false
-FlutterでWebViewを使うためには少しいじる必要があります。
-flutter_webview_plugin Flutterで Nativeの WebView を呼び出すには flutter_webview_plugin の依存を追加する必要があります。
-1 2  dependencies:flutter_webview_plugin:&amp;#34;0.2.1+2&amp;#34;   バージョンはこちら からご覧ください。
-ターミナル上で
-flutter packages get  インストールすることで使えるようになります。
-また、WebViewはWdigetTreeには統合されていないためSnackBarやDialogを使うところはできません。
-インポート文は
-1  import &amp;#39;package:flutter_webview_plugin/flutter_webview_plugin.dart&amp;#39;;   実装 Flutter Navigationを利用して起動します。 公式サンプルのままですが
-1 2 3 4 5 6 7 8 9 10  new MaterialApp( routes: { &amp;#34;/&amp;#34;: (_) =&amp;gt; new WebviewScaffold( url: &amp;#34;https://www.google.com&amp;#34;, appBar: new AppBar( title: new Text(&amp;#34;Widget webview&amp;#34;), ), ) }, );   WebviewScaffold を使ってその中で諸々セットして使います。 特に難しいことはありません。</description>
-    </item>
     
     <item>
       <title>AndroidManifestについて</title>
@@ -62,148 +44,6 @@ AndroidManifest内で行うこと  アプリを構成する要素 ユーザー�
       
       <guid>https://sasakiyuki.github.io/cards/hackster/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>AndroidTips-003-リスト表示をしてみる</title>
-      <link>https://sasakiyuki.github.io/posts/android_tips_003/</link>
-      <pubDate>Fri, 09 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/android_tips_003/</guid>
-      <description>複数の似たようなデータを表示する場合にはリスト形式のViewを使うのが一般的です。 今回はそのリスト形式のViewをどのように扱うかをやっていきたいと思います。
-流れ  Listを表示する Activity を追加します。 レイアウトにリストの元になるRecyclerViewを置きます RecyclerViewにリストを表示するための Adapter を用意する （リストに表示するデータを用意する） 用意したAdapterをRecyclerView にセットしてリストを表示する  この流れでいきます。
-目指すリストは下の通りです。
-シンプルな文字だけどリストです。
-Activityを追加 特に難しいことはしませんが一応。 Empty Activity を作り今回は名前は SimpleStringListActivity としました。
-レイアウトファイルにRecyclerViewを置く Androidでリスト表示をするには RecyclerVIew を使います。
-まずはレイアウトファイルに配置してみましょう。
-1 2 3 4 5 6 7 8 9 10  &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt; &amp;lt;LinearLayout xmlns:android=&amp;#34;http://schemas.android.com/apk/res/android&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34;&amp;gt; &amp;lt;android.support.v7.widget.RecyclerView android:id=&amp;#34;@+id/recyclerView&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34; /&amp;gt; &amp;lt;/LinearLayout&amp;gt;   RecyclerViewはサポートライブラリーで追加されたViewです。
-RecyclerViewで表示するレイアウトを作る リストとして表示する主な要素となるレイアウトを作成します。 今回はシンプルなリストを目指すのでTextViewのみ置かれたシンプルなレイアウトファイルを作成します。
-1 2 3 4 5 6 7 8 9 10 11 12 13  &amp;lt;?</description>
-    </item>
-    
-    <item>
-      <title>PythonDjango入門-DBに触れる</title>
-      <link>https://sasakiyuki.github.io/posts/python_django_db/</link>
-      <pubDate>Mon, 05 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/python_django_db/</guid>
-      <description>データベースが必要になる理由 前回までにユーザーの登録フォームなどを作ってきましたが、特にデータの保存等はしてきませんでした。 Webアプリケーションを作る上で何かしらのデータを保存することは絶対に必要になってきます。データを個人で永続的に使うというだけであればデータベースでなくとも何かしらの形でファイルにアウトプットすればいいでしょうが、Webアプリケーションでは同時に別のユーザーから開かれる可能性があるのでファイルを開いていたら何か障害が起きかねません。そもそもアクセス速度やデータ分類などの面で問題がありそうです。
-データベースはそれらを解決するために長年進化を続けてきました。特にRDBMS(リレーショナルデータベースマネジメントシステム　説明するにはちょっとDBの知識がいるので今は要するに『普通のDB』とでも思っていてください）は長く、現在も使われています。現在ではNoSQLなどRDBMSとは違うDBも出てきていますが、今回はこのRDBを学んでいきます。
-データベース全体の特徴は
- なんといってもデータアクセス速度が速い 高度な検索が可能 同時アクセスされることを前提に作られている  DjangoでDBを使う 上記の通りDBを使うことにメリットが非常にあることがわかりましたが、一口にDBといっても色々なものが存在します。 Djangoだと使われがちなのは
- SQLite MySQL PostgreSQL  でしょうか。 それぞれ特徴があります。すごく雑に説明すると（上から）
- djnagoプロジェクトを作ると初期設定はこれ　軽い、高速　だけど大規模に向いてないので学習や小規模など　ちなみにAndroidで採用されている 最も多く採用されているんじゃないかと言われている 導入コストが低く済む　  すべて共通してオープンソースで、SQLというデータアクセス言語を使っています。
-今回はPostgreSQLでいきましょう！
-djangoにてPostgreSQLを設定をする まずはインストールをします。 MacOSなら Homebrewを使ってすぐに終わります。
-brew install postgresql  Winだったらまずはインストーラーをこちらからダウンロードしてください。
-インストーラー起動するとディレクトリとかの設定は基本デフォルトで問題ないですが見慣れないスーパーユーザーのパスワードの設定をしてください、という項目があると思うので任意のものを設定してください。 またポートはデフォルトの5432でいいでしょう。 ロケールは デフォルトで
-で、パスを通します。
-環境変数設定で　C:\Program Files\PostgreSQL\11\bin　先ほどインストールした bin を通して
-パスが通ってることを確認。
-psql --version  通ってたら成功です。
-settings.py をご覧ください。デフォルトのままであれば
-1 2 3 4 5 6  DATABASES = { &amp;#39;default&amp;#39;: { &amp;#39;ENGINE&amp;#39;: &amp;#39;django.</description>
-    </item>
-    
-    <item>
-      <title>アプリケーションのレイアウト</title>
-      <link>https://sasakiyuki.github.io/posts/android_tutorial_layout/</link>
-      <pubDate>Fri, 26 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/android_tutorial_layout/</guid>
-      <description>レイアウトとは レイアウトとは、GUIの配置を決めるための仕組みです。 このレイアウトを使うことによって、Androidアプリの画面を簡単に作成することができます。
-レイアウトを構成する要素 画面を構成する要素（パーツ）は大きくわけて２種類あります。
- Wedget(ウィジェット） Layout(レイアウト）  です。これらの要素をまとめてViewといいます。
-WedgetとLayoutの違いを超わかりやすく説明します。 ざっくり言うと、Layoutの中（要素）にWedgetを配置していくイメージです。 枯山水で例えると一番親要素のLayoutを「寺院」全体として、その中の小要素のレイアウトが「庭園」、さらにその中に配置される孫要素が「砂紋」や「石」です。
-それぞれ具体的にどのような種類があるか。
-Wedget  TextView EditText Button ImageView ListView  Layout  FrameLayout LinearLayout TableLayout GridLayout RelativeLayout ConstraintLayout(new!)  以上が代表的なViewとなります。もちろんこれ以外にもたくさんありますが、必要な時に覚えていけば問題ありません。
-どちらにも共通する要素 サイズの指定方法 .xmlでの指定は大きく分けて三つあります - 画面いっぱいに表示する - その要素を表示するのに必要なだけ大きさを確保する - サイズを直接指定する
-の三つです。ではそれぞれやっていきましょう。
-1 2 3 4 5 6 7 8 9 10 11  &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt; &amp;lt;LinearLayout xmlns:android=&amp;#34;http://schemas.android.com/apk/res/android&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34;&amp;gt; &amp;lt;TextView android:layout_width=&amp;#34;wrap_content&amp;#34; android:layout_height=&amp;#34;wrap_content&amp;#34; android:background=&amp;#34;@android:color/holo_blue_bright&amp;#34; android:text=&amp;#34;テキストを表示します&amp;#34; /&amp;gt; &amp;lt;/LinearLayout&amp;gt;   まず一旦 LinearLayoutとは何ぞやということなどは忘れてもらってこれを実際に画面に映してみると</description>
-    </item>
-    
-    <item>
-      <title>PythonDjango入門-テンプレートを使ってみる </title>
-      <link>https://sasakiyuki.github.io/posts/python_django_templetes/</link>
-      <pubDate>Sat, 20 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/python_django_templetes/</guid>
-      <description>テンプレートを使ってそれらしいものを表示する 前回の資料では各種関数の戻り値に HttpResponse を用いてテキストを表示していました。 簡単なテキストを表示するだけならこれでも問題ありませんが、現実でそんなケースはむしろないです。
-Webアプリケーションで物を作るなら HTML/CSSやJS,またファイルなどの静的ファイルを活用してユーザーによりよいユーザー体験を届けたいところですが、Pythonは直接HTMLファイルを扱うのは苦手です。そもそも直接HTML/CSSをいじるだけならDjangoを使う必要はありません。
-そこでPythonに適した形でHTMLを扱いところです。それを「テンプレート」といいます。テンプレートは変数などPythonで扱っている値をHTMLに代入し表示を行うものでDjangoで用意されているテンプレートは DTL と呼ばれます。(Django Template Language)
-基本的にはHTMLのように使えます。
-テンプレートを作成、表示する ではテンプレートを作成してみましょう。
-テンプレートはどこに作成するか Project -&amp;gt; App -&amp;gt; templates(create) -&amp;gt; AppName(create)
-createと書かれているファイルを作成します。 例えば私の今回のケースだと ProjectName:app1 AppName:app1,app2 その中の app2にtempletesというフォルダを作成 templetesというフォルダの中にapp2というフォルダを作りその中にテンプレートを置きます。
-ではテンプレートは index.html を作成しましょう。
-Pycharmで作成すると
-1 2 3 4 5 6 7  &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34;&amp;gt; &amp;lt;title&amp;gt;Title&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt;   単純なHTMLが吐き出されました。これを少しだけいじってさっそくテンプレートっぽく使ってみます。
-テンプレート（HTML）で変数を扱う 1 2 3 4 5 6 7  &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34;&amp;gt; &amp;lt;title&amp;gt;{{ title }}&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt;   titleを {{}} で囲みました。 これがテンプレートで変数を使うように定義する方法です。</description>
-    </item>
-    
-    <item>
-      <title>Pythonにおけるオブジェクト指向</title>
-      <link>https://sasakiyuki.github.io/posts/python_django_local_and_url/</link>
-      <pubDate>Sat, 20 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/python_django_local_and_url/</guid>
-      <description>Pythonの特徴 初期リリースは91年で開発当初はオブジェクト指向を意識した設計になっていませんでしたが、途中からオブジェクト指向が組み込まれリリースに合わせてそれらは含まれる形になりました。 あまり日本では注目されることのなかった言語のようですが、機械学習やGoogle app engineにpythonが採用（そもそもGoogleでは社内標準言語としてpythonが採用されていますが）されたため日本でも注目を集め今では珍しくないレベルまで来ています。 スクリプト言語であり学習に向いているとされています。その理由としてはそもそもスクリプト言語が実行しやすかったり（コンパイルが不要）、Pythonの記法がシンプルであることから言われています。中でもインデントブロックは大きな特徴の一つです。
-Webフレームワークとは さて、では実際にPythonでWebアプリケーションを作ろうとなった時にWebフレームワークの選定が必要になります。 そもそもWebフレームワークとは Webアプリケーションを作成する際に骨組み（足場）になってくれるもののことを指します。フレームワーク自体が機能群のことで、それのWb版だと思っていただければ問題ありません。最大のメリットは「書くコードが減る」ということです。フレームワークによって大なり小なりありますが作成に必要な機能が盛り込まれており１から書く必要がなくなります。また、書き方なども統一されるため可読性が上がるなどのメリットもあります。 Pythonで有名なWebフレームワークは
- Django Flask Bottle  などが有名どころです。 下に行くほど軽量なフレームワークとなっていきます。
-今回はこの中でも実際に採用されている万能な大型フレームワークであるDJangoを使っていきたいと思います。
-Djangoとは Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.  公式からの引用ですがハイレベルなWebフレームワークで超スピードで実用的なWebアプリケーションを構築するぜ、と言っています。
-フルスタックフレームワークと言われる、いわゆる全部盛りフレームワークで、複雑なデーターベース主体のアプリケーションを簡単に書くことができたり、管理者用GUIを自動生成したりするなど便利な機能がたくさん載っています。 また、プロジェクトの構成が単純で生成時のファイルが少ないのもメリットと言えるでしょう。
-セットアップ 早速セットアップしていきます
-雑にpythonのパスを通します。(TODO)
-IDEはPyCharmを使います
-新規Djangoプロジェクトの作成 ではさっそくPyCharmを起動してプロジェクトを作成します。
-New Project -&amp;gt; Djangoを選択
-プロジェクトファイル 自動生成されるコードの紹介
- init.py  Pythonでは特別な意味を持つファイルで、このディレクトリをPythonパッケージであるということを伝えるために存在しています。
- settings.py  Djangoで生成したアプリケーションの設定をつかさどっているファイルです。
- urls.py  URL宣言が含まれているファイルでルーティングはここで行います。
- wsgi.py  作ったPythonプロジェクトをWebサーバーにデプロイする際に使用されるファイルです（エントリポイントを定義している） Webアプリケーションのメインのプログラムとなります。
- manage.</description>
-    </item>
-    
-    <item>
-      <title>Pythonにおけるオブジェクト指向</title>
-      <link>https://sasakiyuki.github.io/posts/python_object_oriented/</link>
-      <pubDate>Tue, 16 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/python_object_oriented/</guid>
-      <description>オブジェクト指向とは プログラミングを効率的に行うための考え方、手法の一つ。概念。 効率的に行うには 共通の設計思想 が大切で現在では主流の一つ。
-関連のあるデータや処理をまとめて「オブジェクト」にし、コードを管理しやすくすることである。
-pythonはオブジェクト指向言語だが、関数があったりと割と自由な言語である。 javaから来た人間としてはオー自由だなーと思うことが多い。（どっちがいいとかそういう話ではない）
-オブジェクト指向を構成する要素  クラス メソッド データ プロパティ インスタンス カプセル化 継承 ポリモーフィズム  では説明していきましょう。
-クラス Class とはオブジェクトの設計図 です。 クラス内にはオブジェクトを作る際に必要なデータやメソッド（後述、処理）などが記述されています。
-定義の方法は簡単で
-class `クラス名` :  これらの中にデータやメソッド追加していくことで一つのクラスになります。
-[memo] カラのclass 空のクラスというのも存在します 仕組み的にpythonでは : 以降何もないのは無理なので
-1 2  class EmptyClass: pass   と記述します。
-[memo] クラスの命名規則 ThisIsClass のように単語区切りで先頭は大文字に
-メソッドの定義 method とはクラス内に記述された処理。 定義されたデータを使って何かしたり、クラスに関する何かを定義したりします。 関数との大きな違いはクラスに属しているという点です。
-class ClassName: def MethodName(self,その他引数): 処理  メソッドは必ず一つの引数を持ちその一つとは self　です。 ただし呼び出し自体は
-インスタンス化（後述）されたクラス.MethodName()  でselfは記述する必要がありません。 このselfとは自身を指しており、 .</description>
-    </item>
-    
-    <item>
-      <title>AndroidTips-002-画面移動してみる</title>
-      <link>https://sasakiyuki.github.io/posts/android_tips_002/</link>
-      <pubDate>Wed, 03 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/android_tips_002/</guid>
-      <description>サンプルコード 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21  import android.content.Context import android.content.Intent import android.os.Bundle import android.support.v7.app.AppCompatActivity import kotlinx.android.synthetic.main.activity_main.* class MainActivity : AppCompatActivity() { override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState) setContentView(R.layout.activity_main) setupButton() } private fun setupButton() { redImageView.setOnClickListener { val intent = Intent(this@MainActivity, FormActivity::class.java) startActivity(intent) } } }   Intent アプリの中での移動に限らず外への移動（例えば標準のWebブラウザに飛ばす）などに用いられる画面遷移用のコンポーネントです。 どこに移動するか　や　移動の際に渡すデータ　などを指定できます。 今回は単純に移動するためだけに使っているシンプルな使い方です。その際のIntentのコンストラクタは</description>
-    </item>
-    
-    <item>
-      <title>AndroidTips-001-押されたら何かをするを実装する</title>
-      <link>https://sasakiyuki.github.io/posts/android_tips_001/</link>
-      <pubDate>Tue, 02 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/android_tips_001/</guid>
-      <description>サンプルコード 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34  import android.os.Bundle import android.support.v7.app.AppCompatActivity import android.view.View import android.widget.ImageView import kotlinx.android.synthetic.main.activity_main.* class MainActivity : AppCompatActivity() { override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState) setContentView(R.layout.activity_main) setupButton() } private fun setupButton() { // 1 val button = findViewById&amp;lt;ImageView&amp;gt;(R.</description>
     </item>
     
     <item>
