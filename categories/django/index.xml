@@ -12,6 +12,25 @@
     
     
     <item>
+      <title>PythonDjango入門-テンプレートを使ってみる </title>
+      <link>https://sasakiyuki.github.io/posts/python_django_templetes/</link>
+      <pubDate>Sat, 20 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/python_django_templetes/</guid>
+      <description>テンプレートを使ってそれらしいものを表示する 前回の資料では各種関数の戻り値に HttpResponse を用いてテキストを表示していました。 簡単なテキストを表示するだけならこれでも問題ありませんが、現実でそんなケースはむしろないです。
+Webアプリケーションで物を作るなら HTML/CSSやJS,またファイルなどの静的ファイルを活用してユーザーによりよいユーザー体験を届けたいところですが、Pythonは直接HTMLファイルを扱うのは苦手です。そもそも直接HTML/CSSをいじるだけならDjangoを使う必要はありません。
+そこでPythonに適した形でHTMLを扱いところです。それを「テンプレート」といいます。テンプレートは変数などPythonで扱っている値をHTMLに代入し表示を行うものでDjangoで用意されているテンプレートは DTL と呼ばれます。(Django Template Language)
+基本的にはHTMLのように使えます。
+テンプレートを作成、表示する ではテンプレートを作成してみましょう。
+テンプレートはどこに作成するか Project -&amp;gt; App -&amp;gt; templates(create) -&amp;gt; AppName(create)
+createと書かれているファイルを作成します。 例えば私の今回のケースだと ProjectName:app1 AppName:app1,app2 その中の app2にtempletesというフォルダを作成 templetesというフォルダの中にapp2というフォルダを作りその中にテンプレートを置きます。
+ではテンプレートは index.html を作成しましょう。
+Pycharmで作成すると
+1 2 3 4 5 6 7  &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34;&amp;gt; &amp;lt;title&amp;gt;Title&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt;   単純なHTMLが吐き出されました。これを少しだけいじってさっそくテンプレートっぽく使ってみます。
+テンプレート（HTML）で変数を扱う 1 2 3 4 5 6 7  &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34;&amp;gt; &amp;lt;title&amp;gt;{{ title }}&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt;   titleを {{}} で囲みました。 これがテンプレートで変数を使うように定義する方法です。</description>
+    </item>
+    
+    <item>
       <title>Pythonにおけるオブジェクト指向</title>
       <link>https://sasakiyuki.github.io/posts/python_django_local_and_url/</link>
       <pubDate>Sat, 20 Oct 2018 00:00:00 +0000</pubDate>

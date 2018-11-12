@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+<head>
+	<title>
+	PythonDjango入門-テンプレートを使ってみる 
+</title><style>
+body {
+	display: block;
+	--colorBG: "#40e0d0, #ff8c00, #ff0080";background: linear-gradient(to right, var(--colorBG)) !important;
+	
+}
+
+body, body.pushable {
+	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: cover !important;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="author" content="map[name:Yuki Yamada]" />
+	<meta name="description" content="Python Django入門記事その２。テンプレートを使ってそれらしいものを表示します。" />
+<meta name="generator" content="Hugo 0.41" />
+
+<link rel="shortcut icon" href="/img/defaultFav.ico">
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+<style>
+body.pushable {
+	display: block;background: linear-gradient(to right, var(--colorBG)) !important;
+	 ;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/css/site.css"><link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/UtkarshVerma/hugo-dream-plus/ae11561d/exampleSite/static/css/highlight.css">
+<script>
+	var colorBG =  true 
+	var enabledPost =  false 
+	var isMobile = ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+	console.log("The client device is a "+(isMobile?"mobile":"PC")+".")
+</script>
+</head>
+<body><script>
+var prevBgIndex = 0;
+var bodyBgSwitchIndex = 0;var gradients = [
+	  [],
+	  ['#40e0d0', '#ff8c00', '#ff0080'], 
+	  ['#3e5151', '#decba4'], 
+	  ['#11998e', '#38ef7d'], 
+	  ['#108dc7', '#ef8e38'], 
+	  ['#fc5c7d', '#6a82fb'], 
+	  ['#fc466b', '#3f5efb'], 
+	  ['#c94b4b', '#4b134f'], 
+	  ['#23074d', '#cc5333'] 
+	];
+	document.body.style.setProperty('--colorBG', connect(gradients[getRandomInt(0, gradients.length)]));
+	function getRandomInt(min, max) {
+	  min = Math.ceil(min);
+	  max = Math.floor(max);
+	  var random;
+	  while (1) {
+	    random = Math.floor(Math.random() * (max - min)) + min;
+	    if (random !== prevBgIndex) {
+	      prevBgIndex = random;
+	      break;
+	    }
+	  }
+	  return random;
+	}
+
+	function connect(arr) {
+	  var str = '';
+	  for (var i = 0; i < arr.length; i++) {
+	    if (i !== arr.length - 1) {
+	      str += arr[i] + ', ';
+	    } else {
+	      str += arr[i];
+	    }
+	  }
+	  return str;
+	}
+</script><div id="sidebar" class="ui sidebar inverted vertical menu">
+	<section id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
+		<img src="https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png">
+</div>
+<h3 class="ui header">YukiYamada
+	<div class="sub header">Android Developer.Learning Android Kotlin-Spring Python-Django.</div>
+</h3>
+</section><section class="ui attached inverted segment sidebar-dream-categories both flexbox">
+		<div class="ui inverted accordion">
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/android">android</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/first/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-003-リスト表示をしてみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_android_manifest/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidManifestについて</p>
+		</div>
+	</a>
+
+</div>
+
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/androidtips">androidtips</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/first/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-003-リスト表示をしてみる</p>
+		</div>
+	</a>
+
+</div>
+
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/django">django</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_templetes/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-テンプレートを使ってみる </p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_local_and_url/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+</div>
+
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/flutter">flutter</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/creating-a-new-theme/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-001-WebViewを使う</p>
+		</div>
+	</a>
+
+</div>
+
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/fluttertips">fluttertips</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/creating-a-new-theme/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-001-WebViewを使う</p>
+		</div>
+	</a>
+
+</div>
+
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/python">python</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_templetes/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-テンプレートを使ってみる </p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_local_and_url/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_object_oriented/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+</div>
+
+</div>
+	</section>
+	
+	<section id="footer" class="ui bottom attached center aligned inverted segment">
+	<p>© 2018 ヤマダユキの備忘log</p>
+
+<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
+</section>
+</div>
+<div class="pusher">
+		<div class="flipper">
+			<div class="front">
+	
+	<nav class="ui top secondary menu bar">
+	<div class="item">
+		<i class="inverted big link bullseye icon dream-flip-toggle" title=""></i>
+	</div>
+<div class="item">
+			<a href="/">
+				<i class="inverted big link home icon" title=""></i>
+			</a>
+		</div>
+	<div class="item">
+			<a href="/posts">
+				<i class="inverted big link archive icon" title=""></i>
+			</a>
+		</div>
+	
+	<div class="item">
+			<a href="/tags">
+				<i class="inverted big link tags icon" title=""></i>
+			</a>
+		</div>
+	<div class="item">
+			<a href="/categories">
+				<i class="inverted big link cubes icon" title=""></i>
+			</a>
+    	</div>
+	
+	<div class="ui container tablet computer only grid">
+		<div class="item" onClick="$('.ui.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');">
+			<i class="inverted big link sidebar icon" title=""></i>
+		</div>
+	</div>
+	
+
+	
+	<div class="item right">
+		<a href="/posts/index.xml">
+			<i class="inverted big link rss icon" title=""></i>
+		</a>
+	</div>
+	
+</nav>
+
+
+<div class="ui centered grid">
+	<div class="sixteen wide mobile only column"><div class="ui inverted accordion">
+	<div id="header" class="ui inverted segment column box">
+		<header id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
+		<img src="https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png">
+</div>
+<h3 class="ui header">YukiYamada
+	<div class="sub header">Android Developer.Learning Android Kotlin-Spring Python-Django.</div>
+</h3>
+</header>
+		<div class=" title header-title"><div id="tag-category-pop" class="ui red right corner label">
+				<i class="hand point icon down"title=""></i>
+			</div></div>
+		<div id="tag-category" class=" content"><section class="ui attached inverted segment dream-categories both flexbox">
+				<div class="inverted accordion">
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/android">android</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/first/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-003-リスト表示をしてみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_android_manifest/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidManifestについて</p>
+		</div>
+	</a>
+
+</div>
+
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/androidtips">androidtips</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/first/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-003-リスト表示をしてみる</p>
+		</div>
+	</a>
+
+</div>
+
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/django">django</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_templetes/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-テンプレートを使ってみる </p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_local_and_url/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+</div>
+
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/flutter">flutter</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/creating-a-new-theme/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-001-WebViewを使う</p>
+		</div>
+	</a>
+
+</div>
+
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/fluttertips">fluttertips</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/creating-a-new-theme/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-001-WebViewを使う</p>
+		</div>
+	</a>
+
+</div>
+
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/python">python</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_templetes/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-テンプレートを使ってみる </p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_local_and_url/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_object_oriented/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+</div>
+
+</div>
+			</section></div>
+		<footer class="ui bottom attached center aligned inverted segment">
+	<p>© 2018 ヤマダユキの備忘log</p>
+
+<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
+</footer>
+	</div>
+</div>
+</div>
+	<div class="sixteen wide mobile fifteen wide tablet twelve wide computer column post-list">
+		<section class="ui secondary top attached black segment post-head">
+			<h1 class="post-title">
+				PythonDjango入門-テンプレートを使ってみる 
+			</h1>
+			<div class="sub header">
+					<div><span><i class="calendar outline icon"></i>Oct 20, 2018</span></div><div><span class="disqusComment"><i class="comment outline icon"></i><a href="https://sasakiyuki.github.io/posts/python_django_templetes/#disqus_thread" class="disqus-comment-count" data-disqus-identifier="ff7091137e8ff8cf76ce4aa127595f7b"></a></span></div>
+					<div><span><i class="clock outline icon"></i>3 min read</span></div>
+					<div><span><i class="angle double up icon"></i> Oct 20, 2018</span></div>
+			</div>
+			<hr><div class="toc"><nav id="TableOfContents">
+<ul>
+<li><a href="#テンプレートを使ってそれらしいものを表示する">テンプレートを使ってそれらしいものを表示する</a></li>
+<li><a href="#テンプレートを作成-表示する">テンプレートを作成、表示する</a>
+<ul>
+<li><a href="#テンプレートはどこに作成するか">テンプレートはどこに作成するか</a></li>
+<li><a href="#テンプレート-html-で変数を扱う">テンプレート（HTML）で変数を扱う</a>
+<ul>
+<li><a href="#render関数">render関数</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ユーザーから入力を受け付ける">ユーザーから入力を受け付ける</a>
+<ul>
+<li><a href="#まずはhtmlの用意から">まずはHTMLの用意から</a></li>
+<li><a href="#テンプレートタグ">テンプレートタグ</a>
+<ul>
+<li><a href="#memo-csrf対策">[memo]CSRF対策</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#よりdjangoを使う意味を持たせるために">よりDjangoを使う意味を持たせるために</a>
+<ul>
+<li><a href="#条件分岐">条件分岐</a></li>
+<li><a href="#ループ">ループ</a></li>
+<li><a href="#継承">継承</a></li>
+<li><a href="#formクラスを使ってみる">Formクラスを使ってみる</a>
+<ul>
+<li><a href="#まずはformを継承したクラスを作成">まずはFormを継承したクラスを作成</a></li>
+<li><a href="#作ったregisterformを受け取るhtmlを作成">作ったRegisterFormを受け取るHTMLを作成</a></li>
+<li><a href="#インスタンス化して渡す">インスタンス化して渡す</a></li>
+</ul></li>
+<li><a href="#cssを適用させる">CSSを適用させる</a></li>
+</ul></li>
+</ul>
+</nav></div>
+			
+			<article class="post-content twemoji">
+				
+
+<h1 id="テンプレートを使ってそれらしいものを表示する">テンプレートを使ってそれらしいものを表示する&nbsp;<a class="anchor" href="#テンプレートを使ってそれらしいものを表示する"><i class="small linkify icon"></i></a> </h1>
+
+<p><a href="https://babylonian-tec.kibe.la/shared/entries/82cc8623-706c-4e8f-91ba-261d459c9c76">前回の資料</a>では各種関数の戻り値に <code>HttpResponse</code> を用いてテキストを表示していました。
+簡単なテキストを表示するだけならこれでも問題ありませんが、現実でそんなケースはむしろないです。</p>
+
+<p>Webアプリケーションで物を作るなら HTML/CSSやJS,またファイルなどの静的ファイルを活用してユーザーによりよいユーザー体験を届けたいところですが、Pythonは直接HTMLファイルを扱うのは苦手です。そもそも直接HTML/CSSをいじるだけならDjangoを使う必要はありません。</p>
+
+<p>そこでPythonに適した形でHTMLを扱いところです。それを「テンプレート」といいます。テンプレートは変数などPythonで扱っている値をHTMLに代入し表示を行うものでDjangoで用意されているテンプレートは <code>DTL</code> と呼ばれます。(Django Template Language)</p>
+
+<p>基本的にはHTMLのように使えます。</p>
+
+<h1 id="テンプレートを作成-表示する">テンプレートを作成、表示する&nbsp;<a class="anchor" href="#テンプレートを作成-表示する"><i class="small linkify icon"></i></a> </h1>
+
+<p>ではテンプレートを作成してみましょう。</p>
+
+<h2 id="テンプレートはどこに作成するか">テンプレートはどこに作成するか&nbsp;<a class="anchor" href="#テンプレートはどこに作成するか"><i class="small linkify icon"></i></a> </h2>
+
+<p><code>Project</code> -&gt; <code>App</code> -&gt; <code>templates</code>(create) -&gt; <code>AppName</code>(create)</p>
+
+<p>createと書かれているファイルを作成します。
+例えば私の今回のケースだと
+ProjectName:app1
+AppName:app1,app2 その中の app2にtempletesというフォルダを作成
+templetesというフォルダの中にapp2というフォルダを作りその中にテンプレートを置きます。</p>
+
+<p>ではテンプレートは  <code>index.html</code> を作成しましょう。</p>
+
+<p>Pycharmで作成すると</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>単純なHTMLが吐き出されました。これを少しだけいじってさっそくテンプレートっぽく使ってみます。</p>
+
+<h2 id="テンプレート-html-で変数を扱う">テンプレート（HTML）で変数を扱う&nbsp;<a class="anchor" href="#テンプレート-html-で変数を扱う"><i class="small linkify icon"></i></a> </h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{{ title }}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>titleを <code>{{}}</code> で囲みました。
+これがテンプレートで変数を使うように定義する方法です。</p>
+
+<p>では .py のほうもいじっていきましょう。 title という変数を渡したいですね。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&#34;app2/index.html&#34;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&#34;title&#34;</span><span class="p">:</span> <span class="s2">&#34;タブ名変更&#34;</span><span class="p">})</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>index関数を再利用してごにょってみました。</p>
+
+<p><code>render</code>をimportしHTMLをレンダリングしています。</p>
+
+<h3 id="render関数">render関数&nbsp;<a class="anchor" href="#render関数"><i class="small linkify icon"></i></a> </h3>
+
+<p>テンプレートをレンダリング際に使うショートカット関数です。
+第一引数に <code>HttpRequest</code> 2, レンダリングするテンプレート 3, 辞書型の変数s
+戻り値はTemplateResponseを返します。</p>
+
+<p>では実際に実行してみましょう。</p>
+
+<p>タブ上のテキストが変わっているのが確認できると思います。</p>
+
+<p>以上で簡単なテンプレートの作り方が分かったかと思います。</p>
+
+<h1 id="ユーザーから入力を受け付ける">ユーザーから入力を受け付ける&nbsp;<a class="anchor" href="#ユーザーから入力を受け付ける"><i class="small linkify icon"></i></a> </h1>
+
+<p>ユーザーから入力を受け付けてみましょう。</p>
+
+<p><a href="https://babylonian-tec.kibe.la/notes/python/66#http%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89">前回</a> Httpメソッドについてすごくざっくり説明しました。
+Httpメソッドには大きく分けて二つ　ユーザー視点に立つと</p>
+
+<ul>
+<li>データをよこせ</li>
+<li>データを渡すから何かしろ（何か データをDBに　DBから削除　置き換え　等）</li>
+</ul>
+
+<p>です。</p>
+
+<p>では代表的なPOSTメソッドの使い道である　ユーザー登録　「っぽいもの」を作りましょう。
+（実際にはDBに登録したりなどが必要ですが今回はガワと受け取りだけやってみましょう。）</p>
+
+<h2 id="まずはhtmlの用意から">まずはHTMLの用意から&nbsp;<a class="anchor" href="#まずはhtmlの用意から"><i class="small linkify icon"></i></a> </h2>
+
+<p>フォーム画面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{{ title }}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>ユーザー登録<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;{% url &#34;</span><span class="na">user_info</span><span class="err">&#34;</span> <span class="err">%}&#34;</span><span class="p">&gt;</span>
+    {% csrf_token %}
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;id&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;id&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;post&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>受け取った情報を表示する画面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{{ title }}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>ユーザー情報<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>id<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ id }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>password<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ password }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python:views.py" data-lang="python:views.py"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python:views.py" data-lang="python:views.py"><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+
+
+<span class="k">def</span> <span class="nf">render_register_form</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&#34;register/register.html&#34;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&#34;user_info&#34;</span><span class="p">:</span> <span class="s2">&#34;user_info&#34;</span><span class="p">})</span>
+
+
+<span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&#34;id&#34;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&#34;password&#34;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&#34;register/user_info.html&#34;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s2">&#34;id&#34;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&#34;id&#34;</span><span class="p">],</span>
+            <span class="s2">&#34;password&#34;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&#34;password&#34;</span><span class="p">]</span>
+        <span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&#34;必須項目がPOSTされていません&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python:ulrs.py" data-lang="python:ulrs.py"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python:ulrs.py" data-lang="python:ulrs.py"><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;form/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">render_register_form</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;registered_user_info&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">register</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;user_info&#34;</span><span class="p">)</span>
+<span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>ではコード(スクリプト）を元に解説していきましょう。</p>
+
+<h2 id="テンプレートタグ">テンプレートタグ&nbsp;<a class="anchor" href="#テンプレートタグ"><i class="small linkify icon"></i></a> </h2>
+
+<p>HTML中に <code>{% %}</code> といったタグが見られるかと思います。
+これはテンプレートタグと言われるものでDjangoに用意されているタグ機能です。
+結構種類がたくさんありますがここでは url というテンプレートタグを使用しています。その他にもifテンプレートタグやリープテンプレートタグがありテンプレートをプログラミングちっくに技術することができます。</p>
+
+<p>使い方は非常にシンプルで</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html">{% url name %}</code></pre></td></tr></table>
+</div>
+</div>
+<p>と書き、 このnameとしていしたURLが書き出されます。</p>
+
+<p>今回のケースでは</p>
+
+<p><code>&lt;form method=&quot;POST&quot; action=&quot;{% url &quot;user_info&quot; %}&quot;&gt;</code></p>
+
+<p>フォームのアクションで指定していますのでフォーム内のinputがpostされた際には user_info の名前をもつURLに飛びます。</p>
+
+<p>ではこのサンプル中ではどこに飛ぶかと言いますと
+urls.pyで指定している</p>
+
+<p><code>path('registered_user_info', views.register, name=&quot;user_info&quot;)</code></p>
+
+<p>こいつが呼び出されます。</p>
+
+<h3 id="memo-csrf対策">[memo]CSRF対策&nbsp;<a class="anchor" href="#memo-csrf対策"><i class="small linkify icon"></i></a> </h3>
+
+<p>CSRFとは Cross site request forgeries の略で外部から該当サイトへのフォーム送信などを送る攻撃です。
+正しいフォームから送信されたアクセスかどうかを確認する必要があるのですが、それがDjangoには組み込まれているためそれを有効化してねということが <code>{%  csrf_token %}</code> となります。</p>
+
+<h1 id="よりdjangoを使う意味を持たせるために">よりDjangoを使う意味を持たせるために&nbsp;<a class="anchor" href="#よりdjangoを使う意味を持たせるために"><i class="small linkify icon"></i></a> </h1>
+
+<p>ちょっとまだ全体的にコードが芋くさいですね。
+よりテンプレートを使いこなしてみましょう</p>
+
+<h2 id="条件分岐">条件分岐&nbsp;<a class="anchor" href="#条件分岐"><i class="small linkify icon"></i></a> </h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-jinja" data-lang="jinja"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-jinja" data-lang="jinja"><span class="x">&lt;!DOCTYPE html&gt;
+</span><span class="x">&lt;html lang=&#34;en&#34;&gt;
+</span><span class="x">&lt;head&gt;
+</span><span class="x">    &lt;meta charset=&#34;UTF-8&#34;&gt;
+</span><span class="x">    &lt;title&gt;Title&lt;/title&gt;
+</span><span class="x">&lt;/head&gt;
+</span><span class="x">&lt;body&gt;
+</span><span class="x"></span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">id</span> <span class="o">&lt;=</span> <span class="m">10</span> <span class="cp">%}</span><span class="x">
+</span><span class="x">    &lt;h1&gt;登録が早い&lt;/h1&gt;
+</span><span class="x"></span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">id</span> <span class="o">&lt;=</span> <span class="m">100</span> <span class="cp">%}</span><span class="x">
+</span><span class="x">    &lt;h1&gt;普通&lt;/h1&gt;
+</span><span class="x"></span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x">
+</span><span class="x">    &lt;h1&gt;遅め&lt;/h1&gt;
+</span><span class="x"></span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x">
+</span><span class="x">&lt;/body&gt;
+</span><span class="x">&lt;/html&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Pythonの構文と変わりませんが、最後に <code>endif</code> が必要です。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">path</span><span class="p">(</span><span class="s2">&#34;&lt;int:user_id&gt;&#34;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">render_sample</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>URLにidを含めて動作を確認してみてください。</p>
+
+<h2 id="ループ">ループ&nbsp;<a class="anchor" href="#ループ"><i class="small linkify icon"></i></a> </h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html">{% for item in list %}
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{ item }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+{% endfor %}</code></pre></td></tr></table>
+</div>
+</div>
+<p>リストの展開も可能</p>
+
+<h2 id="継承">継承&nbsp;<a class="anchor" href="#継承"><i class="small linkify icon"></i></a> </h2>
+
+<p>テンプレートはなんと継承させることができます。
+大まかなLPなどの骨組みが決まっているケース、そうでなくともヘッダーやフッターは固定なことが多いでしょうからそれらをベースのテプレートとして組み込み、それらを継承してテンプレートを作っていくこともできます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-jinja" data-lang="jinja"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-jinja" data-lang="jinja"><span class="x">&lt;!DOCTYPE html&gt;
+</span><span class="x">&lt;html lang=&#34;en&#34;&gt;
+</span><span class="x">&lt;head&gt;
+</span><span class="x">    </span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">head</span> <span class="cp">%}</span><span class="x">
+</span><span class="x">        &lt;meta charset=&#34;UTF-8&#34;&gt;
+</span><span class="x">        &lt;title&gt;</span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x">&lt;/title&gt;
+</span><span class="x">    </span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x">
+</span><span class="x">&lt;/head&gt;
+</span><span class="x">&lt;body&gt;
+</span><span class="x"></span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span><span class="x">
+</span><span class="x"></span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x">
+</span><span class="x">&lt;div id=&#34;footer&#34;&gt;
+</span><span class="x">    </span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">footer</span> <span class="cp">%}</span><span class="x">
+</span><span class="x">        footer
+</span><span class="x">    </span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x">
+</span><span class="x">&lt;/div&gt;
+</span><span class="x">&lt;/body&gt;
+</span><span class="x">&lt;/html&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>継承元は↑のように作ります。
+block で囲み　タイトルを付けます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-jinja" data-lang="jinja"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-jinja" data-lang="jinja"><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&#34;register/base.html&#34;</span> <span class="cp">%}</span><span class="x">
+</span><span class="x"></span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span><span class="x">
+</span><span class="x">    Extends Title
+</span><span class="x"></span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x">
+</span><span class="x"></span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">footer</span> <span class="cp">%}</span><span class="x">
+</span><span class="x">    Extends Footer
+</span><span class="x"></span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>継承先ではblock title 中身を書く、で書くことができます。</p>
+
+<h2 id="formクラスを使ってみる">Formクラスを使ってみる&nbsp;<a class="anchor" href="#formクラスを使ってみる"><i class="small linkify icon"></i></a> </h2>
+
+<p>上の例ではフォームこそ作れましたが正直Djangoっぽい書き方ではありませんでした。
+DjangoにはFormを作る要のクラスが存在します。その使い方を説明してきます。</p>
+
+<h3 id="まずはformを継承したクラスを作成">まずはFormを継承したクラスを作成&nbsp;<a class="anchor" href="#まずはformを継承したクラスを作成"><i class="small linkify icon"></i></a> </h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+
+
+<span class="k">class</span> <span class="nc">RegisterForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&#34;id&#34;</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&#34;password&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Formクラスを継承した <code>RegisterForm</code> を作りました
+そして格納される id, passwordという変数を用意(idとpassword)
+実際に代入されているのは <code>CharField</code> というインスタンスです。
+これはテキストを入力させるものでその他にも数字やメールなど様々なFieldが存在しています。
+引数で渡しているラベルは入力欄の横に表示されるテキスト用です。</p>
+
+<h3 id="作ったregisterformを受け取るhtmlを作成">作ったRegisterFormを受け取るHTMLを作成&nbsp;<a class="anchor" href="#作ったregisterformを受け取るhtmlを作成"><i class="small linkify icon"></i></a> </h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-jinja" data-lang="jinja"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-jinja" data-lang="jinja"><span class="x">&lt;!DOCTYPE html&gt;
+</span><span class="x">&lt;html lang=&#34;en&#34;&gt;
+</span><span class="x">&lt;head&gt;
+</span><span class="x">    &lt;meta charset=&#34;UTF-8&#34;&gt;
+</span><span class="x">    &lt;title&gt;TITLE&lt;/title&gt;
+</span><span class="x">&lt;/head&gt;
+</span><span class="x">
+</span><span class="x">&lt;body&gt;
+</span><span class="x">&lt;h1&gt;ユーザー登録&lt;/h1&gt;
+</span><span class="x">&lt;form method=&#34;POST&#34; action=&#34;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s2">&#34;user_info&#34;</span> <span class="cp">%}</span><span class="x">&#34;&gt;
+</span><span class="x">    </span><span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span><span class="x">
+</span><span class="x">    </span><span class="cp">{{</span> <span class="nv">form</span> <span class="cp">}}</span><span class="x">
+</span><span class="x">    &lt;input value=&#34;post&#34; type=&#34;submit&#34;&gt;
+</span><span class="x">&lt;/form&gt;
+</span><span class="x">&lt;/body&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>変数としてformを受け取ろうとしているだけで特に前回と変わりはありません。</p>
+
+<h3 id="インスタンス化して渡す">インスタンス化して渡す&nbsp;<a class="anchor" href="#インスタンス化して渡す"><i class="small linkify icon"></i></a> </h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&#34;register/register_form.html&#34;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&#34;form&#34;</span><span class="p">:</span> <span class="n">RegisterForm</span><span class="p">()})</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>作ったインスタンスを渡すだけです。</p>
+
+<h2 id="cssを適用させる">CSSを適用させる&nbsp;<a class="anchor" href="#cssを適用させる"><i class="small linkify icon"></i></a> </h2>
+
+<p>Cssは静的ファイルに属しますので
+アプリケーション &gt; static(mkdir) -&gt; .css</p>
+
+<p>で配置しましょう。</p>
+
+<p>てきとーにCSSを作ったら
+適用させたい.htmlに</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-jinja" data-lang="jinja"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-jinja" data-lang="jinja"><span class="cp">{%</span> <span class="k">load</span> <span class="nv">static</span> <span class="cp">%}</span><span class="x">
+</span><span class="x">&lt;!DOCTYPE html&gt;
+</span><span class="x">&lt;html lang=&#34;en&#34;&gt;
+</span><span class="x">&lt;head&gt;
+</span><span class="x">    &lt;meta charset=&#34;UTF-8&#34;&gt;
+</span><span class="x">    &lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;</span><span class="cp">{%</span> <span class="k">static</span> <span class="s2">&#34;style.css&#34;</span> <span class="cp">%}</span><span class="x">&#34; /&gt;
+</span><span class="x">    &lt;title&gt;</span><span class="cp">{{</span> <span class="nv">title</span> <span class="cp">}}</span><span class="x">&lt;/title&gt;
+</span><span class="x">&lt;/head&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>loadしていつも通りできようさせるだけです。</p>
+
+			</article>
+		</section>
+		<section class="ui secondary attached segment dream-tags">
+			<span></span>
+			
+		</section><section class="ui secondary  attached segment share row box"><div class="author"><img class="avatar" src="/img/avatar4.svg">
+	
+</div>
+<div class="info grow flexbox">
+	<p class="name">Yuki Yamada</p>
+	<p class="desc">Android Developer.Learning Android Kotlin-Spring Python-Django.</p>
+</div>
+<section class="buttons row box">
+	<div class="facebook none flexbox" href="#" onclick="window.open(
+			'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+			'facebook-share-dialog',
+			'width=626,height=436'); return false;">
+		<button class="ui facebook button"><i class="facebook icon"></i>Share</button>
+	</div>
+	<div class="twitter none flexbox" onclick="window.open('https://twitter.com/intent/tweet?text=Read &quot;PythonDjango入門-テンプレートを使ってみる  &quot; by @YukiYamadaJP https:\/\/sasakiyuki.github.io\/posts\/python_django_templetes\/','_self')">
+		<button class="ui twitter button"><i class="twitter icon"></i>Tweet</button>
+	</div>
+</section>
+</section>
+		<section class="ui secondary attached segment copyright">
+			
+
+		</section>
+		<div class="ui secondary bottom attached stacked segment disqus"><div id="disqus_thread"></div>
+<script>
+	var disqus_config = function () {
+		this.page.url = 'https:\/\/sasakiyuki.github.io\/posts\/python_django_templetes\/';
+		this.page.identifier = 'ff7091137e8ff8cf76ce4aa127595f7b';
+	};
+	(function() {
+   	var d = document, s = d.createElement('script');
+   	s.src = 'https://' + 'dream-plus' + '.disqus.com/embed.js';
+   	s.setAttribute('data-timestamp', +new Date());
+   	(d.head || d.body).appendChild(s);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+		
+	</div>
+</div>
+
+			</div>
+			<div class="back">
+<nav class="ui top secondary menu bar">
+	<div class="item">
+		<i class="inverted big link bullseye icon dream-flip-toggle" title=""></i>
+	</div>
+
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+	
+	
+	
+		
+		
+		<div class="item">
+			<a href="https://github.com/SasakiYuki" target="	_blank">
+				<i id="ico" class="inverted big link github icon" title="GitHub"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+		<div class="item">
+			<a href="mailto:wacorggen@gmail.com" target="	_blank">
+				<i id="ico" class="inverted big link mail icon" title="Email"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+		<div class="item">
+			<a href="https://twitter.com/YukiYamadaJP" target="	_blank">
+				<i id="ico" class="inverted big link twitter icon" title="Twitter"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+	
+		
+		
+		<div class="item">
+			<a href="https://medium.com/@wacorggen" target="	_blank">
+				<i id="ico" class="inverted big link medium icon" title="Medium"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+
+	
+	<div class="item right">
+		<a href="/posts/index.xml">
+			<i class="inverted big link rss icon" title=""></i>
+		</a>
+	</div>
+	
+</nav>
+
+<div class="ui centered grid about">
+	<div class="sixteen wide mobile fifteen wide tablet fifteen wide computer column about">
+		<section class="ui stacked segments">
+			<div class="ui inverted segment">
+				<article class="twemoji"><h1>So, Who Am I?</h1>
+
+<hr />
+
+<p><br>
+ヤマダユキと申します。</p>
+
+<p>都内に住むソフトウェアエンジニアです。
+技術ブログや日々の話など雑多に書きます。</p>
+
+<p>基本休日もコード書いてることが多いですが、その他の趣味にカメラとDTM civ6などもあります。</p>
+
+<p>経歴等は<a href="https://www.wantedly.com/users/17800328">Wantedly</a>をご確認ください。
+相談は上部mailやtwitterDMなどどこでもどうぞ。</p>
+</article>
+			</div>
+		</section>
+	</div>
+</div>
+</div>
+		</div>
+	</div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/site.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script><script src="https://twemoji.maxcdn.com/2/twemoji.min.js?2.6"></script>
+
+<script id="dsq-count-scr" src="//dream-plus.disqus.com/count.js" async></script>
+
+
+<script>
+	(function () {
+	  console.log("Twemoji up and making stuff colourful!");
+	  for (var b = document.getElementsByClassName("twemoji"), a = 0; a < b.length; a++) {
+		twemoji.parse(b[a]);
+	  }
+	})();
+</script>
+
+</body>
+</html>
