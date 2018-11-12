@@ -1,14 +1,20 @@
 ---
 title: "flutterTips-001-WebViewを使う"
 description: "flutterでWebViewを使う方法を説明します。導入から実装まで。"
+weight: 1
 author:
   name: "Yuki Sasaki"
 date: 2018-11-12
 draft: false
 categories:
+- blogging
+tags:
 - flutter
 - flutterTips
 ---
+
+cover : "https://raw.githubusercontent.com/UtkarshVerma/blog/source/static/images/gci/gci-thumb.png"
+draft: false
 
 FlutterでWebViewを使うためには少しいじる必要があります。
 
