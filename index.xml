@@ -13,10 +13,10 @@
     
     <item>
       <title>flutterTips-001-WebViewを使う</title>
-      <link>https://sasakiyuki.github.io/posts/creating-a-new-theme/</link>
+      <link>https://sasakiyuki.github.io/posts/flutter_tips_001/</link>
       <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://sasakiyuki.github.io/posts/creating-a-new-theme/</guid>
+      <guid>https://sasakiyuki.github.io/posts/flutter_tips_001/</guid>
       <description>cover : &amp;ldquo;https://raw.githubusercontent.com/UtkarshVerma/blog/source/static/images/gci/gci-thumb.png&amp;quot; draft: false
 FlutterでWebViewを使うためには少しいじる必要があります。
 flutter_webview_plugin Flutterで Nativeの WebView を呼び出すには flutter_webview_plugin の依存を追加する必要があります。
@@ -49,10 +49,10 @@ flutter packages get  インストールすることで使えるようになり�
     
     <item>
       <title>AndroidTips-003-リスト表示をしてみる</title>
-      <link>https://sasakiyuki.github.io/posts/first/</link>
+      <link>https://sasakiyuki.github.io/posts/android_tips_003/</link>
       <pubDate>Fri, 09 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://sasakiyuki.github.io/posts/first/</guid>
+      <guid>https://sasakiyuki.github.io/posts/android_tips_003/</guid>
       <description>複数の似たようなデータを表示する場合にはリスト形式のViewを使うのが一般的です。 今回はそのリスト形式のViewをどのように扱うかをやっていきたいと思います。
 流れ  Listを表示する Activity を追加します。 レイアウトにリストの元になるRecyclerViewを置きます RecyclerViewにリストを表示するための Adapter を用意する （リストに表示するデータを用意する） 用意したAdapterをRecyclerView にセットしてリストを表示する  この流れでいきます。
 目指すリストは下の通りです。
@@ -173,10 +173,10 @@ class ClassName: def MethodName(self,その他引数): 処理  メソッドは�
     
     <item>
       <title>AndroidManifestについて</title>
-      <link>https://sasakiyuki.github.io/posts/android_tips_android_manifest/</link>
+      <link>https://sasakiyuki.github.io/posts/android_document_android_manifest/</link>
       <pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://sasakiyuki.github.io/posts/android_tips_android_manifest/</guid>
+      <guid>https://sasakiyuki.github.io/posts/android_document_android_manifest/</guid>
       <description>AndroidManifestとは AndroidManifest.xmlはすべてのプロジェクトに等しく一つ存在するものです。
 作っているAndroidアプリに関する情報をAndroidのOS(システム）に伝える役目を担っており、コード実行の際に必要になる重要な情報を記述する必要があります。
 プロジェクトの基底ディレクトリに AndroidManifest.xml として置く必要があり名前を変えることなどはできません。

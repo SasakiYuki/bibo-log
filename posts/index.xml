@@ -13,19 +13,19 @@
     
     <item>
       <title>flutterTips-001-WebViewを使う</title>
-      <link>https://sasakiyuki.github.io/posts/creating-a-new-theme/</link>
+      <link>https://sasakiyuki.github.io/posts/flutter_tips_001/</link>
       <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://sasakiyuki.github.io/posts/creating-a-new-theme/</guid>
+      <guid>https://sasakiyuki.github.io/posts/flutter_tips_001/</guid>
       <description>flutterでWebViewを使う方法を説明します。導入から実装まで。</description>
     </item>
     
     <item>
       <title>AndroidTips-003-リスト表示をしてみる</title>
-      <link>https://sasakiyuki.github.io/posts/first/</link>
+      <link>https://sasakiyuki.github.io/posts/android_tips_003/</link>
       <pubDate>Fri, 09 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://sasakiyuki.github.io/posts/first/</guid>
+      <guid>https://sasakiyuki.github.io/posts/android_tips_003/</guid>
       <description>Android初心者向け記事。リスト表示をするための資料です。</description>
     </item>
     
@@ -76,10 +76,10 @@
     
     <item>
       <title>AndroidManifestについて</title>
-      <link>https://sasakiyuki.github.io/posts/android_tips_android_manifest/</link>
+      <link>https://sasakiyuki.github.io/posts/android_document_android_manifest/</link>
       <pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://sasakiyuki.github.io/posts/android_tips_android_manifest/</guid>
+      <guid>https://sasakiyuki.github.io/posts/android_document_android_manifest/</guid>
       <description>勉強会で説明する際に用いた追加資料です。AndroidManifestについて簡単なマトメになっています。</description>
     </item>
     

@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://sasakiyuki.github.io/posts/creating-a-new-theme/</loc>
+    <loc>https://sasakiyuki.github.io/posts/flutter_tips_001/</loc>
     <lastmod>2018-11-12T00:00:00+00:00</lastmod>
   </url>
   
@@ -18,7 +18,7 @@
   </url>
   
   <url>
-    <loc>https://sasakiyuki.github.io/posts/first/</loc>
+    <loc>https://sasakiyuki.github.io/posts/android_tips_003/</loc>
     <lastmod>2018-11-09T00:00:00+00:00</lastmod>
   </url>
   
@@ -48,7 +48,7 @@
   </url>
   
   <url>
-    <loc>https://sasakiyuki.github.io/posts/android_tips_android_manifest/</loc>
+    <loc>https://sasakiyuki.github.io/posts/android_document_android_manifest/</loc>
     <lastmod>2018-10-04T00:00:00+00:00</lastmod>
   </url>
   
@@ -71,13 +71,13 @@
   </url>
   
   <url>
-    <loc>https://sasakiyuki.github.io/categories/android/</loc>
+    <loc>https://sasakiyuki.github.io/tags/android/</loc>
     <lastmod>2018-11-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://sasakiyuki.github.io/categories/androidtips/</loc>
+    <loc>https://sasakiyuki.github.io/tags/androidtips/</loc>
     <lastmod>2018-11-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -96,12 +96,12 @@
   
   <url>
     <loc>https://sasakiyuki.github.io/categories/</loc>
-    <lastmod>2018-11-09T00:00:00+00:00</lastmod>
+    <lastmod>2018-11-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://sasakiyuki.github.io/categories/django/</loc>
+    <loc>https://sasakiyuki.github.io/tags/django/</loc>
     <lastmod>2018-11-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -125,14 +125,14 @@
   </url>
   
   <url>
-    <loc>https://sasakiyuki.github.io/categories/python/</loc>
+    <loc>https://sasakiyuki.github.io/tags/python/</loc>
     <lastmod>2018-11-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sasakiyuki.github.io/tags/</loc>
-    <lastmod>2018-11-12T00:00:00+00:00</lastmod>
+    <lastmod>2018-11-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

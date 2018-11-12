@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Django on ヤマダユキの備忘log</title>
+    <link>https://sasakiyuki.github.io/tags/django/</link>
+    <description>Recent content in Django on ヤマダユキの備忘log</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Mon, 05 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://sasakiyuki.github.io/tags/django/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>PythonDjango入門-DBに触れる</title>
+      <link>https://sasakiyuki.github.io/posts/python_django_db/</link>
+      <pubDate>Mon, 05 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/python_django_db/</guid>
+      <description>データベースが必要になる理由 前回までにユーザーの登録フォームなどを作ってきましたが、特にデータの保存等はしてきませんでした。 Webアプリケーションを作る上で何かしらのデータを保存することは絶対に必要になってきます。データを個人で永続的に使うというだけであればデータベースでなくとも何かしらの形でファイルにアウトプットすればいいでしょうが、Webアプリケーションでは同時に別のユーザーから開かれる可能性があるのでファイルを開いていたら何か障害が起きかねません。そもそもアクセス速度やデータ分類などの面で問題がありそうです。
+データベースはそれらを解決するために長年進化を続けてきました。特にRDBMS(リレーショナルデータベースマネジメントシステム　説明するにはちょっとDBの知識がいるので今は要するに『普通のDB』とでも思っていてください）は長く、現在も使われています。現在ではNoSQLなどRDBMSとは違うDBも出てきていますが、今回はこのRDBを学んでいきます。
+データベース全体の特徴は
+ なんといってもデータアクセス速度が速い 高度な検索が可能 同時アクセスされることを前提に作られている  DjangoでDBを使う 上記の通りDBを使うことにメリットが非常にあることがわかりましたが、一口にDBといっても色々なものが存在します。 Djangoだと使われがちなのは
+ SQLite MySQL PostgreSQL  でしょうか。 それぞれ特徴があります。すごく雑に説明すると（上から）
+ djnagoプロジェクトを作ると初期設定はこれ　軽い、高速　だけど大規模に向いてないので学習や小規模など　ちなみにAndroidで採用されている 最も多く採用されているんじゃないかと言われている 導入コストが低く済む　  すべて共通してオープンソースで、SQLというデータアクセス言語を使っています。
+今回はPostgreSQLでいきましょう！
+djangoにてPostgreSQLを設定をする まずはインストールをします。 MacOSなら Homebrewを使ってすぐに終わります。
+brew install postgresql  Winだったらまずはインストーラーをこちらからダウンロードしてください。
+インストーラー起動するとディレクトリとかの設定は基本デフォルトで問題ないですが見慣れないスーパーユーザーのパスワードの設定をしてください、という項目があると思うので任意のものを設定してください。 またポートはデフォルトの5432でいいでしょう。 ロケールは デフォルトで
+で、パスを通します。
+環境変数設定で　C:\Program Files\PostgreSQL\11\bin　先ほどインストールした bin を通して
+パスが通ってることを確認。
+psql --version  通ってたら成功です。
+settings.py をご覧ください。デフォルトのままであれば
+1 2 3 4 5 6  DATABASES = { &amp;#39;default&amp;#39;: { &amp;#39;ENGINE&amp;#39;: &amp;#39;django.</description>
+    </item>
+    
+    <item>
+      <title>PythonDjango入門-テンプレートを使ってみる </title>
+      <link>https://sasakiyuki.github.io/posts/python_django_templetes/</link>
+      <pubDate>Sat, 20 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/python_django_templetes/</guid>
+      <description>テンプレートを使ってそれらしいものを表示する 前回の資料では各種関数の戻り値に HttpResponse を用いてテキストを表示していました。 簡単なテキストを表示するだけならこれでも問題ありませんが、現実でそんなケースはむしろないです。
+Webアプリケーションで物を作るなら HTML/CSSやJS,またファイルなどの静的ファイルを活用してユーザーによりよいユーザー体験を届けたいところですが、Pythonは直接HTMLファイルを扱うのは苦手です。そもそも直接HTML/CSSをいじるだけならDjangoを使う必要はありません。
+そこでPythonに適した形でHTMLを扱いところです。それを「テンプレート」といいます。テンプレートは変数などPythonで扱っている値をHTMLに代入し表示を行うものでDjangoで用意されているテンプレートは DTL と呼ばれます。(Django Template Language)
+基本的にはHTMLのように使えます。
+テンプレートを作成、表示する ではテンプレートを作成してみましょう。
+テンプレートはどこに作成するか Project -&amp;gt; App -&amp;gt; templates(create) -&amp;gt; AppName(create)
+createと書かれているファイルを作成します。 例えば私の今回のケースだと ProjectName:app1 AppName:app1,app2 その中の app2にtempletesというフォルダを作成 templetesというフォルダの中にapp2というフォルダを作りその中にテンプレートを置きます。
+ではテンプレートは index.html を作成しましょう。
+Pycharmで作成すると
+1 2 3 4 5 6 7  &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34;&amp;gt; &amp;lt;title&amp;gt;Title&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt;   単純なHTMLが吐き出されました。これを少しだけいじってさっそくテンプレートっぽく使ってみます。
+テンプレート（HTML）で変数を扱う 1 2 3 4 5 6 7  &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34;&amp;gt; &amp;lt;title&amp;gt;{{ title }}&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt;   titleを {{}} で囲みました。 これがテンプレートで変数を使うように定義する方法です。</description>
+    </item>
+    
+    <item>
+      <title>Pythonにおけるオブジェクト指向</title>
+      <link>https://sasakiyuki.github.io/posts/python_django_local_and_url/</link>
+      <pubDate>Sat, 20 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/python_django_local_and_url/</guid>
+      <description>Pythonの特徴 初期リリースは91年で開発当初はオブジェクト指向を意識した設計になっていませんでしたが、途中からオブジェクト指向が組み込まれリリースに合わせてそれらは含まれる形になりました。 あまり日本では注目されることのなかった言語のようですが、機械学習やGoogle app engineにpythonが採用（そもそもGoogleでは社内標準言語としてpythonが採用されていますが）されたため日本でも注目を集め今では珍しくないレベルまで来ています。 スクリプト言語であり学習に向いているとされています。その理由としてはそもそもスクリプト言語が実行しやすかったり（コンパイルが不要）、Pythonの記法がシンプルであることから言われています。中でもインデントブロックは大きな特徴の一つです。
+Webフレームワークとは さて、では実際にPythonでWebアプリケーションを作ろうとなった時にWebフレームワークの選定が必要になります。 そもそもWebフレームワークとは Webアプリケーションを作成する際に骨組み（足場）になってくれるもののことを指します。フレームワーク自体が機能群のことで、それのWb版だと思っていただければ問題ありません。最大のメリットは「書くコードが減る」ということです。フレームワークによって大なり小なりありますが作成に必要な機能が盛り込まれており１から書く必要がなくなります。また、書き方なども統一されるため可読性が上がるなどのメリットもあります。 Pythonで有名なWebフレームワークは
+ Django Flask Bottle  などが有名どころです。 下に行くほど軽量なフレームワークとなっていきます。
+今回はこの中でも実際に採用されている万能な大型フレームワークであるDJangoを使っていきたいと思います。
+Djangoとは Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.  公式からの引用ですがハイレベルなWebフレームワークで超スピードで実用的なWebアプリケーションを構築するぜ、と言っています。
+フルスタックフレームワークと言われる、いわゆる全部盛りフレームワークで、複雑なデーターベース主体のアプリケーションを簡単に書くことができたり、管理者用GUIを自動生成したりするなど便利な機能がたくさん載っています。 また、プロジェクトの構成が単純で生成時のファイルが少ないのもメリットと言えるでしょう。
+セットアップ 早速セットアップしていきます
+雑にpythonのパスを通します。(TODO)
+IDEはPyCharmを使います
+新規Djangoプロジェクトの作成 ではさっそくPyCharmを起動してプロジェクトを作成します。
+New Project -&amp;gt; Djangoを選択
+プロジェクトファイル 自動生成されるコードの紹介
+ init.py  Pythonでは特別な意味を持つファイルで、このディレクトリをPythonパッケージであるということを伝えるために存在しています。
+ settings.py  Djangoで生成したアプリケーションの設定をつかさどっているファイルです。
+ urls.py  URL宣言が含まれているファイルでルーティングはここで行います。
+ wsgi.py  作ったPythonプロジェクトをWebサーバーにデプロイする際に使用されるファイルです（エントリポイントを定義している） Webアプリケーションのメインのプログラムとなります。
+ manage.</description>
+    </item>
+    
+  </channel>
+</rss>
