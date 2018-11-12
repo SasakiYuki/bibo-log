@@ -6,6 +6,8 @@ author:
 date: 2018-11-09
 draft: false
 categories:
+- blogging
+tags:
 - Android
 - AndroidTips
 ---

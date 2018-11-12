@@ -6,6 +6,8 @@ author:
 date: 2018-11-05
 draft: false	
 categories:
+- blogging
+tags:
 - python
 - Django
 ---

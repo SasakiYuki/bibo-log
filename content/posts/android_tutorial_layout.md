@@ -6,6 +6,8 @@ author:
 date: 2018-10-26
 draft: false	
 categories:
+- blogging
+tags:
 - Android
 ---
 
