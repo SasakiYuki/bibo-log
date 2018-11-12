@@ -30,6 +30,15 @@
     </item>
     
     <item>
+      <title>Django</title>
+      <link>https://sasakiyuki.github.io/categories/django/</link>
+      <pubDate>Sat, 20 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/categories/django/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Flutter</title>
       <link>https://sasakiyuki.github.io/categories/flutter/</link>
       <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
@@ -50,7 +59,7 @@
     <item>
       <title>Python</title>
       <link>https://sasakiyuki.github.io/categories/python/</link>
-      <pubDate>Tue, 16 Oct 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 20 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>https://sasakiyuki.github.io/categories/python/</guid>
       <description></description>

@@ -66,6 +66,31 @@ RecyclerViewで表示するレイアウトを作る リストとして表示す�
     
     <item>
       <title>Pythonにおけるオブジェクト指向</title>
+      <link>https://sasakiyuki.github.io/posts/python_django_local_and_url/</link>
+      <pubDate>Sat, 20 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/python_django_local_and_url/</guid>
+      <description>Pythonの特徴 初期リリースは91年で開発当初はオブジェクト指向を意識した設計になっていませんでしたが、途中からオブジェクト指向が組み込まれリリースに合わせてそれらは含まれる形になりました。 あまり日本では注目されることのなかった言語のようですが、機械学習やGoogle app engineにpythonが採用（そもそもGoogleでは社内標準言語としてpythonが採用されていますが）されたため日本でも注目を集め今では珍しくないレベルまで来ています。 スクリプト言語であり学習に向いているとされています。その理由としてはそもそもスクリプト言語が実行しやすかったり（コンパイルが不要）、Pythonの記法がシンプルであることから言われています。中でもインデントブロックは大きな特徴の一つです。
+Webフレームワークとは さて、では実際にPythonでWebアプリケーションを作ろうとなった時にWebフレームワークの選定が必要になります。 そもそもWebフレームワークとは Webアプリケーションを作成する際に骨組み（足場）になってくれるもののことを指します。フレームワーク自体が機能群のことで、それのWb版だと思っていただければ問題ありません。最大のメリットは「書くコードが減る」ということです。フレームワークによって大なり小なりありますが作成に必要な機能が盛り込まれており１から書く必要がなくなります。また、書き方なども統一されるため可読性が上がるなどのメリットもあります。 Pythonで有名なWebフレームワークは
+ Django Flask Bottle  などが有名どころです。 下に行くほど軽量なフレームワークとなっていきます。
+今回はこの中でも実際に採用されている万能な大型フレームワークであるDJangoを使っていきたいと思います。
+Djangoとは Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.  公式からの引用ですがハイレベルなWebフレームワークで超スピードで実用的なWebアプリケーションを構築するぜ、と言っています。
+フルスタックフレームワークと言われる、いわゆる全部盛りフレームワークで、複雑なデーターベース主体のアプリケーションを簡単に書くことができたり、管理者用GUIを自動生成したりするなど便利な機能がたくさん載っています。 また、プロジェクトの構成が単純で生成時のファイルが少ないのもメリットと言えるでしょう。
+セットアップ 早速セットアップしていきます
+雑にpythonのパスを通します。(TODO)
+IDEはPyCharmを使います
+新規Djangoプロジェクトの作成 ではさっそくPyCharmを起動してプロジェクトを作成します。
+New Project -&amp;gt; Djangoを選択
+プロジェクトファイル 自動生成されるコードの紹介
+ init.py  Pythonでは特別な意味を持つファイルで、このディレクトリをPythonパッケージであるということを伝えるために存在しています。
+ settings.py  Djangoで生成したアプリケーションの設定をつかさどっているファイルです。
+ urls.py  URL宣言が含まれているファイルでルーティングはここで行います。
+ wsgi.py  作ったPythonプロジェクトをWebサーバーにデプロイする際に使用されるファイルです（エントリポイントを定義している） Webアプリケーションのメインのプログラムとなります。
+ manage.</description>
+    </item>
+    
+    <item>
+      <title>Pythonにおけるオブジェクト指向</title>
       <link>https://sasakiyuki.github.io/posts/python_object_oriented/</link>
       <pubDate>Tue, 16 Oct 2018 00:00:00 +0000</pubDate>
       
