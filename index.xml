@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ヤマダユキの備忘log</title>
-    <link>https://dream-plus-posts.netlify.com/</link>
+    <link>https://sasakiyuki.github.io/</link>
     <description>Recent content on ヤマダユキの備忘log</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <lastBuildDate>Wed, 31 Jan 2018 00:34:29 +0530</lastBuildDate>
     
-	<atom:link href="https://dream-plus-posts.netlify.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://sasakiyuki.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Blog</title>
-      <link>https://dream-plus-posts.netlify.com/cards/blog/</link>
+      <link>https://sasakiyuki.github.io/cards/blog/</link>
       <pubDate>Wed, 31 Jan 2018 00:34:29 +0530</pubDate>
       
-      <guid>https://dream-plus-posts.netlify.com/cards/blog/</guid>
+      <guid>https://sasakiyuki.github.io/cards/blog/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hackster</title>
-      <link>https://dream-plus-posts.netlify.com/cards/hackster/</link>
+      <link>https://sasakiyuki.github.io/cards/hackster/</link>
       <pubDate>Tue, 30 Jan 2018 00:26:04 +0530</pubDate>
       
-      <guid>https://dream-plus-posts.netlify.com/cards/hackster/</guid>
+      <guid>https://sasakiyuki.github.io/cards/hackster/</guid>
       <description></description>
     </item>
     
     <item>
       <title>flutterTips-001-WebViewを使う</title>
-      <link>https://dream-plus-posts.netlify.com/posts/creating-a-new-theme/</link>
+      <link>https://sasakiyuki.github.io/posts/creating-a-new-theme/</link>
       <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://dream-plus-posts.netlify.com/posts/creating-a-new-theme/</guid>
+      <guid>https://sasakiyuki.github.io/posts/creating-a-new-theme/</guid>
       <description>FlutterでWebViewを使うためには少しいじる必要があります。
 flutter_webview_plugin Flutterで Nativeの WebView を呼び出すには flutter_webview_plugin の依存を追加する必要があります。
 1 2  dependencies:flutter_webview_plugin:&amp;#34;0.2.1+2&amp;#34;   バージョンはこちら からご覧ください。
@@ -48,19 +48,19 @@ flutter packages get  インストールすることで使えるようになり�
     
     <item>
       <title></title>
-      <link>https://dream-plus-posts.netlify.com/404/</link>
+      <link>https://sasakiyuki.github.io/404/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dream-plus-posts.netlify.com/404/</guid>
+      <guid>https://sasakiyuki.github.io/404/</guid>
       <description> Error 404: Page Not Found It seems that the page that you&amp;rsquo;re trying to access doesn&amp;rsquo;t exist. 😟 If you&amp;rsquo;re sure that it exists, chances are it might have been moved to a new link! You may search for it on the home page. </description>
     </item>
     
     <item>
       <title></title>
-      <link>https://dream-plus-posts.netlify.com/about/</link>
+      <link>https://sasakiyuki.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://dream-plus-posts.netlify.com/about/</guid>
+      <guid>https://sasakiyuki.github.io/about/</guid>
       <description>So, Who Am I? 
 I’m just another teenager who likes writing, programming and making stuff. Even setting the title as Who Am I for this article is reminding me of whoami in Linux. I feel the inner urge to contribute something to the Internet because I love writing and I believe posting something online enables users all around the globe to see your work and suggest improvements.
 Recently I&amp;rsquo;ve also started taking interest in web designing and hosting the fruitful results of which these site and blogs are!</description>

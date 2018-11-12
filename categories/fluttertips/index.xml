@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fluttertips on ヤマダユキの備忘log</title>
-    <link>https://dream-plus-posts.netlify.com/categories/fluttertips/</link>
+    <link>https://sasakiyuki.github.io/categories/fluttertips/</link>
     <description>Recent content in Fluttertips on ヤマダユキの備忘log</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <lastBuildDate>Mon, 12 Nov 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://dream-plus-posts.netlify.com/categories/fluttertips/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://sasakiyuki.github.io/categories/fluttertips/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>flutterTips-001-WebViewを使う</title>
-      <link>https://dream-plus-posts.netlify.com/posts/creating-a-new-theme/</link>
+      <link>https://sasakiyuki.github.io/posts/creating-a-new-theme/</link>
       <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://dream-plus-posts.netlify.com/posts/creating-a-new-theme/</guid>
+      <guid>https://sasakiyuki.github.io/posts/creating-a-new-theme/</guid>
       <description>FlutterでWebViewを使うためには少しいじる必要があります。
 flutter_webview_plugin Flutterで Nativeの WebView を呼び出すには flutter_webview_plugin の依存を追加する必要があります。
 1 2  dependencies:flutter_webview_plugin:&amp;#34;0.2.1+2&amp;#34;   バージョンはこちら からご覧ください。

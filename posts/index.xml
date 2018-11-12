@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on ヤマダユキの備忘log</title>
-    <link>https://dream-plus-posts.netlify.com/posts/</link>
+    <link>https://sasakiyuki.github.io/posts/</link>
     <description>Recent content in Posts on ヤマダユキの備忘log</description>
     <meta name="generator" content="Hugo 0.41" />
     <language>ja-jp</language>
     <lastBuildDate>Mon, 12 Nov 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://dream-plus-posts.netlify.com/posts/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://sasakiyuki.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>flutterTips-001-WebViewを使う</title>
-      <link>https://dream-plus-posts.netlify.com/posts/creating-a-new-theme/</link>
+      <link>https://sasakiyuki.github.io/posts/creating-a-new-theme/</link>
       <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://dream-plus-posts.netlify.com/posts/creating-a-new-theme/</guid>
+      <guid>https://sasakiyuki.github.io/posts/creating-a-new-theme/</guid>
       <description>flutterでWebViewを使う方法を説明します。導入から実装まで。</description>
     </item>
     

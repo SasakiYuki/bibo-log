@@ -2,29 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on ヤマダユキの備忘log</title>
-    <link>https://dream-plus-posts.netlify.com/categories/</link>
+    <link>https://sasakiyuki.github.io/categories/</link>
     <description>Recent content in Categories on ヤマダユキの備忘log</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     
-	<atom:link href="https://dream-plus-posts.netlify.com/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://sasakiyuki.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Flutter</title>
-      <link>https://dream-plus-posts.netlify.com/categories/flutter/</link>
+      <link>https://sasakiyuki.github.io/categories/flutter/</link>
       <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://dream-plus-posts.netlify.com/categories/flutter/</guid>
+      <guid>https://sasakiyuki.github.io/categories/flutter/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Fluttertips</title>
-      <link>https://dream-plus-posts.netlify.com/categories/fluttertips/</link>
+      <link>https://sasakiyuki.github.io/categories/fluttertips/</link>
       <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://dream-plus-posts.netlify.com/categories/fluttertips/</guid>
+      <guid>https://sasakiyuki.github.io/categories/fluttertips/</guid>
       <description></description>
     </item>
     
