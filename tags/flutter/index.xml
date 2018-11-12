@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Flutter on ヤマダユキの備忘log</title>
-    <link>https://sasakiyuki.github.io/categories/flutter/</link>
+    <link>https://sasakiyuki.github.io/tags/flutter/</link>
     <description>Recent content in Flutter on ヤマダユキの備忘log</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <lastBuildDate>Mon, 12 Nov 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://sasakiyuki.github.io/categories/flutter/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://sasakiyuki.github.io/tags/flutter/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,7 +17,8 @@
       <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>https://sasakiyuki.github.io/posts/creating-a-new-theme/</guid>
-      <description>FlutterでWebViewを使うためには少しいじる必要があります。
+      <description>cover : &amp;ldquo;https://raw.githubusercontent.com/UtkarshVerma/blog/source/static/images/gci/gci-thumb.png&amp;quot; draft: false
+FlutterでWebViewを使うためには少しいじる必要があります。
 flutter_webview_plugin Flutterで Nativeの WebView を呼び出すには flutter_webview_plugin の依存を追加する必要があります。
 1 2  dependencies:flutter_webview_plugin:&amp;#34;0.2.1+2&amp;#34;   バージョンはこちら からご覧ください。
 ターミナル上で

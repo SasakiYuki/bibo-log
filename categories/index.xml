@@ -30,29 +30,20 @@
     </item>
     
     <item>
+      <title>Blogging</title>
+      <link>https://sasakiyuki.github.io/categories/blogging/</link>
+      <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/categories/blogging/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Django</title>
       <link>https://sasakiyuki.github.io/categories/django/</link>
       <pubDate>Mon, 05 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>https://sasakiyuki.github.io/categories/django/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Flutter</title>
-      <link>https://sasakiyuki.github.io/categories/flutter/</link>
-      <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/categories/flutter/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Fluttertips</title>
-      <link>https://sasakiyuki.github.io/categories/fluttertips/</link>
-      <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/categories/fluttertips/</guid>
       <description></description>
     </item>
     
