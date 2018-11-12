@@ -6,27 +6,10 @@
     <description>Recent content on ヤマダユキの備忘log</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Thu, 04 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 31 Jan 2018 00:34:29 +0530</lastBuildDate>
     
 	<atom:link href="https://sasakiyuki.github.io/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>AndroidManifestについて</title>
-      <link>https://sasakiyuki.github.io/posts/android_document_android_manifest/</link>
-      <pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/android_document_android_manifest/</guid>
-      <description>AndroidManifestとは AndroidManifest.xmlはすべてのプロジェクトに等しく一つ存在するものです。
-作っているAndroidアプリに関する情報をAndroidのOS(システム）に伝える役目を担っており、コード実行の際に必要になる重要な情報を記述する必要があります。
-プロジェクトの基底ディレクトリに AndroidManifest.xml として置く必要があり名前を変えることなどはできません。
-XML で記述されており、タグで要素を構築します。
-AndroidManifest内で行うこと  アプリを構成する要素 ユーザーパーミッション スタイルや名前、アイコンなどを指定 Intentのフィルター  ファイル内の規則 AndroidManifestで必須の要素は &amp;lt;manifest&amp;gt; &amp;lt;application&amp;gt; のみです。 これらは省くことはできず、逆にそれ以外は任意ということになります。（実質必要というものは存在します） また manifest と application はそれぞれ一回ずつのみ宣言され、階層は manifest -&amp;gt; application の中に存在しないといけません。
-実際に見てみましょう。 例えばAndroidStudioでプロジェクトを初期で作った時に生成されるmanifestは以下です。
-&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;manifest xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot; package=&amp;quot;string&amp;quot;&amp;gt; &amp;lt;application android:allowBackup=&amp;quot;true&amp;quot; android:icon=&amp;quot;@mipmap/ic_launcher&amp;quot; android:label=&amp;quot;@string/app_name&amp;quot; android:roundIcon=&amp;quot;@mipmap/ic_launcher_round&amp;quot; android:supportsRtl=&amp;quot;true&amp;quot; android:theme=&amp;quot;@style/AppTheme&amp;quot;&amp;gt; &amp;lt;activity android:name=&amp;quot;.MainActivity&amp;quot;&amp;gt; &amp;lt;intent-filter&amp;gt; &amp;lt;action android:name=&amp;quot;android.intent.action.MAIN&amp;quot; /&amp;gt; &amp;lt;category android:name=&amp;quot;android.intent.category.LAUNCHER&amp;quot; /&amp;gt; &amp;lt;/intent-filter&amp;gt; &amp;lt;/activity&amp;gt; &amp;lt;/application&amp;gt; &amp;lt;/manifest&amp;gt;  manifestタグの中にapplicationが存在しているのがわかると思います。
-注目してもらいたいのは２行目 xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot; この.xmlファイルはAndroidManifestですよ、と宣言しているということになります。 また、xml上に android のネームスペースを定義しています。またこの中の属性は絶対に &amp;quot;http://schemas.android.com/apk/res/android&amp;quot; である必要がありますのでご注意ください。
-次に application内を見てみると様々な情報が書いてあることがわかると思います。 上から</description>
-    </item>
     
     <item>
       <title>Tech Blog</title>
@@ -44,6 +27,23 @@ AndroidManifest内で行うこと  アプリを構成する要素 ユーザー�
       
       <guid>https://sasakiyuki.github.io/cards/hackster/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>AndroidManifestについて</title>
+      <link>https://sasakiyuki.github.io/posts/android_document_android_manifest/</link>
+      <pubDate>Thu, 04 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/android_document_android_manifest/</guid>
+      <description>AndroidManifestとは AndroidManifest.xmlはすべてのプロジェクトに等しく一つ存在するものです。
+作っているAndroidアプリに関する情報をAndroidのOS(システム）に伝える役目を担っており、コード実行の際に必要になる重要な情報を記述する必要があります。
+プロジェクトの基底ディレクトリに AndroidManifest.xml として置く必要があり名前を変えることなどはできません。
+XML で記述されており、タグで要素を構築します。
+AndroidManifest内で行うこと  アプリを構成する要素 ユーザーパーミッション スタイルや名前、アイコンなどを指定 Intentのフィルター  ファイル内の規則 AndroidManifestで必須の要素は &amp;lt;manifest&amp;gt; &amp;lt;application&amp;gt; のみです。 これらは省くことはできず、逆にそれ以外は任意ということになります。（実質必要というものは存在します） また manifest と application はそれぞれ一回ずつのみ宣言され、階層は manifest -&amp;gt; application の中に存在しないといけません。
+実際に見てみましょう。 例えばAndroidStudioでプロジェクトを初期で作った時に生成されるmanifestは以下です。
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt; &amp;lt;manifest xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot; package=&amp;quot;string&amp;quot;&amp;gt; &amp;lt;application android:allowBackup=&amp;quot;true&amp;quot; android:icon=&amp;quot;@mipmap/ic_launcher&amp;quot; android:label=&amp;quot;@string/app_name&amp;quot; android:roundIcon=&amp;quot;@mipmap/ic_launcher_round&amp;quot; android:supportsRtl=&amp;quot;true&amp;quot; android:theme=&amp;quot;@style/AppTheme&amp;quot;&amp;gt; &amp;lt;activity android:name=&amp;quot;.MainActivity&amp;quot;&amp;gt; &amp;lt;intent-filter&amp;gt; &amp;lt;action android:name=&amp;quot;android.intent.action.MAIN&amp;quot; /&amp;gt; &amp;lt;category android:name=&amp;quot;android.intent.category.LAUNCHER&amp;quot; /&amp;gt; &amp;lt;/intent-filter&amp;gt; &amp;lt;/activity&amp;gt; &amp;lt;/application&amp;gt; &amp;lt;/manifest&amp;gt;  manifestタグの中にapplicationが存在しているのがわかると思います。
+注目してもらいたいのは２行目 xmlns:android=&amp;quot;http://schemas.android.com/apk/res/android&amp;quot; この.xmlファイルはAndroidManifestですよ、と宣言しているということになります。 また、xml上に android のネームスペースを定義しています。またこの中の属性は絶対に &amp;quot;http://schemas.android.com/apk/res/android&amp;quot; である必要がありますのでご注意ください。
+次に application内を見てみると様々な情報が書いてあることがわかると思います。 上から</description>
     </item>
     
     <item>
