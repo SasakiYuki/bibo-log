@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on ヤマダユキの備忘log</title>
+    <link>https://dream-plus-posts.netlify.com/posts/</link>
+    <description>Recent content in Posts on ヤマダユキの備忘log</description>
+    <meta name="generator" content="Hugo 0.41" />
+    <language>ja-jp</language>
+    <lastBuildDate>Sun, 28 Sep 2014 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://dream-plus-posts.netlify.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Creating a New Theme</title>
+      <link>https://dream-plus-posts.netlify.com/posts/creating-a-new-theme/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://dream-plus-posts.netlify.com/posts/creating-a-new-theme/</guid>
+      <description>A tutorial on how to create a Hugo theme.</description>
+    </item>
+    
+  </channel>
+</rss>
