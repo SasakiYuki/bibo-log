@@ -30,6 +30,15 @@
     </item>
     
     <item>
+      <title>PythonDjango入門-DBに触れる</title>
+      <link>https://sasakiyuki.github.io/posts/python_django_db/</link>
+      <pubDate>Mon, 05 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/python_django_db/</guid>
+      <description>Python Django入門記事その3。DBを使ってみます。</description>
+    </item>
+    
+    <item>
       <title>アプリケーションのレイアウト</title>
       <link>https://sasakiyuki.github.io/posts/android_tutorial_layout/</link>
       <pubDate>Fri, 26 Oct 2018 00:00:00 +0000</pubDate>
