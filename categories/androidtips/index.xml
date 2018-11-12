@@ -29,5 +29,14 @@ RecyclerViewで表示するレイアウトを作る リストとして表示す�
 1 2 3 4 5 6 7 8 9 10 11 12 13  &amp;lt;?</description>
     </item>
     
+    <item>
+      <title>AndroidTips-001-押されたら何かをするを実装する</title>
+      <link>https://sasakiyuki.github.io/posts/android_tips_001/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/android_tips_001/</guid>
+      <description>サンプルコード 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34  import android.os.Bundle import android.support.v7.app.AppCompatActivity import android.view.View import android.widget.ImageView import kotlinx.android.synthetic.main.activity_main.* class MainActivity : AppCompatActivity() { override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState) setContentView(R.layout.activity_main) setupButton() } private fun setupButton() { // 1 val button = findViewById&amp;lt;ImageView&amp;gt;(R.</description>
+    </item>
+    
   </channel>
 </rss>

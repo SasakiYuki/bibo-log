@@ -2,9 +2,7 @@
 <html lang="ja-jp">
 <head>
 	<title>
-	
-		 | flutter
-	
+	AndroidTips-001-押されたら何かをするを実装する
 </title><style>
 body {
 	display: block;
@@ -21,13 +19,12 @@ body, body.pushable {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<meta name="author" content="YukiYamada" />
-	<meta name="description" content="Just a random blog for random stuff, mostly tech-related." />
+	<meta name="author" content="map[name:Yuki Yamada]" />
+	<meta name="description" content="Android初心者向け記事。OnClickListenerの説明。" />
 <meta name="generator" content="Hugo 0.41" />
 
 <link rel="shortcut icon" href="/img/defaultFav.ico">
 
-<link rel="alternate" type="application/rss" href="https://sasakiyuki.github.io/categories/flutter/index.xml" title="ヤマダユキの備忘log" />
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
 <style>
 body.pushable {
@@ -269,13 +266,11 @@ var bodyBgSwitchIndex = 0;var gradients = [
 			</a>
     	</div>
 	
-	
-		
-			<div class="item">
-			
-  			</div>
-			<div class="item">
+	<div class="ui container tablet computer only grid">
+		<div class="item" onClick="$('.ui.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');">
+			<i class="inverted big link sidebar icon" title=""></i>
 		</div>
+	</div>
 	
 
 	
@@ -289,8 +284,7 @@ var bodyBgSwitchIndex = 0;var gradients = [
 
 
 <div class="ui centered grid">
-	<div class="fifteen wide mobile fifteen wide tablet four wide computer column">
-		<div class="ui inverted accordion">
+	<div class="sixteen wide mobile only column"><div class="ui inverted accordion">
 	<div id="header" class="ui inverted segment column box">
 		<header id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
 		<img src="https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png">
@@ -299,10 +293,10 @@ var bodyBgSwitchIndex = 0;var gradients = [
 	<div class="sub header">Android Developer.Learning Android Kotlin-Spring Python-Django.</div>
 </h3>
 </header>
-		<div class="active title header-title"><div id="tag-category-pop" class="ui red right corner label">
-				<i class="hand point icon up"title=""></i>
+		<div class=" title header-title"><div id="tag-category-pop" class="ui red right corner label">
+				<i class="hand point icon down"title=""></i>
 			</div></div>
-		<div id="tag-category" class="active content"><section class="ui attached inverted segment dream-categories both flexbox">
+		<div id="tag-category" class=" content"><section class="ui attached inverted segment dream-categories both flexbox">
 				<div class="inverted accordion">
 <div class="title">
 	<i class="dropdown icon"></i>
@@ -452,35 +446,214 @@ var bodyBgSwitchIndex = 0;var gradients = [
 </footer>
 	</div>
 </div>
-
-	</div>
-	<div class="fifteen wide mobile fifteen wide tablet eleven wide computer column post-list">
-		<div class="cards row box">
+</div>
+	<div class="sixteen wide mobile fifteen wide tablet twelve wide computer column post-list">
+		<section class="ui secondary top attached black segment post-head">
+			<h1 class="post-title">
+				AndroidTips-001-押されたら何かをするを実装する
+			</h1>
+			<div class="sub header">
+					<div><span><i class="calendar outline icon"></i>Jan 1, 0001</span></div><div><span class="disqusComment"><i class="comment outline icon"></i><a href="https://sasakiyuki.github.io/posts/android_tips_001/#disqus_thread" class="disqus-comment-count" data-disqus-identifier="1cc196c04f2a2dba8e1e375d2fa0facf"></a></span></div>
+					<div><span><i class="clock outline icon"></i>1 min read</span></div>
+					<div><span><i class="angle double up icon"></i> Jan 1, 0001</span></div>
+			</div>
+			<hr><div class="toc"><nav id="TableOfContents">
+<ul>
+<li><a href="#サンプルコード">サンプルコード</a></li>
+<li><a href="#解説">解説</a>
+<ul>
+<li><a href="#findviewbyid">findViewById</a></li>
+<li><a href="#setonclicklistener">setOnClickListener</a></li>
+<li><a href="#kotlinではさらにfindviewbyidも省ける">kotlinではさらにfindViewByIdも省ける</a></li>
+</ul></li>
+</ul>
+</nav></div>
 			
-			
-			
+			<article class="post-content twemoji">
 				
 
-<article class="blog-card none flexbox" style="background-image: url(/img/default3.jpg)">
-<img class="image" src="/img/default3.jpg"></img>
-<div class="title-content twemoji">
-	<h3><a class="title" href=https://sasakiyuki.github.io/posts/creating-a-new-theme/>flutterTips-001-WebViewを使う</a></h3>
-	<div class="intro twemoji">flutterでWebViewを使う方法を説明します。導入から実装まで。</div>
-</div>
-<div class="utility-info">
-	<ul class="utility-list">
-		
-			<div><i class="comment icon"></i><span class="disqus-comment-count" data-disqus-identifier="92ed7e10b3ec2a75bb25bd92c7cb3520"></span></div>
-		
-		<div><span><i class="calendar icon"></i>Nov 12, 2018</span></div>
-		<div><span><i class="clock icon"></i>1 min read</span></div>
-	</ul>
-</div>
-<div class="color-overlay"></div>
-</article>
+<h1 id="サンプルコード">サンプルコード&nbsp;<a class="anchor" href="#サンプルコード"><i class="small linkify icon"></i></a> </h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin:MainActivity" data-lang="kotlin:MainActivity"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin:MainActivity" data-lang="kotlin:MainActivity">import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.view.View
+import android.widget.ImageView
+import kotlinx.android.synthetic.main.activity_main.*
 
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        setupButton()
+    }
+
+    private fun setupButton() {
+        // 1
+        val button = findViewById&lt;ImageView&gt;(R.id.redImageView)
+        button.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                // DO IT !!
+            }
+        })
+        
+        // 2
+        button.setOnClickListener {
+            // DO IT !!
+        }
+
+        // 3
+        redImageView.setOnClickListener {
+            // DO IT !!
+        }
+    }
+}</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span class="nt">&lt;android.support.constraint.ConstraintLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;ImageView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/redImageView&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;100dp&#34;</span>
+        <span class="na">android:src=</span><span class="s">&#34;@android:color/holo_red_dark&#34;</span> <span class="nt">/&gt;</span>
+
+<span class="nt">&lt;/android.support.constraint.ConstraintLayout&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="解説">解説&nbsp;<a class="anchor" href="#解説"><i class="small linkify icon"></i></a> </h1>
+
+<p><code>setupButton</code> というメソッドを定義してその中で「押されたら&hellip;?」の処理をするための準備をしています。</p>
+
+<h2 id="findviewbyid">findViewById&nbsp;<a class="anchor" href="#findviewbyid"><i class="small linkify icon"></i></a> </h2>
+
+<p><code>findViewByID</code> は <code>AppCompatActivity</code> を継承したことによって使うことができるメソッドです。
+<code>setContentView</code> などによって設置された<code>View</code> の中から <code>id</code> を使って対象の <code>View</code> を探すことができるメソッドです。
+使い方は簡単で、</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">        <span class="k">val</span> <span class="py">button</span> <span class="p">=</span> <span class="n">findViewById</span><span class="p">&lt;</span><span class="n">ImageView</span><span class="p">&gt;(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">redImageView</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>findViewById&lt;型、今回はImageView&gt;(リソースID)</p>
+
+<p>です。戻り値に取り出したViewが返ってきます。</p>
+
+<h2 id="setonclicklistener">setOnClickListener&nbsp;<a class="anchor" href="#setonclicklistener"><i class="small linkify icon"></i></a> </h2>
+
+<p>findViewByIdで取り出したViewに対して <code>setOnClickListener</code> というメソッドを呼び出しているのがわかると思います。
+<code>OnClickListener</code> というのは <code>interface</code> と言われるものなのですが今は一旦説明を省きます。
+とりあえずは中かっこのブロックで省略することができるので下のように使うと便利です。</p>
+
+<h2 id="kotlinではさらにfindviewbyidも省ける">kotlinではさらにfindViewByIdも省ける&nbsp;<a class="anchor" href="#kotlinではさらにfindviewbyidも省ける"><i class="small linkify icon"></i></a> </h2>
+
+<p>Kotlin Android Extensions という仕組みを使うことでリソースIDをそのままViewとして扱うことができます。
+3の例がそれです。</p>
+
+<p>対応した <code>import kotlinx.android.synthetic.main.activity_main.*</code> syntheticファイル（自動生成）をimportすることで使えるようになります。</p>
+
+			</article>
+		</section>
+		<section class="ui secondary attached segment dream-tags">
+			<span></span>
 			
-		</div>
+		</section><section class="ui secondary  attached segment share row box"><div class="author"><img class="avatar" src="/img/avatar3.svg">
+	
+</div>
+<div class="info grow flexbox">
+	<p class="name">Yuki Yamada</p>
+	<p class="desc">Android Developer.Learning Android Kotlin-Spring Python-Django.</p>
+</div>
+<section class="buttons row box">
+	<div class="facebook none flexbox" href="#" onclick="window.open(
+			'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+			'facebook-share-dialog',
+			'width=626,height=436'); return false;">
+		<button class="ui facebook button"><i class="facebook icon"></i>Share</button>
+	</div>
+	<div class="twitter none flexbox" onclick="window.open('https://twitter.com/intent/tweet?text=Read &quot;AndroidTips-001-押されたら何かをするを実装する &quot; by @YukiYamadaJP https:\/\/sasakiyuki.github.io\/posts\/android_tips_001\/','_self')">
+		<button class="ui twitter button"><i class="twitter icon"></i>Tweet</button>
+	</div>
+</section>
+</section>
+		<section class="ui secondary attached segment copyright">
+			
+
+		</section>
+		<div class="ui secondary bottom attached stacked segment disqus"><div id="disqus_thread"></div>
+<script>
+	var disqus_config = function () {
+		this.page.url = 'https:\/\/sasakiyuki.github.io\/posts\/android_tips_001\/';
+		this.page.identifier = '1cc196c04f2a2dba8e1e375d2fa0facf';
+	};
+	(function() {
+   	var d = document, s = d.createElement('script');
+   	s.src = 'https://' + 'dream-plus' + '.disqus.com/embed.js';
+   	s.setAttribute('data-timestamp', +new Date());
+   	(d.head || d.body).appendChild(s);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+		
 	</div>
 </div>
 
