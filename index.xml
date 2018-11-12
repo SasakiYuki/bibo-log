@@ -65,6 +65,23 @@ RecyclerViewで表示するレイアウトを作る リストとして表示す�
     </item>
     
     <item>
+      <title>アプリケーションのレイアウト</title>
+      <link>https://sasakiyuki.github.io/posts/android_tutorial_layout/</link>
+      <pubDate>Fri, 26 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/android_tutorial_layout/</guid>
+      <description>レイアウトとは レイアウトとは、GUIの配置を決めるための仕組みです。 このレイアウトを使うことによって、Androidアプリの画面を簡単に作成することができます。
+レイアウトを構成する要素 画面を構成する要素（パーツ）は大きくわけて２種類あります。
+ Wedget(ウィジェット） Layout(レイアウト）  です。これらの要素をまとめてViewといいます。
+WedgetとLayoutの違いを超わかりやすく説明します。 ざっくり言うと、Layoutの中（要素）にWedgetを配置していくイメージです。 枯山水で例えると一番親要素のLayoutを「寺院」全体として、その中の小要素のレイアウトが「庭園」、さらにその中に配置される孫要素が「砂紋」や「石」です。
+それぞれ具体的にどのような種類があるか。
+Wedget  TextView EditText Button ImageView ListView  Layout  FrameLayout LinearLayout TableLayout GridLayout RelativeLayout ConstraintLayout(new!)  以上が代表的なViewとなります。もちろんこれ以外にもたくさんありますが、必要な時に覚えていけば問題ありません。
+どちらにも共通する要素 サイズの指定方法 .xmlでの指定は大きく分けて三つあります - 画面いっぱいに表示する - その要素を表示するのに必要なだけ大きさを確保する - サイズを直接指定する
+の三つです。ではそれぞれやっていきましょう。
+1 2 3 4 5 6 7 8 9 10 11  &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt; &amp;lt;LinearLayout xmlns:android=&amp;#34;http://schemas.android.com/apk/res/android&amp;#34; android:layout_width=&amp;#34;match_parent&amp;#34; android:layout_height=&amp;#34;match_parent&amp;#34;&amp;gt; &amp;lt;TextView android:layout_width=&amp;#34;wrap_content&amp;#34; android:layout_height=&amp;#34;wrap_content&amp;#34; android:background=&amp;#34;@android:color/holo_blue_bright&amp;#34; android:text=&amp;#34;テキストを表示します&amp;#34; /&amp;gt; &amp;lt;/LinearLayout&amp;gt;   まず一旦 LinearLayoutとは何ぞやということなどは忘れてもらってこれを実際に画面に映してみると</description>
+    </item>
+    
+    <item>
       <title>PythonDjango入門-テンプレートを使ってみる </title>
       <link>https://sasakiyuki.github.io/posts/python_django_templetes/</link>
       <pubDate>Sat, 20 Oct 2018 00:00:00 +0000</pubDate>

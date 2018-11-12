@@ -30,6 +30,15 @@
     </item>
     
     <item>
+      <title>アプリケーションのレイアウト</title>
+      <link>https://sasakiyuki.github.io/posts/android_tutorial_layout/</link>
+      <pubDate>Fri, 26 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/android_tutorial_layout/</guid>
+      <description>Android入門記事。レイアウト、つまり.xmlについて語ります。</description>
+    </item>
+    
+    <item>
       <title>PythonDjango入門-テンプレートを使ってみる </title>
       <link>https://sasakiyuki.github.io/posts/python_django_templetes/</link>
       <pubDate>Sat, 20 Oct 2018 00:00:00 +0000</pubDate>
