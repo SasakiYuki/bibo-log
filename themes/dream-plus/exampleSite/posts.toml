@@ -1,8 +1,9 @@
 baseURL = "https://dream-plus-posts.netlify.com/"
-languageCode = "ja-jp"
-defaultContentLanguage = "jp"
-title = "備忘log"
+languageCode = "en-us"
+defaultContentLanguage = "en"
+title = "UtkarshVerma's Blog"
 theme = "dream-plus"
+themesDir = "../.."   #Don't use this, only for exampleSite
 
 pygmentsCodeFences = true
 pygmentsUseClasses = true
@@ -16,10 +17,10 @@ enableRobotsTXT = true
 enableEmoji=true
 
 [params]
-	author = "YukiYamada"
+	author = "Utkarsh Verma"
 	description = "Just a random blog for random stuff, mostly tech-related."
-	avatar = "https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/_bibo-log/static/snowman_white.png"
-	motto = "Android Developer.Learning Android Kotlin-Spring Python-Django."
+	avatar = "https://raw.githubusercontent.com/UtkarshVerma/blog/source/static/images/myavatar.jpg"
+	motto = "A keen maker, programmer and an Instructables author."
 	enableToc = true
 	enableShareCard = true
 
@@ -44,8 +45,9 @@ enableEmoji=true
 	twitterEmoji=true
 
 [social]
-	email = "wacorggen@gmail.com"
-	github = "SasakiYuki"
-	medium = "wacorggen"
-	twitter = "YukiYamadaJP"
+	email = "utkarshverma@pm.me"
+	github = "UtkarshVerma"
+	stackoverflow = "9271608/utkarsh-verma"
+	medium = "UtkarshVerma_"
+	twitter = "UtkarshVerma_"
 	siteStartYear = 2018

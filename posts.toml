@@ -1,7 +1,7 @@
 baseURL = "https://dream-plus-posts.netlify.com/"
 languageCode = "ja-jp"
 defaultContentLanguage = "jp"
-title = "備忘log"
+title = "ヤマダユキの備忘log"
 theme = "dream-plus"
 
 pygmentsCodeFences = true
