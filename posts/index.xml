@@ -20,5 +20,14 @@
       <description>flutterでWebViewを使う方法を説明します。導入から実装まで。</description>
     </item>
     
+    <item>
+      <title>AndroidTips-003-リスト表示をしてみる</title>
+      <link>https://sasakiyuki.github.io/posts/first/</link>
+      <pubDate>Fri, 09 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/first/</guid>
+      <description>Android初心者向け記事。リスト表示をするための資料です。</description>
+    </item>
+    
   </channel>
 </rss>
