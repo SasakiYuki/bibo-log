@@ -3,7 +3,7 @@ title: "AndroidTips-001-押されたら何かをするを実装する"
 description: "Android初心者向け記事。OnClickListenerの説明。"
 author:
   name: "Yuki Yamada"
-date: 2018-10-2
+date: 2018-10-02
 draft: false	
 categories:
 - Android
