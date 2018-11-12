@@ -14,7 +14,7 @@ enableEmoji=true
 [params]
   author = "YukiYamada"
   description = "Just a random blog for random stuff, mostly tech-related."
-  avatar = "https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/_bibo-log/static/snowman_white.png"
+  avatar = "https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png"
   motto = "Android Developer.Learning Android Kotlin-Spring Python-Django."
 
   favicon = "/img/defaultFav.ico"
