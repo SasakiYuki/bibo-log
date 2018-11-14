@@ -4,11 +4,10 @@ defaultContentLanguage = "jp"
 title = "備忘log"
 theme = "dream-plus"
 
-googleAnalytics = "UA-112332904-3"
+googleAnalytics = "UA-129178253-1"
 
 enableRobotsTXT = true
 
-#Enable Hugo Emoji Conversion
 enableEmoji=true
 
 [params]

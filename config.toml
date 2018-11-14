@@ -8,6 +8,8 @@ pygmentsCodeFences = true
 pygmentsUseClasses = true
 pygmentsOptions = "linenos=table"
 
+googleAnalytics = "UA-129178253-1"
+
 disqusShortname = "dream-plus"
 
 enableRobotsTXT = true
