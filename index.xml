@@ -30,24 +30,6 @@ flutter packages get  インストールすることで使えるようになり�
     </item>
     
     <item>
-      <title>Blog</title>
-      <link>https://sasakiyuki.github.io/cards/blog/</link>
-      <pubDate>Wed, 31 Jan 2018 00:34:29 +0530</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/cards/blog/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hackster</title>
-      <link>https://sasakiyuki.github.io/cards/hackster/</link>
-      <pubDate>Tue, 30 Jan 2018 00:26:04 +0530</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/cards/hackster/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>AndroidTips-003-リスト表示をしてみる</title>
       <link>https://sasakiyuki.github.io/posts/android_tips_003/</link>
       <pubDate>Fri, 09 Nov 2018 00:00:00 +0000</pubDate>

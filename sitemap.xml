@@ -8,16 +8,6 @@
   </url>
   
   <url>
-    <loc>https://sasakiyuki.github.io/cards/blog/</loc>
-    <lastmod>2018-01-31T00:34:29+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sasakiyuki.github.io/cards/hackster/</loc>
-    <lastmod>2018-01-30T00:26:04+05:30</lastmod>
-  </url>
-  
-  <url>
     <loc>https://sasakiyuki.github.io/posts/android_tips_003/</loc>
     <lastmod>2018-11-09T00:00:00+00:00</lastmod>
   </url>
@@ -85,12 +75,6 @@
   <url>
     <loc>https://sasakiyuki.github.io/categories/blogging/</loc>
     <lastmod>2018-11-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://sasakiyuki.github.io/cards/</loc>
-    <lastmod>2018-01-31T00:34:29+05:30</lastmod>
     <priority>0</priority>
   </url>
   
