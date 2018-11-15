@@ -9,6 +9,7 @@ categories:
 - blogging
 tags:
 - Android
+cover : "https://raw.githubusercontent.com/UtkarshVerma/blog/source/static/images/gci/gci-thumb.png"
 ---
 
 # AndroidManifestとは
