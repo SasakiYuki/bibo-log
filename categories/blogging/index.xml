@@ -6,10 +6,27 @@
     <description>Recent content in Blogging on ヤマダユキの備忘log</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Mon, 12 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 20 Nov 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://sasakiyuki.github.io/categories/blogging/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>flutterTips-002-ローカルにデータを保存する(SharedPreferences)</title>
+      <link>https://sasakiyuki.github.io/posts/flutter_tips_002/</link>
+      <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/flutter_tips_002/</guid>
+      <description>FlutterではSharedPreferences 端末に簡単なデータを保存する際Flutterでは SharedPreferences で保存します。 これは Key value方式での保存で、AndroidDeveloperならそのまま SharedPreferences として使えます。iOSDeveloperなら NSUserDefaults がそれに相当します。
+SharedPreferencesはXML形式で保存されます。 アプリケーション固有のもので、アプリのアンインストールをしたりアプリのデータを消すと消えます。
+データは非同期でディスクに保存されますが、コールバック等がなく書き込みがディスクに保存されることが「絶対」には保証できないため重要なデータを保存するのには向いていません。
+AndroidはUIthreadでも扱うことができましたが、flutterでは async awaitを用いた非同期取得になりますのでご注意を。
+pubspec.yamlに依存関係を追加 1  shared_preferences:^0.4.3   バージョンはこちらから確認してください。
+その後いつも通り
+flutter packages get  使ってみる プロジェクトを作った際に生成されるカウントアップの例を改造してSharedPreferencesに保存されるようにしてみます。
+まずはコードから
+コード 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77  import &amp;#39;package:flutter/material.</description>
+    </item>
     
     <item>
       <title>flutterTips-001-WebViewを使う</title>
