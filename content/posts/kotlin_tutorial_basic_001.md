@@ -1,15 +1,17 @@
 ---
-title: "Kotlin超入門①"
-description: "Kotlin超入門。ギリギリオブジェクト指向をかすらないような内容。"
+title: "flutterTips-003"
+description: "flutterでローカルにデータを保存する方法を説明します。導入から実装まで。今回はSharedPreferences。"
 weight: 1
 author:
-  name: "Yuki Yamada"
-date: 2018-11-30
+  name: "Yuki Sasaki"
+date: 2018-11-20
 draft: false
 categories:
 - blogging
 tags:
-- kotlin
+- flutter
+- flutterTips
+cover : "https://raw.githubusercontent.com/UtkarshVerma/blog/source/static/images/gci/gci-thumb.png"
 ---
 
 # 実行環境
