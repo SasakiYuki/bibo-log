@@ -9,7 +9,7 @@ draft: false
 categories:
 - blogging
 tags:
-- flutter
+- kotlin
 - flutterTips
 ---
 
