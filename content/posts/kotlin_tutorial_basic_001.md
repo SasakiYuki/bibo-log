@@ -3,14 +3,14 @@ title: "Kotlin超入門①"
 description: "Koltinの最初の一歩になってほしい記事。Java解読者ではなく、プログラミング初心者向け。オブジェクト指向は含まれません"
 weight: 1
 author:
-  name: "Yuki Sasaki"
+  name: "Yuki Yamada"
 date: 2018-11-20
 draft: false
 categories:
 - blogging
 tags:
 - kotlin
-- flutterTips
+- android
 ---
 
 # 実行環境
