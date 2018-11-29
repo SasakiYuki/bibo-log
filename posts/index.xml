@@ -12,20 +12,20 @@
     
     
     <item>
+      <title>Kotlin超入門①</title>
+      <link>https://sasakiyuki.github.io/posts/kotlin_tutorial_basic_001/</link>
+      <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/kotlin_tutorial_basic_001/</guid>
+      <description>Koltinの最初の一歩になってほしい記事。Java解読者ではなく、プログラミング初心者向け。オブジェクト指向は含まれません</description>
+    </item>
+    
+    <item>
       <title>flutterTips-002-ローカルにデータを保存する(SharedPreferences)</title>
       <link>https://sasakiyuki.github.io/posts/flutter_tips_002/</link>
       <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>https://sasakiyuki.github.io/posts/flutter_tips_002/</guid>
-      <description>flutterでローカルにデータを保存する方法を説明します。導入から実装まで。今回はSharedPreferences。</description>
-    </item>
-    
-    <item>
-      <title>flutterTips-003</title>
-      <link>https://sasakiyuki.github.io/posts/kotlin_tutorial_basic_001/</link>
-      <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://sasakiyuki.github.io/posts/kotlin_tutorial_basic_001/</guid>
       <description>flutterでローカルにデータを保存する方法を説明します。導入から実装まで。今回はSharedPreferences。</description>
     </item>
     

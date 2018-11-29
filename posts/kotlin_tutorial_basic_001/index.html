@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
 	<title>
-	flutterTips-003
+	Kotlin超入門①
 </title><style>
 body {
 	display: block;
@@ -20,7 +20,7 @@ body, body.pushable {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="author" content="map[name:Yuki Sasaki]" />
-	<meta name="description" content="flutterでローカルにデータを保存する方法を説明します。導入から実装まで。今回はSharedPreferences。" />
+	<meta name="description" content="Koltinの最初の一歩になってほしい記事。Java解読者ではなく、プログラミング初心者向け。オブジェクト指向は含まれません" />
 <meta name="generator" content="Hugo 0.41" />
 
 <link rel="shortcut icon" href="/img/defaultFav.ico">
@@ -88,17 +88,17 @@ var bodyBgSwitchIndex = 0;var gradients = [
 </h3>
 </section><section class="ui attached center aligned inverted segment sidebar-dream-tags">
 
-	<a class="ui label violet " href="/tags/android" title="android">android</a>
+	<a class="ui label brown " href="/tags/android" title="android">android</a>
 
-	<a class="ui label orange " href="/tags/androidtips" title="androidtips">androidtips</a>
+	<a class="ui label olive " href="/tags/androidtips" title="androidtips">androidtips</a>
 
-	<a class="ui label pink " href="/tags/django" title="django">django</a>
+	<a class="ui label blue " href="/tags/django" title="django">django</a>
 
-	<a class="ui label purple " href="/tags/flutter" title="flutter">flutter</a>
+	<a class="ui label orange " href="/tags/flutter" title="flutter">flutter</a>
 
-	<a class="ui label yellow " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+	<a class="ui label purple " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
 
-	<a class="ui label olive " href="/tags/python" title="python">python</a>
+	<a class="ui label red " href="/tags/python" title="python">python</a>
 
 </section>
 	<section class="ui attached inverted segment sidebar-dream-categories both flexbox">
@@ -109,17 +109,17 @@ var bodyBgSwitchIndex = 0;var gradients = [
 </div>
 <div class="content">
 
+	<a class="item" href="https://sasakiyuki.github.io/posts/kotlin_tutorial_basic_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Kotlin超入門①</p>
+		</div>
+	</a>
+
 	<a class="item" href="https://sasakiyuki.github.io/posts/flutter_tips_002/">
 		<div>
 			<i class="cocktail icon"></i>
 			<p>flutterTips-002-ローカルにデータを保存する(SharedPreferences)</p>
-		</div>
-	</a>
-
-	<a class="item" href="https://sasakiyuki.github.io/posts/kotlin_tutorial_basic_001/">
-		<div>
-			<i class="cocktail icon"></i>
-			<p>flutterTips-003</p>
 		</div>
 	</a>
 
@@ -264,17 +264,17 @@ var bodyBgSwitchIndex = 0;var gradients = [
 			</div></div>
 		<div id="tag-category" class=" content"><section class="ui attached center aligned inverted segment dream-tags none flexbox">
 
-	<a class="ui label pink " href="/tags/android" title="android">android</a>
+	<a class="ui label blue " href="/tags/android" title="android">android</a>
 
-	<a class="ui label pink " href="/tags/androidtips" title="androidtips">androidtips</a>
+	<a class="ui label green " href="/tags/androidtips" title="androidtips">androidtips</a>
 
-	<a class="ui label brown " href="/tags/django" title="django">django</a>
+	<a class="ui label yellow " href="/tags/django" title="django">django</a>
 
-	<a class="ui label red " href="/tags/flutter" title="flutter">flutter</a>
+	<a class="ui label brown " href="/tags/flutter" title="flutter">flutter</a>
 
-	<a class="ui label olive " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+	<a class="ui label red " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
 
-	<a class="ui label yellow " href="/tags/python" title="python">python</a>
+	<a class="ui label pink " href="/tags/python" title="python">python</a>
 
 </section><section class="ui attached inverted segment dream-categories both flexbox">
 				<div class="inverted accordion">
@@ -284,17 +284,17 @@ var bodyBgSwitchIndex = 0;var gradients = [
 </div>
 <div class="content">
 
+	<a class="item" href="https://sasakiyuki.github.io/posts/kotlin_tutorial_basic_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Kotlin超入門①</p>
+		</div>
+	</a>
+
 	<a class="item" href="https://sasakiyuki.github.io/posts/flutter_tips_002/">
 		<div>
 			<i class="cocktail icon"></i>
 			<p>flutterTips-002-ローカルにデータを保存する(SharedPreferences)</p>
-		</div>
-	</a>
-
-	<a class="item" href="https://sasakiyuki.github.io/posts/kotlin_tutorial_basic_001/">
-		<div>
-			<i class="cocktail icon"></i>
-			<p>flutterTips-003</p>
 		</div>
 	</a>
 
@@ -383,7 +383,7 @@ var bodyBgSwitchIndex = 0;var gradients = [
 	<div class="sixteen wide mobile fifteen wide tablet twelve wide computer column post-list">
 		<section class="ui secondary top attached black segment post-head">
 			<h1 class="post-title">
-				flutterTips-003
+				Kotlin超入門①
 			</h1>
 			<div class="sub header">
 					<div><span><i class="calendar outline icon"></i>Nov 20, 2018</span></div><div><span class="disqusComment"><i class="comment outline icon"></i><a href="https://sasakiyuki.github.io/posts/kotlin_tutorial_basic_001/#disqus_thread" class="disqus-comment-count" data-disqus-identifier="f52c54572bf04f80dc91ca12a47a4a0d"></a></span></div>
@@ -1375,20 +1375,20 @@ Javaでは同名メソッドを複数用意しますがkotlinではそういっ�
 		</section>
 		<section class="ui secondary attached segment dream-tags">
 
-	<a class="ui label yellow " href="/tags/android" title="android">android</a>
+	<a class="ui label brown " href="/tags/android" title="android">android</a>
 
-	<a class="ui label blue " href="/tags/androidtips" title="androidtips">androidtips</a>
+	<a class="ui label yellow " href="/tags/androidtips" title="androidtips">androidtips</a>
 
-	<a class="ui label brown " href="/tags/django" title="django">django</a>
+	<a class="ui label blue " href="/tags/django" title="django">django</a>
 
-	<a class="ui label teal " href="/tags/flutter" title="flutter">flutter</a>
+	<a class="ui label red " href="/tags/flutter" title="flutter">flutter</a>
 
-	<a class="ui label green " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+	<a class="ui label yellow " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
 
-	<a class="ui label blue " href="/tags/python" title="python">python</a>
+	<a class="ui label yellow " href="/tags/python" title="python">python</a>
 
 
-		</section><section class="ui secondary  attached segment share row box"><div class="author"><img class="avatar" src="/img/avatar3.svg">
+		</section><section class="ui secondary  attached segment share row box"><div class="author"><img class="avatar" src="/img/avatar1.svg">
 	
 </div>
 <div class="info grow flexbox">
@@ -1402,7 +1402,7 @@ Javaでは同名メソッドを複数用意しますがkotlinではそういっ�
 			'width=626,height=436'); return false;">
 		<button class="ui facebook button"><i class="facebook icon"></i>Share</button>
 	</div>
-	<div class="twitter none flexbox" onclick="window.open('https://twitter.com/intent/tweet?text=Read &quot;flutterTips-003 &quot; by @YukiYamadaJP https:\/\/sasakiyuki.github.io\/posts\/kotlin_tutorial_basic_001\/','_self')">
+	<div class="twitter none flexbox" onclick="window.open('https://twitter.com/intent/tweet?text=Read &quot;Kotlin超入門① &quot; by @YukiYamadaJP https:\/\/sasakiyuki.github.io\/posts\/kotlin_tutorial_basic_001\/','_self')">
 		<button class="ui twitter button"><i class="twitter icon"></i>Tweet</button>
 	</div>
 </section>
