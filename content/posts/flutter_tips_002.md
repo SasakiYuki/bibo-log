@@ -11,7 +11,6 @@ categories:
 tags:
 - flutter
 - flutterTips
-cover : "https://raw.githubusercontent.com/UtkarshVerma/blog/source/static/images/gci/gci-thumb.png"
 ---
 
 # FlutterではSharedPreferences
