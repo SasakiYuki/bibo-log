@@ -1,6 +1,6 @@
 ---
-title: "flutterTips-003"
-description: "flutterでローカルにデータを保存する方法を説明します。導入から実装まで。今回はSharedPreferences。"
+title: "Kotlin超入門①"
+description: "Koltinの最初の一歩になってほしい記事。Java解読者ではなく、プログラミング初心者向け。オブジェクト指向は含まれません"
 weight: 1
 author:
   name: "Yuki Sasaki"
@@ -11,7 +11,6 @@ categories:
 tags:
 - flutter
 - flutterTips
-cover : "https://raw.githubusercontent.com/UtkarshVerma/blog/source/static/images/gci/gci-thumb.png"
 ---
 
 # 実行環境
