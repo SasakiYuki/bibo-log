@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+<head>
+	<title>
+	flutterTips-003
+</title><style>
+body {
+	display: block;
+	--colorBG: "#40e0d0, #ff8c00, #ff0080";background: linear-gradient(to right, var(--colorBG)) !important;
+	
+}
+
+body, body.pushable {
+	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: cover !important;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="author" content="map[name:Yuki Sasaki]" />
+	<meta name="description" content="flutterでローカルにデータを保存する方法を説明します。導入から実装まで。今回はSharedPreferences。" />
+<meta name="generator" content="Hugo 0.41" />
+
+<link rel="shortcut icon" href="/img/defaultFav.ico">
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+<style>
+body.pushable {
+	display: block;background: linear-gradient(to right, var(--colorBG)) !important;
+	 ;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/css/site.css"><link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/UtkarshVerma/hugo-dream-plus/ae11561d/exampleSite/static/css/highlight.css">
+<script>
+	var colorBG =  true 
+	var enabledPost =  false 
+	var isMobile = ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+	console.log("The client device is a "+(isMobile?"mobile":"PC")+".")
+</script>
+</head>
+<body><script>
+var prevBgIndex = 0;
+var bodyBgSwitchIndex = 0;var gradients = [
+	  [],
+	  ['#40e0d0', '#ff8c00', '#ff0080'], 
+	  ['#3e5151', '#decba4'], 
+	  ['#11998e', '#38ef7d'], 
+	  ['#108dc7', '#ef8e38'], 
+	  ['#fc5c7d', '#6a82fb'], 
+	  ['#fc466b', '#3f5efb'], 
+	  ['#c94b4b', '#4b134f'], 
+	  ['#23074d', '#cc5333'] 
+	];
+	document.body.style.setProperty('--colorBG', connect(gradients[getRandomInt(0, gradients.length)]));
+	function getRandomInt(min, max) {
+	  min = Math.ceil(min);
+	  max = Math.floor(max);
+	  var random;
+	  while (1) {
+	    random = Math.floor(Math.random() * (max - min)) + min;
+	    if (random !== prevBgIndex) {
+	      prevBgIndex = random;
+	      break;
+	    }
+	  }
+	  return random;
+	}
+
+	function connect(arr) {
+	  var str = '';
+	  for (var i = 0; i < arr.length; i++) {
+	    if (i !== arr.length - 1) {
+	      str += arr[i] + ', ';
+	    } else {
+	      str += arr[i];
+	    }
+	  }
+	  return str;
+	}
+</script><div id="sidebar" class="ui sidebar inverted vertical menu">
+	<section id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
+		<img src="https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png">
+</div>
+<h3 class="ui header">YukiYamada
+	<div class="sub header">Android Developer.Learning Android Kotlin-Spring Python-Django.</div>
+</h3>
+</section><section class="ui attached center aligned inverted segment sidebar-dream-tags">
+
+	<a class="ui label violet " href="/tags/android" title="android">android</a>
+
+	<a class="ui label orange " href="/tags/androidtips" title="androidtips">androidtips</a>
+
+	<a class="ui label pink " href="/tags/django" title="django">django</a>
+
+	<a class="ui label purple " href="/tags/flutter" title="flutter">flutter</a>
+
+	<a class="ui label yellow " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+
+	<a class="ui label olive " href="/tags/python" title="python">python</a>
+
+</section>
+	<section class="ui attached inverted segment sidebar-dream-categories both flexbox">
+		<div class="ui inverted accordion">
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/blogging">blogging</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/flutter_tips_002/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-002-ローカルにデータを保存する(SharedPreferences)</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/kotlin_tutorial_basic_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-003</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/flutter_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-001-WebViewを使う</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_003/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-003-リスト表示をしてみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_db/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-DBに触れる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tutorial_layout/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>アプリケーションのレイアウト</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_templetes/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-テンプレートを使ってみる </p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_local_and_url/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_object_oriented/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_document_android_manifest/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidManifestについて</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_002/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-002-画面移動してみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-001-押されたら何かをするを実装する</p>
+		</div>
+	</a>
+
+</div>
+
+</div>
+	</section>
+	
+	<section id="footer" class="ui bottom attached center aligned inverted segment">
+	<p>© 2018 ヤマダユキの備忘log</p>
+
+<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
+</section>
+</div>
+<div class="pusher">
+		<div class="flipper">
+			<div class="front">
+	
+	<nav class="ui top secondary menu bar">
+	<div class="item">
+		<i class="inverted big link bullseye icon dream-flip-toggle" title=""></i>
+	</div><div class="item">
+			<a href="/">
+				<i class="inverted big link home icon" title=""></i>
+			</a>
+		</div>
+	<div class="item">
+			<a href="/posts">
+				<i class="inverted big link archive icon" title=""></i>
+			</a>
+		</div>
+	
+	<div class="item">
+			<a href="/tags">
+				<i class="inverted big link tags icon" title=""></i>
+			</a>
+		</div>
+	<div class="item">
+			<a href="/categories">
+				<i class="inverted big link cubes icon" title=""></i>
+			</a>
+    	</div>
+	
+	<div class="ui container tablet computer only grid">
+		<div class="item" onClick="$('.ui.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');">
+			<i class="inverted big link sidebar icon" title=""></i>
+		</div>
+	</div>
+	
+	
+	<div class="item right">
+		<a href="/posts/index.xml">
+			<i class="inverted big link rss icon" title=""></i>
+		</a>
+	</div>
+	
+</nav>
+
+
+<div class="ui centered grid">
+	<div class="sixteen wide mobile only column"><div class="ui inverted accordion">
+	<div id="header" class="ui inverted segment column box">
+		<header id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
+		<img src="https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png">
+</div>
+<h3 class="ui header">YukiYamada
+	<div class="sub header">Android Developer.Learning Android Kotlin-Spring Python-Django.</div>
+</h3>
+</header>
+		<div class=" title header-title"><div id="tag-category-pop" class="ui red right corner label">
+				<i class="hand point icon down"title=""></i>
+			</div></div>
+		<div id="tag-category" class=" content"><section class="ui attached center aligned inverted segment dream-tags none flexbox">
+
+	<a class="ui label pink " href="/tags/android" title="android">android</a>
+
+	<a class="ui label pink " href="/tags/androidtips" title="androidtips">androidtips</a>
+
+	<a class="ui label brown " href="/tags/django" title="django">django</a>
+
+	<a class="ui label red " href="/tags/flutter" title="flutter">flutter</a>
+
+	<a class="ui label olive " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+
+	<a class="ui label yellow " href="/tags/python" title="python">python</a>
+
+</section><section class="ui attached inverted segment dream-categories both flexbox">
+				<div class="inverted accordion">
+<div class="title">
+	<i class="dropdown icon"></i>
+	<a class="link" href="/categories/blogging">blogging</a>
+</div>
+<div class="content">
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/flutter_tips_002/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-002-ローカルにデータを保存する(SharedPreferences)</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/kotlin_tutorial_basic_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-003</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/flutter_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>flutterTips-001-WebViewを使う</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_003/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-003-リスト表示をしてみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_db/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-DBに触れる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tutorial_layout/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>アプリケーションのレイアウト</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_templetes/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>PythonDjango入門-テンプレートを使ってみる </p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_django_local_and_url/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/python_object_oriented/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>Pythonにおけるオブジェクト指向</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_document_android_manifest/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidManifestについて</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_002/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-002-画面移動してみる</p>
+		</div>
+	</a>
+
+	<a class="item" href="https://sasakiyuki.github.io/posts/android_tips_001/">
+		<div>
+			<i class="cocktail icon"></i>
+			<p>AndroidTips-001-押されたら何かをするを実装する</p>
+		</div>
+	</a>
+
+</div>
+
+</div>
+			</section></div>
+		<footer class="ui bottom attached center aligned inverted segment">
+	<p>© 2018 ヤマダユキの備忘log</p>
+
+<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
+</footer>
+	</div>
+</div>
+</div>
+	<div class="sixteen wide mobile fifteen wide tablet twelve wide computer column post-list">
+		<section class="ui secondary top attached black segment post-head">
+			<h1 class="post-title">
+				flutterTips-003
+			</h1>
+			<div class="sub header">
+					<div><span><i class="calendar outline icon"></i>Nov 20, 2018</span></div><div><span class="disqusComment"><i class="comment outline icon"></i><a href="https://sasakiyuki.github.io/posts/kotlin_tutorial_basic_001/#disqus_thread" class="disqus-comment-count" data-disqus-identifier="f52c54572bf04f80dc91ca12a47a4a0d"></a></span></div>
+					<div><span><i class="clock outline icon"></i>6 min read</span></div>
+					<div><span><i class="angle double up icon"></i> Nov 20, 2018</span></div>
+			</div>
+			<hr><div class="toc"><nav id="TableOfContents">
+<ul>
+<li><a href="#実行環境">実行環境</a></li>
+<li><a href="#ハローワールド">ハローワールド</a>
+<ul>
+<li><a href="#文字or数字">文字or数字</a></li>
+</ul></li>
+<li><a href="#変数">変数</a>
+<ul>
+<li><a href="#変数の定義">変数の定義</a>
+<ul>
+<li><a href="#代入">代入</a></li>
+<li><a href="#再代入が不可能な変数の定義">再代入が不可能な変数の定義</a></li>
+<li><a href="#再代入が可能な変数">再代入が可能な変数</a></li>
+<li><a href="#tips-なぜvalを使う">[tips]なぜvalを使う？</a></li>
+<li><a href="#変数の宣言時に型を指定する">変数の宣言時に型を指定する</a></li>
+<li><a href="#型">型？</a></li>
+<li><a href="#型を宣言しつつ変数を宣言する場合">型を宣言しつつ変数を宣言する場合</a></li>
+<li><a href="#tips-変数のルール">[tips]変数のルール</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#制御構文">制御構文</a>
+<ul>
+<li><a href="#if文">if文</a>
+<ul>
+<li><a href="#条件式">条件式</a></li>
+<li><a href="#比較演算子">比較演算子</a></li>
+<li><a href="#条件式のユースケース">条件式のユースケース</a></li>
+</ul></li>
+<li><a href="#when文">When文</a></li>
+<li><a href="#for文">for文</a>
+<ul>
+<li><a href="#コレクション">コレクション</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#クラス-メソッド">クラス、メソッド</a>
+<ul>
+<li><a href="#クラス">クラス</a>
+<ul>
+<li><a href="#コンストラクタ">コンストラクタ</a></li>
+</ul></li>
+<li><a href="#メソッド">メソッド</a>
+<ul>
+<li><a href="#メソッドを定義する">メソッドを定義する</a></li>
+</ul></li>
+<li><a href="#tips-name">[tips]$name</a>
+<ul>
+<li><a href="#呼び方">呼び方</a></li>
+<li><a href="#引数">引数</a></li>
+<li><a href="#戻り値">戻り値</a></li>
+<li><a href="#同名メソッド">同名メソッド</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav></div>
+			
+			<article class="post-content twemoji">
+				
+
+<h1 id="実行環境">実行環境&nbsp;<a class="anchor" href="#実行環境"><i class="small linkify icon"></i></a> </h1>
+
+<p>本当は実行環境をローカルに作りたいところですが、今回は皆さんで実行環境を合わせるためにWeb上のツールを使いましょう。</p>
+
+<p><a href="https://try.kotlinlang.org/#/Examples/Hello,%20world!/Simplest%20version/Simplest%20version.kt">https://try.kotlinlang.org/#/Examples/Hello,%20world!/Simplest%20version/Simplest%20version.kt</a></p>
+
+<h1 id="ハローワールド">ハローワールド&nbsp;<a class="anchor" href="#ハローワールド"><i class="small linkify icon"></i></a> </h1>
+
+<p>コンソール上にて <code>Hello world</code> を表示してみましょう。
+実行結果に何かを表示するときには <code>print()</code> 関数を使います。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="n">print</span><span class="p">(</span><span class="s">&#34;Hello world&#34;</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>printのかっこ内に文字を入力することでコンソール上に表示されます。</p>
+
+<p><code>fun main</code> ~~~　の当たりは今は必要なものだと思って流し読みしてください！</p>
+
+<h2 id="文字or数字">文字or数字&nbsp;<a class="anchor" href="#文字or数字"><i class="small linkify icon"></i></a> </h2>
+
+<p>今回は <code>Hello world</code> という <code>文字列</code> を表示しました。
+文字列は上記の通り <code>&quot; &quot;</code> のようにダブルコーテーションで囲むことで明示的に文字列であるとコンパイラーに伝えます。</p>
+
+<p>では数字はどうでしょう。
+数字では特に何かで囲むことなく表示することがあります。ではやってみましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="n">print</span><span class="p">(</span><span class="m">1</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>上の通り数字では特に囲う必要はありません。</p>
+
+<p>この仕様は <code>print()</code> だけに限らず後述する変数やメソッドの場合にも「文字列ならダブルコーテーションで囲む」「数字ならそのまま入力」するとなりますので忘れないようにしましょう。</p>
+
+<h1 id="変数">変数&nbsp;<a class="anchor" href="#変数"><i class="small linkify icon"></i></a> </h1>
+
+<p><code>Kotlin</code> に限らずプログラミングには「変数」と言われる概念が存在します。プログラミングの中ではデータは変数というもので扱います。データとは数字であったり文字列であったりします。</p>
+
+<p>変数という言葉は日常生活には馴染みがないですが、よく言われるのは「データを入れるための箱」と例えられるくらい簡単なものです。</p>
+
+<h2 id="変数の定義">変数の定義&nbsp;<a class="anchor" href="#変数の定義"><i class="small linkify icon"></i></a> </h2>
+
+<p>Kotlinには変数の定義の仕方がいくつかあります。</p>
+
+<ul>
+<li>後に再代入可能な型を宣言した変数</li>
+<li>後に再代入が不可能な型を宣言した変数</li>
+<li>後に再代入可能な型を宣言しない変数</li>
+<li>後に再代入不可能な型を宣言しない変数</li>
+</ul>
+
+<p>の４種類存在します。</p>
+
+<p>まず大きく分けて「再代入が可能かどうか」</p>
+
+<h3 id="代入">代入&nbsp;<a class="anchor" href="#代入"><i class="small linkify icon"></i></a> </h3>
+
+<p>先ほどから代入、再代入という言葉が出ていますがプログラミングにおける代入とは変数に値を入れることです。用語として今後出てくるので確実に覚えてください。</p>
+
+<h3 id="再代入が不可能な変数の定義">再代入が不可能な変数の定義&nbsp;<a class="anchor" href="#再代入が不可能な変数の定義"><i class="small linkify icon"></i></a> </h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">val</span> <span class="err">変数名 = 初期化する値</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>kotlinでは変数を定義する際に絶対に初期化する値を代入しなきゃいけません。なぜしなければならないかは明確に理由が存在しますが、今はしなければならないものとして考えておいてください。
+実際にval で宣言してみましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">val</span> <span class="py">amount</span> <span class="p">=</span> <span class="m">1</span>
+    <span class="k">val</span> <span class="py">name</span> <span class="p">=</span> <span class="s">&#34;山田&#34;</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>amount</code> という変数名で数字を入れています。
+また、次に <code>name</code> という変数名で <code>山田</code> という文字列を入れています。</p>
+
+<p>それぞれを出力するようにprint()の関数に変数を渡すとそれぞれ表示されます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">val</span> <span class="py">amount</span> <span class="p">=</span> <span class="m">1</span>
+    <span class="k">val</span> <span class="py">name</span> <span class="p">=</span> <span class="s">&#34;山田&#34;</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">name</span> <span class="p">=</span> <span class="s">&#34;ユキ&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>また、print後に再代入しようとするとコンパイルエラーとなりビルドは通りません。</p>
+
+<p>ここで再代入可能なほうに置き換えたらどうなるか確認してみましょう。</p>
+
+<h3 id="再代入が可能な変数">再代入が可能な変数&nbsp;<a class="anchor" href="#再代入が可能な変数"><i class="small linkify icon"></i></a> </h3>
+
+<p>再代入が可能な変数は <code>val</code> ではなく <code>var</code> として宣言します。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">amount</span> <span class="p">=</span> <span class="m">1</span>
+    <span class="k">var</span> <span class="py">name</span> <span class="p">=</span> <span class="s">&#34;山田&#34;</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">name</span> <span class="p">=</span> <span class="s">&#34;ユキ&#34;</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>val</code> -&gt; <code>var</code> に置き換えただけのコードです。
+先ほどは <code>ユキ</code> の部分でエラーが発生しましたが <code>var</code> は再代入が可能な変数の定義になるのでエラーは発生せず実行結果としても二度目の代入となる  <code>ユキ</code> が表示されます。</p>
+
+<h3 id="tips-なぜvalを使う">[tips]なぜvalを使う？&nbsp;<a class="anchor" href="#tips-なぜvalを使う"><i class="small linkify icon"></i></a> </h3>
+
+<p>一見してみるとvarが便利でvalを使う必要がないように思いますが決してそんなことはありません。
+少し難しい話にはなるんですが、自分でない誰かがコードを読んだときにこれらの違いが明確に出てきます。</p>
+
+<p>varが出てきたら意識的に「これは後で変更される値だな」という意識でリーディングしていくことになります。一方でvalで宣言されている変数を見た場合「この値は後程変更されることがない、実質宣言された変数として読み替えてリーディング’できる状態ということになります。</p>
+
+<p>今は少し理解は難しいかもしれませんが、意識的に変更がない変数は「val｝、変更がある場合は「var」を使っていくことだけは意識してみるといいと思います。</p>
+
+<h3 id="変数の宣言時に型を指定する">変数の宣言時に型を指定する&nbsp;<a class="anchor" href="#変数の宣言時に型を指定する"><i class="small linkify icon"></i></a> </h3>
+
+<p>変数の宣言時に「型」を指定することができます。</p>
+
+<h3 id="型">型？&nbsp;<a class="anchor" href="#型"><i class="small linkify icon"></i></a> </h3>
+
+<p>変数には型という概念が存在します。
+型とは変数に「文字列」か「整数」か「小数点」かなどその変数がどういった種類のものかを示すものです。
+例えば ageという変数があったとします。このageは入ったとしたら
+- １０歳（文字列）
+- 10 (整数）</p>
+
+<p>などが自然です。これが例えば</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">var</span> <span class="py">age</span><span class="p">:</span><span class="n">Float</span>  <span class="p">=</span> <span class="m">2.4</span> <span class="c1">// 2.4歳??</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>2.4歳のような小数点の値が入ると違和感が発生します。
+では変数にはどのような型が存在するでしょうか。</p>
+
+<p>色々ありますが代表的な種類としては以下です。</p>
+
+<ul>
+<li>Int</li>
+<li>String</li>
+<li>Float</li>
+<li>Boolean</li>
+</ul>
+
+<p>それぞれ入る値の種類が違います。</p>
+
+<p>例えば上の例だと</p>
+
+<p>Int -&gt;  符号つき整数 -2147483648～2147483647
+String -&gt; 文字列
+Float -&gt;    32ビット単精度浮動小数点数
+Boolean -&gt; 真偽値 True or False</p>
+
+<h3 id="型を宣言しつつ変数を宣言する場合">型を宣言しつつ変数を宣言する場合&nbsp;<a class="anchor" href="#型を宣言しつつ変数を宣言する場合"><i class="small linkify icon"></i></a> </h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">amount</span><span class="p">:</span><span class="n">Int</span> <span class="p">=</span> <span class="m">1</span>
+    <span class="k">var</span> <span class="py">name</span><span class="p">:</span><span class="n">String</span> <span class="p">=</span> <span class="s">&#34;山田&#34;</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">name</span> <span class="p">=</span> <span class="s">&#34;ユキ&#34;</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>変数名のあとに <code>:型</code> を置くことで宣言できます。</p>
+
+<p>これは絶対にするべきものではありません。書く人それぞれに「絶対にすべき」ケースがあったり「どちらでもいい」「むしろ書かない」などのルールが存在します。</p>
+
+<h3 id="tips-変数のルール">[tips]変数のルール&nbsp;<a class="anchor" href="#tips-変数のルール"><i class="small linkify icon"></i></a> </h3>
+
+<p>言語的なルールで数字から命名はスタートすることはできません
+またその他にもお作法的なルールが存在します。（絶対守る必要はないけど、多くの場合で守られているルール）</p>
+
+<ul>
+<li>変数名は小文字スタート大文字区切り　ex. userName mailAddress など</li>
+<li>単語スタート　英単語</li>
+</ul>
+
+<p>実践で変数を宣言する場合はルールを守ることで多人数開発時にスムーズになることがありますので守っていきましょう。</p>
+
+<h1 id="制御構文">制御構文&nbsp;<a class="anchor" href="#制御構文"><i class="small linkify icon"></i></a> </h1>
+
+<p>kotlinに限らずプログラミングでは制御構文と言われるものが存在します。
+例えば「ｘｘの時ｙｙする」ものだったり「ｘｘの間ｙｙを繰り返す」などの制御構文があります。具体的に下で説明していきます。</p>
+
+<h2 id="if文">if文&nbsp;<a class="anchor" href="#if文"><i class="small linkify icon"></i></a> </h2>
+
+<p>if文は「条件に合っているとき何かをする」といった制御構文です
+日常に置き換えてみると</p>
+
+<p>喫茶店に行く　もし「シフォンケーキがあったら」　シフォンケーキを注文する</p>
+
+<p>といったように「もし」「if」のように使います。</p>
+
+<p>これを実際にkotlinの構文に起こしてみると下のようになります</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">if</span><span class="p">(</span><span class="err">条件式</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 何かする
+</span><span class="c1"></span><span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>となります。今回のシフォンケースのでいうと条件式には「シフォンケーキがあったら」という条件式が入ります。</p>
+
+<p>if文の詳しい解説をする前に条件式について詳しく解説します。</p>
+
+<h3 id="条件式">条件式&nbsp;<a class="anchor" href="#条件式"><i class="small linkify icon"></i></a> </h3>
+
+<p>条件式とは真偽値が返ってくる式のことです。
+変数の型の説明で <code>Boolean</code> という型があることを説明しました。これは true or false　という２択の値が入る型です。Boolean型は真偽型と言われます。似たように真偽値も true or false のどちらかが返ってくる式のことを指します。
+では条件式と通常の式の違いはなんでしょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">val</span> <span class="py">number1</span> <span class="p">=</span> <span class="m">1</span><span class="p">+</span><span class="m">1</span>
+    <span class="k">val</span> <span class="py">number2</span> <span class="p">=</span> <span class="m">4</span><span class="p">-</span><span class="m">2</span>
+    <span class="k">val</span> <span class="py">boolean1</span> <span class="p">=</span> <span class="n">number1</span> <span class="p">==</span> <span class="n">number2</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">boolean1</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>number1 は <code>1+1</code> が加算されて <code>2</code> というint型の整数が入る通常の式です。
+number2も同様に <code>4-2</code> が実行され <code>2</code> が代入される通常の式です。
+そして boolean1 は number1 と number2 の値を <code>==</code> した値が入っています。これに何が入るかというと <code>true</code> という真偽値が入ります。</p>
+
+<p>この <code>==</code> というのは比較演算子と言われるものの一つです。</p>
+
+<h3 id="比較演算子">比較演算子&nbsp;<a class="anchor" href="#比較演算子"><i class="small linkify icon"></i></a> </h3>
+
+<p>演算子|意味|例|オペランドの型
+&mdash;&mdash;&ndash; | &mdash;- | &ndash; | &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;- |
+<code>&lt;</code> | 未満 | 2 &lt; 3    | 数値
+<code>&gt;</code>  | 超える | 2 &gt; 3 | 数値
+<code>&lt;=</code> | 以下 | 2 &lt;= 3 | 数値
+<code>&gt;=</code> | 以上 | 2 &gt;= 3 | 数値
+<code>==</code> | 等しい | 2 == 3 |任意
+<code>!=</code>  | 等しくない | 2 != 3 |任意</p>
+
+<p>改めて上のサンプルコードを見てみると <code>true</code> が返ってくるのがわかっているかと思います。</p>
+
+<p>ぶれましたが if文に戻ってみましょう。</p>
+
+<h3 id="条件式のユースケース">条件式のユースケース&nbsp;<a class="anchor" href="#条件式のユースケース"><i class="small linkify icon"></i></a> </h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">	<span class="k">val</span> <span class="py">tanakaAge</span> <span class="p">=</span> <span class="m">12</span>
+    <span class="k">val</span> <span class="py">yamadaAge</span> <span class="p">=</span> <span class="m">10</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">tanakaAge</span> <span class="p">&gt;</span> <span class="n">yamadaAge</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">print</span><span class="p">(</span><span class="s">&#34;田中のほうが年上です&#34;</span><span class="p">)</span>
+    <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>この例で式が評価されると <code>true</code> です。
+すると if文の中に入ってprint()関数が実行されます。 <code>{}</code> で挟まれた部分をブロックと言います。</p>
+
+<p>ただこれだともし田中のほうが年下だった場合に何も処理がされなくて困ります。</p>
+
+<p>その場合は <code>else</code> 文を使います。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">	<span class="k">val</span> <span class="py">tanakaAge</span> <span class="p">=</span> <span class="m">9</span>
+    <span class="k">val</span> <span class="py">yamadaAge</span> <span class="p">=</span> <span class="m">10</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">tanakaAge</span> <span class="p">&gt;</span> <span class="n">yamadaAge</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">print</span><span class="p">(</span><span class="s">&#34;田中のほうが年上です&#34;</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">print</span><span class="p">(</span><span class="s">&#34;田中のほうが年下です&#34;</span><span class="p">)</span>
+    <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>ifブロックの後で <code>else</code> をすることで「if条件文で当てはまらなかったら&hellip;?」のブロックを生成することができます。</p>
+
+<p>ただしこれでもまだ一つ抜けがあります。同い年だった場合です。
+その時は <code>else if</code> 文を使います。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">	<span class="k">val</span> <span class="py">tanakaAge</span> <span class="p">=</span> <span class="m">10</span>
+    <span class="k">val</span> <span class="py">yamadaAge</span> <span class="p">=</span> <span class="m">10</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">tanakaAge</span> <span class="p">&gt;</span> <span class="n">yamadaAge</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">print</span><span class="p">(</span><span class="s">&#34;田中のほうが年上です&#34;</span><span class="p">)</span>
+    <span class="p">}</span><span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">tanakaAge</span> <span class="p">==</span> <span class="n">yamadaAge</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">print</span><span class="p">(</span><span class="s">&#34;同い年です&#34;</span><span class="p">)</span>  
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">print</span><span class="p">(</span><span class="s">&#34;田中のほうが年下です&#34;</span><span class="p">)</span>
+    <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>これですべてのケースに対応することができました。</p>
+
+<h2 id="when文">When文&nbsp;<a class="anchor" href="#when文"><i class="small linkify icon"></i></a> </h2>
+
+<p>When文はif文に近い使い方ができます。対象をとってその値がｘｘだったら&hellip;?という使いかたをします。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">val</span> <span class="py">yamadaLevel</span> <span class="p">=</span> <span class="m">3</span>
+    <span class="k">when</span><span class="p">(</span><span class="n">yamadaLevel</span><span class="p">)</span> <span class="p">{</span>
+        <span class="m">0</span> <span class="p">-&gt;</span> <span class="n">print</span><span class="p">(</span><span class="s">&#34;初心者すぎます&#34;</span><span class="p">)</span>
+        <span class="m">1</span> <span class="p">-&gt;</span> <span class="n">print</span><span class="p">(</span><span class="s">&#34;もう一レベル上げて&#34;</span><span class="p">)</span>
+        <span class="m">2</span> <span class="p">-&gt;</span> <span class="n">print</span><span class="p">(</span><span class="s">&#34;合格です&#34;</span><span class="p">)</span>
+        <span class="k">else</span> <span class="p">-&gt;</span> <span class="n">print</span><span class="p">(</span><span class="s">&#34;値不正&#34;</span><span class="p">)</span>
+    <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>値を直接指定して使います。もう少し応用した使い方がありますが今はこの程度にしておきましょう。</p>
+
+<h2 id="for文">for文&nbsp;<a class="anchor" href="#for文"><i class="small linkify icon"></i></a> </h2>
+
+<p>for文は繰り返し処理をするための制御構文です。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1.</span><span class="p">.</span><span class="m">10</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>上の例は1から10まで繰り返すfor文です。</p>
+
+<p>実行してみてください。</p>
+
+<p>次にコレクションを使ったfor文をやります。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">val</span> <span class="py">list</span> <span class="p">=</span> <span class="n">arrayOf</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">30</span><span class="p">,</span><span class="m">22</span><span class="p">,</span><span class="m">14</span><span class="p">)</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="n">list</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>リストを渡すと一つずつ In の左の変数に取り入れられます。</p>
+
+<h3 id="コレクション">コレクション&nbsp;<a class="anchor" href="#コレクション"><i class="small linkify icon"></i></a> </h3>
+
+<p>上で雑に「リストを渡す」という言葉出てきましたが、変数をコレクション形式として扱う方法があります。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">intList</span> <span class="p">=</span> <span class="n">arrayOf</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">)</span>
+<span class="k">val</span> <span class="py">stringList</span> <span class="p">=</span> <span class="n">arrayOf</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">,</span><span class="s">&#34;b&#34;</span><span class="p">,</span><span class="s">&#34;c&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>arrayOf関数を使うことでコレクションとして使えます。</p>
+
+<p>コレクションの対象のコレクションにアクセスするには</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">val</span> <span class="py">stringList</span> <span class="p">=</span> <span class="n">arrayOf</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">,</span><span class="s">&#34;b&#34;</span><span class="p">,</span><span class="s">&#34;c&#34;</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">stringList</span><span class="na">[0]</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>[]</code> ないに数字を入れることで取り出せます。
+ちなみに注意するべきは 0 からスタートするという点です。一見１番目に入っていそうな <code>a</code> ですが 0番目に入っていますので注意。</p>
+
+<h1 id="クラス-メソッド">クラス、メソッド&nbsp;<a class="anchor" href="#クラス-メソッド"><i class="small linkify icon"></i></a> </h1>
+
+<p>Kotlinに限らず「オブジェクト指向」に則ったプログラミング言語はクラス、メソッドに処理を格納（カプセル化）することで人間が読みやすい、保守しやすいコードを作っていくことを前提に設計されています。</p>
+
+<p>オブジェクト指向は理解するのが少し難しい部分で、それだけで本になるほど大事ですが難しい部分です。オブジェクト指向は理解しなくてもコードは書けますが、いずれ理解しなければいけない日が来ます。が今日ではない！</p>
+
+<p>「クラス、メソッド」がオブジェクト指向においてどういう意味を持つのかは一旦置いておいて「クラス、メソッド」はどうやって使うのか　をまず理解してみましょう。</p>
+
+<h2 id="クラス">クラス&nbsp;<a class="anchor" href="#クラス"><i class="small linkify icon"></i></a> </h2>
+
+<p><code>Class</code> とは<code>オブジェクトの設計図</code> です。（説明が説明になっていないパターンのやつ）
+もう少しかみ砕いて言うと、クラス内にはオブジェクトを作る際に必要なデータやメソッド（後述、処理のことを言います）などが記述されています。</p>
+
+<p>定義の方法は簡単で</p>
+
+<pre><code>class `クラス名` {}
+</code></pre>
+
+<p>これらの中にデータやメソッド追加していくことで一つのクラスになります。</p>
+
+<p>クラスを作ってみましょう。
+名前と年齢の変数を定義した <code>User</code> というクラスを作ります。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">User</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span><span class="p">:</span><span class="n">String</span> <span class="p">=</span><span class="s">&#34;&#34;</span>
+    <span class="k">var</span> <span class="py">age</span><span class="p">:</span><span class="n">Int</span> <span class="p">=</span> <span class="m">0</span> 
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>ではこの <code>User</code> を使ってみます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">yamada</span> <span class="p">=</span> <span class="n">User</span><span class="p">()</span>
+    <span class="n">yamada</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&#34;yamada&#34;</span>
+    <span class="n">yamada</span><span class="p">.</span><span class="n">age</span> <span class="p">=</span> <span class="m">21</span>
+    
+    <span class="n">print</span><span class="p">(</span><span class="n">yamada</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">yamada</span><span class="p">.</span><span class="n">age</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>まずは１行目　<code>yamada</code> という変数名に <code>User</code> を代入しているのが見れるかと思います。
+先ほど作った <code>User</code> クラスを作り出し変数に格納しています。データの何もないユーザーオブジェクトを作ったわけです。
+このクラスを変数にぶち込むことを <code>インスタンス化</code> と言います。
+その後インスタンス化した <code>yamada</code> 変数の中身をいじっています。
+yamada(Userクラス)は <code>name</code> と <code>age</code> を持っているのでそれらをいじってユーザーに正常な値を代入します。</p>
+
+<p><code>yamada.name</code> .変数　とつなげることでクラス内に存在する変数を参照することができます。その後は今までの変数と同じように代入することができます。</p>
+
+<h3 id="コンストラクタ">コンストラクタ&nbsp;<a class="anchor" href="#コンストラクタ"><i class="small linkify icon"></i></a> </h3>
+
+<p>上の例ではインスタンス化したあと変数にアクセスしたことで yamada やら 21やらが代入できましたがこれだと少し困ったことがあります。</p>
+
+<p>代入し忘れ</p>
+
+<p>それを防ぐためにコンストラクタという仕組みがあります。
+要するにクラスをインスタンス化するときにnameもageも上げれば解決じゃない？という話です。</p>
+
+<p>どうやるか</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="k">val</span> <span class="py">name</span><span class="p">:</span><span class="n">String</span><span class="p">,</span><span class="k">val</span> <span class="py">age</span><span class="p">:</span><span class="n">Int</span><span class="p">)</span> <span class="p">{}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>非常に簡単でクラス宣言時に<code>()</code>を追加してそのまま<code>name</code> と<code>age</code>を宣言するだけです。こうすることでインスタンス化時にこれらの値が渡されないとコンパイルエラーとなります。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">  	<span class="k">val</span> <span class="py">yamada</span> <span class="p">=</span> <span class="n">User</span><span class="p">(</span><span class="s">&#34;yamada&#34;</span><span class="p">,</span><span class="m">23</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="メソッド">メソッド&nbsp;<a class="anchor" href="#メソッド"><i class="small linkify icon"></i></a> </h2>
+
+<p>メソッドは処理を切り分けるために使います。
+同じような処理が発生しそうであったり、処理をひとくくりにすることで可読性を担保するためにメソッドという形でまとめます。</p>
+
+<p>多くのメソッドはクラスに属しています。
+クラスをインスタンス化することで呼び出せる「インスタンスメソッド」とそうでなくとも呼び出せる「スタティックメソッド」の二種類存在します</p>
+
+<h3 id="メソッドを定義する">メソッドを定義する&nbsp;<a class="anchor" href="#メソッドを定義する"><i class="small linkify icon"></i></a> </h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="err">メソッド名() {
+</span><span class="err">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>基本の形はたったのこれだけです。一つ定義してみましょう。
+先ほどのUserクラスにメソッドを追加してみます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">User</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span><span class="p">:</span><span class="n">String</span> <span class="p">=</span><span class="s">&#34;&#34;</span>
+    <span class="k">var</span> <span class="py">age</span><span class="p">:</span><span class="n">Int</span> <span class="p">=</span> <span class="m">0</span> 
+    
+    <span class="k">fun</span> <span class="nf">displayUserName</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">&#34;私の名前は $name です&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>displayUserName()</code> というメソッドを用意してみました。
+メソッドの中身は名前を表示しているだけです。</p>
+
+<p>では下で実際にこの<code>displayUserName()</code> を呼び出して見ましょう。</p>
+
+<h2 id="tips-name">[tips]$name&nbsp;<a class="anchor" href="#tips-name"><i class="small linkify icon"></i></a> </h2>
+
+<p>kotlinでは簡単に文字列の中に変数を使うことができます。
+dollarを付けて、その後ろに変数名をいれるだけです。</p>
+
+<h3 id="呼び方">呼び方&nbsp;<a class="anchor" href="#呼び方"><i class="small linkify icon"></i></a> </h3>
+
+<p>メソッドを定義したら呼び出す必要があります。
+インスタンス化したクラスから <code>.</code>で繋いで定義したメソッドを呼びます。</p>
+
+<p>上の例で作った <code>displayUserName</code> を呼び出してみましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+  	<span class="k">val</span> <span class="py">yamada</span> <span class="p">=</span> <span class="n">User</span><span class="p">()</span>
+    <span class="n">yamada</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&#34;yamada&#34;</span>
+    <span class="n">yamada</span><span class="p">.</span><span class="n">age</span> <span class="p">=</span> <span class="m">21</span>
+    
+   <span class="n">yamada</span><span class="p">.</span><span class="n">displayUserName</span><span class="p">()</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>インスタンス化したUserである<code>yamada</code>から<code>.</code>でつなげて作った<code>displayUserName()</code>を呼び出しています。かっこを忘れないように気を付けてくださいね。</p>
+
+<h3 id="引数">引数&nbsp;<a class="anchor" href="#引数"><i class="small linkify icon"></i></a> </h3>
+
+<p>メソッドには引数を持たせることができます。
+引数とはメソッドを呼び出すときにメソッドの実行に必要な値を外から渡すことができる仕組みです。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">methodName</span><span class="p">(</span><span class="err">引数、引数、、、、）</span> <span class="p">{</span>
+    <span class="err">処理</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例を挙げます 先ほどのUserクラスを使いまわします。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+  	<span class="k">val</span> <span class="py">yamada</span> <span class="p">=</span> <span class="n">User</span><span class="p">()</span>
+    <span class="n">yamada</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&#34;yamada&#34;</span>
+    <span class="n">yamada</span><span class="p">.</span><span class="n">age</span> <span class="p">=</span> <span class="m">21</span>
+    
+  	<span class="n">yamada</span><span class="p">.</span><span class="n">displayUserName</span><span class="p">(</span><span class="s">&#34;おいどん&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">User</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span><span class="p">:</span><span class="n">String</span> <span class="p">=</span><span class="s">&#34;&#34;</span>
+    <span class="k">var</span> <span class="py">age</span><span class="p">:</span><span class="n">Int</span> <span class="p">=</span> <span class="m">0</span> 
+    
+    <span class="c1">// personalPronounsは一人称の意
+</span><span class="c1"></span>    <span class="k">fun</span> <span class="nf">displayUserName</span><span class="p">(</span><span class="n">personalPronouns</span><span class="p">:</span><span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">&#34;$personalPronouns の名前は $name です&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>さっきの<code>displayUserName</code>は一人称が「私」で固定でしたが、そんなもんその時の気分によります。だから外から指定できたほうがいいでしょう。</p>
+
+<p>ということで引数として<code>personalPronouns</code>という<code>String</code>を渡すことにしました。
+これによって外から値を指定できたことになります。</p>
+
+<p>また引数はいくらでも渡すことができます。</p>
+
+<p>例を挙げます。一人称が　おいどん　なのに語尾が　です　は違和感しかありませんので語尾も指定できるようにします。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">fun</span> <span class="nf">displayUserName</span><span class="p">(</span><span class="n">personalPronouns</span><span class="p">:</span><span class="n">String</span><span class="p">,</span><span class="n">endingOfWord</span><span class="p">:</span><span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">&#34;$personalPronouns の名前は $name $endingOfWord&#34;</span><span class="p">)</span>
+    <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>,</code> で連ねていきます。呼び出すほうも同様に<code>,</code>で引数を連ねます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="n">yamada</span><span class="p">.</span><span class="n">displayUserName</span><span class="p">(</span><span class="s">&#34;おいどん&#34;</span><span class="p">,</span><span class="s">&#34;ごわす&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="戻り値">戻り値&nbsp;<a class="anchor" href="#戻り値"><i class="small linkify icon"></i></a> </h3>
+
+<p>戻り値とはメソッドを呼び出し、最終的に戻ってくる値のことです。
+つまりメソッドとは何らかの処理を実行し、その処理結果に応じて何らかの値を返すことができるということです。</p>
+
+<p>使い方は</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">methodName</span><span class="p">(</span><span class="err">引数、引数、、、、）</span><span class="p">:</span><span class="err">戻り値の型</span> <span class="p">{</span>
+    <span class="err">処理</span>
+    <span class="k">return</span> <span class="err">戻り値</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例を挙げます。
+Userクラスをまた使いまわしますが、今のところageを入力したのに特に使っていませんでした。使いましょう。引数として現在の年を入力することで生まれ年を返すメソッドを作ります。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">fun</span> <span class="nf">calculateBirthYear</span><span class="p">(</span><span class="n">currentYear</span><span class="p">:</span><span class="n">Int</span><span class="p">):</span><span class="n">Int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">currentYear</span> <span class="p">-</span> <span class="n">age</span><span class="p">;</span>
+    <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>現在の年から年齢を引くことで（穴がありまくりですが今回はちょっと見逃して）生まれ年が計算できます。</p>
+
+<p>では呼び出してみましょう。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+  	<span class="k">val</span> <span class="py">yamada</span> <span class="p">=</span> <span class="n">User</span><span class="p">()</span>
+    <span class="n">yamada</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&#34;yamada&#34;</span>
+    <span class="n">yamada</span><span class="p">.</span><span class="n">age</span> <span class="p">=</span> <span class="m">23</span>
+    
+  	<span class="n">yamada</span><span class="p">.</span><span class="n">displayUserName</span><span class="p">(</span><span class="s">&#34;おいどん&#34;</span><span class="p">)</span>
+    <span class="n">yamada</span><span class="p">.</span><span class="n">displayUserName</span><span class="p">(</span><span class="s">&#34;おいどん&#34;</span><span class="p">,</span><span class="s">&#34;ごわす&#34;</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">yamada</span><span class="p">.</span><span class="n">calculateBirthYear</span><span class="p">(</span><span class="m">2018</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">User</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span><span class="p">:</span><span class="n">String</span> <span class="p">=</span><span class="s">&#34;&#34;</span>
+    <span class="k">var</span> <span class="py">age</span><span class="p">:</span><span class="n">Int</span> <span class="p">=</span> <span class="m">0</span> 
+    
+    <span class="c1">// personalPronounsは一人称の意
+</span><span class="c1"></span>    <span class="k">fun</span> <span class="nf">displayUserName</span><span class="p">(</span><span class="n">personalPronouns</span><span class="p">:</span><span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">&#34;$personalPronouns の名前は $name です&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="k">fun</span> <span class="nf">displayUserName</span><span class="p">(</span><span class="n">personalPronouns</span><span class="p">:</span><span class="n">String</span><span class="p">,</span><span class="n">endingOfWord</span><span class="p">:</span><span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">&#34;$personalPronouns の名前は $name $endingOfWord&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="k">fun</span> <span class="nf">calculateBirthYear</span><span class="p">(</span><span class="n">currentYear</span><span class="p">:</span><span class="n">Int</span><span class="p">):</span><span class="n">Int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">currentYear</span> <span class="p">-</span> <span class="n">age</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="同名メソッド">同名メソッド&nbsp;<a class="anchor" href="#同名メソッド"><i class="small linkify icon"></i></a> </h3>
+
+<p>メソッドは同名の物を定義することができます。
+ただし、引数が違う場合のみです。
+Javaでは同名メソッドを複数用意しますがkotlinではそういったことはしなくてもいいような仕組みが用意されています。</p>
+
+<p>まずは一般的な同名メソッドの使い方から見ていきましょう</p>
+
+<p>というかすでに実はやっていますね。
+例で挙げた <code>displayUserName</code> は同名ですが引数が違うおかげで定義できています。
+もしこれが引数が同じで処理の中身だけ違う場合はコンパイルエラーが発生するでしょう。コンパイラーがどちらを呼び出せばいいか判断できないからです。</p>
+
+<p>では次にkotlinでの応用的な使いかたを見てみます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">fun</span> <span class="nf">displayUserName</span><span class="p">(</span><span class="n">personalPronouns</span><span class="p">:</span><span class="n">String</span><span class="p">,</span><span class="n">endingOfWord</span><span class="p">:</span><span class="n">String</span> <span class="p">=</span> <span class="s">&#34;です&#34;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">&#34;$personalPronouns の名前は $name $endingOfWord&#34;</span><span class="p">)</span>
+    <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>endingofWord</code> を定義してすぐに代入しています。今回は<code>です</code>を代入しています。
+こうすることで<code>です</code>が初期値として定義され、もう一つのメソッドは消すことができます。コード全文を見てみればピントくると思います。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+  	<span class="k">val</span> <span class="py">yamada</span> <span class="p">=</span> <span class="n">User</span><span class="p">()</span>
+    <span class="n">yamada</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&#34;yamada&#34;</span>
+    <span class="n">yamada</span><span class="p">.</span><span class="n">age</span> <span class="p">=</span> <span class="m">23</span>
+    
+  	<span class="n">yamada</span><span class="p">.</span><span class="n">displayUserName</span><span class="p">(</span><span class="s">&#34;おいどん&#34;</span><span class="p">)</span>
+    <span class="n">yamada</span><span class="p">.</span><span class="n">displayUserName</span><span class="p">(</span><span class="s">&#34;おいどん&#34;</span><span class="p">,</span><span class="s">&#34;ごわす&#34;</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">yamada</span><span class="p">.</span><span class="n">calculateBirthYear</span><span class="p">(</span><span class="m">2018</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">User</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span><span class="p">:</span><span class="n">String</span> <span class="p">=</span><span class="s">&#34;&#34;</span>
+    <span class="k">var</span> <span class="py">age</span><span class="p">:</span><span class="n">Int</span> <span class="p">=</span> <span class="m">0</span> 
+    
+    <span class="c1">// personalPronounsは一人称の意
+</span><span class="c1"></span>    
+    <span class="k">fun</span> <span class="nf">displayUserName</span><span class="p">(</span><span class="n">personalPronouns</span><span class="p">:</span><span class="n">String</span><span class="p">,</span><span class="n">endingOfWord</span><span class="p">:</span><span class="n">String</span> <span class="p">=</span> <span class="s">&#34;です&#34;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">&#34;$personalPronouns の名前は $name $endingOfWord&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="k">fun</span> <span class="nf">calculateBirthYear</span><span class="p">(</span><span class="n">currentYear</span><span class="p">:</span><span class="n">Int</span><span class="p">):</span><span class="n">Int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">currentYear</span> <span class="p">-</span> <span class="n">age</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>displayUserName()</code>は一つに減りましたが、引数が一つの<code>yamada.displayUserName(&quot;おいどん&quot;)</code>もコンパイルエラーなく実行され、さらに初期値である<code>です</code>が表示されているかと思います。</p>
+
+			</article>
+		</section>
+		<section class="ui secondary attached segment dream-tags">
+
+	<a class="ui label yellow " href="/tags/android" title="android">android</a>
+
+	<a class="ui label blue " href="/tags/androidtips" title="androidtips">androidtips</a>
+
+	<a class="ui label brown " href="/tags/django" title="django">django</a>
+
+	<a class="ui label teal " href="/tags/flutter" title="flutter">flutter</a>
+
+	<a class="ui label green " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+
+	<a class="ui label blue " href="/tags/python" title="python">python</a>
+
+
+		</section><section class="ui secondary  attached segment share row box"><div class="author"><img class="avatar" src="/img/avatar3.svg">
+	
+</div>
+<div class="info grow flexbox">
+	<p class="name">Yuki Sasaki</p>
+	<p class="desc">Android Developer.Learning Android Kotlin-Spring Python-Django.</p>
+</div>
+<section class="buttons row box">
+	<div class="facebook none flexbox" href="#" onclick="window.open(
+			'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+			'facebook-share-dialog',
+			'width=626,height=436'); return false;">
+		<button class="ui facebook button"><i class="facebook icon"></i>Share</button>
+	</div>
+	<div class="twitter none flexbox" onclick="window.open('https://twitter.com/intent/tweet?text=Read &quot;flutterTips-003 &quot; by @YukiYamadaJP https:\/\/sasakiyuki.github.io\/posts\/kotlin_tutorial_basic_001\/','_self')">
+		<button class="ui twitter button"><i class="twitter icon"></i>Tweet</button>
+	</div>
+</section>
+</section>
+		<section class="ui secondary attached segment copyright">
+			
+
+		</section>
+		<div class="ui secondary bottom attached stacked segment disqus"><div id="disqus_thread"></div>
+<script>
+	var disqus_config = function () {
+		this.page.url = 'https:\/\/sasakiyuki.github.io\/posts\/kotlin_tutorial_basic_001\/';
+		this.page.identifier = 'f52c54572bf04f80dc91ca12a47a4a0d';
+	};
+	(function() {
+   	var d = document, s = d.createElement('script');
+   	s.src = 'https://' + 'dream-plus' + '.disqus.com/embed.js';
+   	s.setAttribute('data-timestamp', +new Date());
+   	(d.head || d.body).appendChild(s);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+		
+	</div>
+</div>
+
+			</div>
+			<div class="back"><nav class="ui top secondary menu bar">
+	<div class="item">
+		<i class="inverted big link bullseye icon dream-flip-toggle" title=""></i>
+	</div>
+	
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+	
+	
+	
+		
+		
+		<div class="item">
+			<a href="https://github.com/SasakiYuki" target="	_blank">
+				<i id="ico" class="inverted big link github icon" title="GitHub"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+		<div class="item">
+			<a href="mailto:wacorggen@gmail.com" target="	_blank">
+				<i id="ico" class="inverted big link mail icon" title="Email"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+		<div class="item">
+			<a href="https://twitter.com/YukiYamadaJP" target="	_blank">
+				<i id="ico" class="inverted big link twitter icon" title="Twitter"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+	
+		
+		
+		<div class="item">
+			<a href="https://medium.com/@wacorggen" target="	_blank">
+				<i id="ico" class="inverted big link medium icon" title="Medium"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+	
+	<div class="item right">
+		<a href="/posts/index.xml">
+			<i class="inverted big link rss icon" title=""></i>
+		</a>
+	</div>
+	
+</nav>
+
+<div class="ui centered grid about">
+	<div class="sixteen wide mobile fifteen wide tablet fifteen wide computer column about">
+		<section class="ui stacked segments">
+			<div class="ui inverted segment">
+				<article class="twemoji"><h1>So, Who Am I?</h1>
+
+<hr />
+
+<p><br>
+ヤマダユキと申します。</p>
+
+<p>都内に住むソフトウェアエンジニアです。
+技術ブログや日々の話など雑多に書きます。</p>
+
+<p>基本休日もコード書いてることが多いですが、その他の趣味にカメラとDTM civ6などもあります。</p>
+
+<p>経歴等は<a href="https://www.wantedly.com/users/17800328">Wantedly</a>をご確認ください。
+相談は上部mailやtwitterDMなどどこでもどうぞ。</p>
+</article>
+			</div>
+		</section>
+	</div>
+</div>
+</div>
+		</div>
+	</div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/site.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script><script src="https://twemoji.maxcdn.com/2/twemoji.min.js?2.6"></script>
+
+
+	<script>
+		window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+		ga('create', 'UA-129178253-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script id="dsq-count-scr" src="//dream-plus.disqus.com/count.js" async></script>
+
+
+<script>
+	(function () {
+	  console.log("Twemoji up and making stuff colourful!");
+	  for (var b = document.getElementsByClassName("twemoji"), a = 0; a < b.length; a++) {
+		twemoji.parse(b[a]);
+	  }
+	})();
+</script>
+
+</body>
+</html>

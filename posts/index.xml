@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>flutterTips-003</title>
+      <link>https://sasakiyuki.github.io/posts/kotlin_tutorial_basic_001/</link>
+      <pubDate>Tue, 20 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/kotlin_tutorial_basic_001/</guid>
+      <description>flutterでローカルにデータを保存する方法を説明します。導入から実装まで。今回はSharedPreferences。</description>
+    </item>
+    
+    <item>
       <title>flutterTips-001-WebViewを使う</title>
       <link>https://sasakiyuki.github.io/posts/flutter_tips_001/</link>
       <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
