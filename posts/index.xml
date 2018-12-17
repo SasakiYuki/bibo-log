@@ -39,6 +39,24 @@
     </item>
     
     <item>
+      <title>トランザクションアナウンスにはNISのタイムスタンプを使う必要がある</title>
+      <link>https://sasakiyuki.github.io/posts/nem_tips_001_transaction_timstamp/</link>
+      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/nem_tips_001_transaction_timstamp/</guid>
+      <description>NEMのドキュメントには書いてないそれ。内容はトランザクションアナウンスにはNISのタイムスタンプを使う必要があるという話。</description>
+    </item>
+    
+    <item>
+      <title>Kotlin超入門①</title>
+      <link>https://sasakiyuki.github.io/posts/kotlin_tutorial_basic_1/</link>
+      <pubDate>Fri, 30 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sasakiyuki.github.io/posts/kotlin_tutorial_basic_1/</guid>
+      <description>Kotlin超入門。ギリギリオブジェクト指向をかすらないような内容。</description>
+    </item>
+    
+    <item>
       <title>AndroidTips-003-リスト表示をしてみる</title>
       <link>https://sasakiyuki.github.io/posts/android_tips_003/</link>
       <pubDate>Fri, 09 Nov 2018 00:00:00 +0000</pubDate>

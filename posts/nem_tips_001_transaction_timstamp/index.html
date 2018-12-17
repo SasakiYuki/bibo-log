@@ -2,7 +2,7 @@
 <html lang="ja-jp">
 <head>
 	<title>
-	AndroidTips-002-画面移動してみる
+	トランザクションアナウンスにはNISのタイムスタンプを使う必要がある
 </title><style>
 body {
 	display: block;
@@ -20,7 +20,7 @@ body, body.pushable {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="author" content="map[name:Yuki Yamada]" />
-	<meta name="description" content="Android初心者向け記事。Intentの説明" />
+	<meta name="description" content="NEMのドキュメントには書いてないそれ。内容はトランザクションアナウンスにはNISのタイムスタンプを使う必要があるという話。" />
 <meta name="generator" content="Hugo 0.41" />
 
 <link rel="shortcut icon" href="/img/defaultFav.ico">
@@ -88,19 +88,19 @@ var bodyBgSwitchIndex = 0;var gradients = [
 </h3>
 </section><section class="ui attached center aligned inverted segment sidebar-dream-tags">
 
-	<a class="ui label pink " href="/tags/android" title="android">android</a>
+	<a class="ui label violet " href="/tags/android" title="android">android</a>
 
-	<a class="ui label orange " href="/tags/androidtips" title="androidtips">androidtips</a>
+	<a class="ui label blue " href="/tags/androidtips" title="androidtips">androidtips</a>
 
-	<a class="ui label teal " href="/tags/django" title="django">django</a>
+	<a class="ui label red " href="/tags/django" title="django">django</a>
 
-	<a class="ui label olive " href="/tags/flutter" title="flutter">flutter</a>
+	<a class="ui label purple " href="/tags/flutter" title="flutter">flutter</a>
 
-	<a class="ui label blue " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+	<a class="ui label violet " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
 
-	<a class="ui label teal " href="/tags/kotlin" title="kotlin">kotlin</a>
+	<a class="ui label orange " href="/tags/kotlin" title="kotlin">kotlin</a>
 
-	<a class="ui label green " href="/tags/nem" title="nem">nem</a>
+	<a class="ui label brown " href="/tags/nem" title="nem">nem</a>
 
 	<a class="ui label teal " href="/tags/python" title="python">python</a>
 
@@ -282,21 +282,21 @@ var bodyBgSwitchIndex = 0;var gradients = [
 			</div></div>
 		<div id="tag-category" class=" content"><section class="ui attached center aligned inverted segment dream-tags none flexbox">
 
-	<a class="ui label green " href="/tags/android" title="android">android</a>
+	<a class="ui label olive " href="/tags/android" title="android">android</a>
 
-	<a class="ui label violet " href="/tags/androidtips" title="androidtips">androidtips</a>
+	<a class="ui label teal " href="/tags/androidtips" title="androidtips">androidtips</a>
 
-	<a class="ui label purple " href="/tags/django" title="django">django</a>
+	<a class="ui label orange " href="/tags/django" title="django">django</a>
 
-	<a class="ui label violet " href="/tags/flutter" title="flutter">flutter</a>
+	<a class="ui label pink " href="/tags/flutter" title="flutter">flutter</a>
 
-	<a class="ui label pink " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
+	<a class="ui label brown " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
 
-	<a class="ui label teal " href="/tags/kotlin" title="kotlin">kotlin</a>
+	<a class="ui label red " href="/tags/kotlin" title="kotlin">kotlin</a>
 
-	<a class="ui label teal " href="/tags/nem" title="nem">nem</a>
+	<a class="ui label yellow " href="/tags/nem" title="nem">nem</a>
 
-	<a class="ui label green " href="/tags/python" title="python">python</a>
+	<a class="ui label brown " href="/tags/python" title="python">python</a>
 
 </section><section class="ui attached inverted segment dream-categories both flexbox">
 				<div class="inverted accordion">
@@ -419,320 +419,140 @@ var bodyBgSwitchIndex = 0;var gradients = [
 	<div class="sixteen wide mobile fifteen wide tablet twelve wide computer column post-list">
 		<section class="ui secondary top attached black segment post-head">
 			<h1 class="post-title">
-				AndroidTips-002-画面移動してみる
+				トランザクションアナウンスにはNISのタイムスタンプを使う必要がある
 			</h1>
 			<div class="sub header">
-					<div><span><i class="calendar outline icon"></i>Oct 3, 2018</span></div><div><span class="disqusComment"><i class="comment outline icon"></i><a href="https://sasakiyuki.github.io/posts/android_tips_002/#disqus_thread" class="disqus-comment-count" data-disqus-identifier="c29ed6c4d610a9db0542b3d203cf5169"></a></span></div>
-					<div><span><i class="clock outline icon"></i>2 min read</span></div>
-					<div><span><i class="angle double up icon"></i> Oct 3, 2018</span></div>
+					<div><span><i class="calendar outline icon"></i>Dec 17, 2018</span></div><div><span class="disqusComment"><i class="comment outline icon"></i><a href="https://sasakiyuki.github.io/posts/nem_tips_001_transaction_timstamp/#disqus_thread" class="disqus-comment-count" data-disqus-identifier="729be9920409fab1fe69807ad2a3d509"></a></span></div>
+					<div><span><i class="clock outline icon"></i>1 min read</span></div>
+					<div><span><i class="angle double up icon"></i> Dec 17, 2018</span></div>
 			</div>
 			<hr><div class="toc"><nav id="TableOfContents">
 <ul>
-<li><a href="#サンプルコード">サンプルコード</a></li>
-<li><a href="#intent">Intent</a></li>
-<li><a href="#もう少しスマートにintentしてみる">もう少しスマートにIntentしてみる</a>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#どこから呼び出されているかメソッドが使われている部分を見れば一目でわかる">どこから呼び出されているかメソッドが使われている部分を見れば一目でわかる</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li><a href="#値を渡すには">値を渡すには？</a></li>
+<li><a href="#トランザクションアナウンスにはnisのタイムスタンプを使う必要がある">トランザクションアナウンスにはNISのタイムスタンプを使う必要がある</a></li>
+<li><a href="#経緯">経緯</a></li>
+<li><a href="#アクションプラン">アクションプラン</a></li>
+<li><a href="#やってみる">やってみる</a></li>
+<li><a href="#おまけ">おまけ</a></li>
 </ul>
 </nav></div>
 			
 			<article class="post-content twemoji">
 				
 
-<h1 id="サンプルコード">サンプルコード&nbsp;<a class="anchor" href="#サンプルコード"><i class="small linkify icon"></i></a> </h1>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin:MainActivity" data-lang="kotlin:MainActivity"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin:MainActivity" data-lang="kotlin:MainActivity">import android.content.Context
-import android.content.Intent
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+<h1 id="トランザクションアナウンスにはnisのタイムスタンプを使う必要がある">トランザクションアナウンスにはNISのタイムスタンプを使う必要がある&nbsp;<a class="anchor" href="#トランザクションアナウンスにはnisのタイムスタンプを使う必要がある"><i class="small linkify icon"></i></a> </h1>
 
-class MainActivity : AppCompatActivity() {
+<p>タイトルの通りですが、トランザクションを作る際のタイムスタンプはローカルタイムではなくNISから持ってくる必要があります。</p>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setupButton()
-    }
+<p><code>「は～～？そんなことドキュメントに書いてないぞ～～？」</code>
+と思った方　正解です。書いてません。</p>
 
-    private fun setupButton() {
-        redImageView.setOnClickListener {
-            val intent = Intent(this@MainActivity, FormActivity::class.java)
-            startActivity(intent)
-        }
-    }
-}</code></pre></td></tr></table>
-</div>
-</div>
-<h1 id="intent">Intent&nbsp;<a class="anchor" href="#intent"><i class="small linkify icon"></i></a> </h1>
+<h1 id="経緯">経緯&nbsp;<a class="anchor" href="#経緯"><i class="small linkify icon"></i></a> </h1>
 
-<p>アプリの中での移動に限らず外への移動（例えば標準のWebブラウザに飛ばす）などに用いられる画面遷移用のコンポーネントです。
-どこに移動するか　や　移動の際に渡すデータ　などを指定できます。
-今回は単純に移動するためだけに使っているシンプルな使い方です。その際のIntentのコンストラクタは</p>
+<p>書こうと思った経緯ですが、某日　NEMFourm にて</p>
+
+<p>とある人物がテストネットのHTTPS対応ノードを立てた旨をフォーラムに投稿しました。
+すると一つのコメントが書き込まれました。
+「なんで『nis.useNetworkTime = false』してんの？」と。要するにNetworktaimeを使わないよう設定していることを指摘しています。
+これはミスではなくテストネットを立てた人にはある考えがあっての行動でした。
+その考えというのが以下です。</p>
+
+<p>「nem-libraryをはじめとする有名NEMLibraryはマシーンローカルタイムを使っているため」
+とのことでした。確かに主要なライブラリはローカルタイムを採用しているものが多く、テストネットということもありこれは非常に理にかなった提案であると私も思いました。
+また、テストネットを立てた人は「本来であればライブラリ側が対応するべきものですので一時的なdisableであり、こういった状況が改善されればこうする必要もなくなる」と仰っております。</p>
+
+<h1 id="アクションプラン">アクションプラン&nbsp;<a class="anchor" href="#アクションプラン"><i class="small linkify icon"></i></a> </h1>
+
+<p>さて、これを読んだエンジニアは何をすべきかは明白かと思います。ライブラリにPR送る？自プロダクトではTimeStampをしっかりセットする？どちらも正しそう。
+が、そもそもNetworktimeはどのように取得すればいいでしょう。先ほども言ったようにこの仕様は特にNISのドキュメントには書かれていません。</p>
+
+<p>APIはこれです</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">Intent</span><span class="p">(</span><span class="n">context</span><span class="p">:</span><span class="n">Context</span><span class="p">,</span> <span class="err">移動するクラス</span><span class="p">:</span><span class="n">Class</span><span class="p">&lt;?&gt;)</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="p">(</span><span class="n">NODE_DOMAIN</span><span class="p">)/</span><span class="n">time</span><span class="p">-</span><span class="n">sync</span><span class="p">/</span><span class="n">network</span><span class="p">-</span><span class="n">time</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>です。今回の例では</p>
+<h1 id="やってみる">やってみる&nbsp;<a class="anchor" href="#やってみる"><i class="small linkify icon"></i></a> </h1>
+
+<p>まず上のAPIを叩くとレスポンス形式としては</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">            <span class="k">val</span> <span class="py">intent</span> <span class="p">=</span> <span class="n">Intent</span><span class="p">(</span><span class="k">this</span><span class="n">@MainActivity</span><span class="p">,</span> <span class="n">FormActivity</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span></code></pre></td></tr></table>
-</div>
-</div>
-<p>でインスタンス化しています。
-それでstartActivityをすることで画面移動をしています。</p>
-
-<h1 id="もう少しスマートにintentしてみる">もう少しスマートにIntentしてみる&nbsp;<a class="anchor" href="#もう少しスマートにintentしてみる"><i class="small linkify icon"></i></a> </h1>
-
-<p>上の方法で十分Intentは要件を満たしていますがもう少しスマートに書いてみましょう。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin:MainActivity" data-lang="kotlin:MainActivity"><span class="lnt">1
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin:MainActivity" data-lang="kotlin:MainActivity">    private fun setupButton() {
-        redImageView.setOnClickListener {
-            startActivity(FormActivity.createIntent(this@MainActivity))
-        }
-    }</code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin:FormActivity" data-lang="kotlin:FormActivity"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin:FormActivity" data-lang="kotlin:FormActivity">class FormActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_form)
-    }
-
-    companion object {
-        fun createIntent(context: Context): Intent {
-            return Intent(context, FormActivity::class.java)
-        }
-    }
-}</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+<span class="nt">&#34;sendTimeStamp&#34;</span><span class="p">:</span> <span class="mi">117445044449</span><span class="p">,</span>
+<span class="nt">&#34;receiveTimeStamp&#34;</span><span class="p">:</span> <span class="mi">117445044449</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>移動したいActivity側にStaticなメソッドの <code>createIntent</code> というものを用意しました。
-これは自分(FormActivity)に飛ぶようなIntentを返すメソッドです。これを用意することにより</p>
+<p>シンプルな二つのタイムスタンプだけが含まれています。
+これのsendTimeStampを使用します。</p>
 
-<h4 id="どこから呼び出されているかメソッドが使われている部分を見れば一目でわかる">どこから呼び出されているかメソッドが使われている部分を見れば一目でわかる&nbsp;<a class="anchor" href="#どこから呼び出されているかメソッドが使われている部分を見れば一目でわかる"><i class="small linkify icon"></i></a> </h4>
+<p>これをトランザクションアナウンスAPIを叩くときに使いましょう！！</p>
 
-<p>といった利点があります。</p>
+<p>ちなみに拙作ラクーンウォレットでもローカルタイムを渡しているので対応する必要があります。</p>
 
-<p>さらに、このcreateIntentもっと大きなメリットがあります。それは値を渡しつつIntentする際に真価を発揮します。</p>
+<p>前提として使用させてもらっている nem-kotlin ではtimestampを渡すとそれが使われますが、渡さない場合ローカルタイムを自動的にセットしてくれています。<a href="https://github.com/ryuta46/nem-kotlin/blob/19640f0f5ab7cd4424dc02c1cae3669cc0efe25f/src/main/kotlin/com/ryuta46/nemkotlin/transaction/TransactionHelper.kt#L102">該当コード</a></p>
 
-<h1 id="値を渡すには">値を渡すには？&nbsp;<a class="anchor" href="#値を渡すには"><i class="small linkify icon"></i></a> </h1>
+<p>ので、timestampを渡すよう修正します。ラクーン側のコードは汚いんでホントは見てほしくないんですが<a href="https://github.com/SasakiYuki/RaccoonWallet/blob/1fae2df69fb662c92417bcade841efda736e7e1b/app/src/main/java/wacode/yamada/yuki/nempaymentapp/utils/NemCommons.kt">ここ</a>です。</p>
 
-<p>先ほどIntentの説明で移動の際に渡すデータを指定することができるといいました。
-せっかくなのでやってみましょう。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">            <span class="k">val</span> <span class="py">intent</span> <span class="p">=</span> <span class="n">Intent</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">FormActivity</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
-            <span class="n">intent</span><span class="p">.</span><span class="n">putExtra</span><span class="p">(</span><span class="s">&#34;intent_name&#34;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></code></pre></td></tr></table>
-</div>
-</div>
-<p>先ほどと同じようにIntentを作ったあとそのIntentに対して <code>putExtra</code> を呼んでいます。
-このputExtraを使うことでIntentに値をセットすることができ引数は</p>
+<h1 id="おまけ">おまけ&nbsp;<a class="anchor" href="#おまけ"><i class="small linkify icon"></i></a> </h1>
+
+<p>このAPIに限りませんがNEMのタイムスタンプはちょっと特殊です。
+例えばこれをそのままDateに変換すると全然違う日付になります。
+ではどうするか。
+NEMのジェネシスブロック時間を足す必要があります。</p>
+
+<p>ちなみにジェネシスブロックの生成日は</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="n">intent</span><span class="p">.</span><span class="n">puExtra</span><span class="p">(</span><span class="err">キ</span><span class="n">ー</span><span class="p">:</span><span class="n">String</span><span class="p">,</span><span class="err">値</span><span class="p">(</span><span class="n">Int</span> <span class="n">String</span> <span class="n">Double</span><span class="p">...</span><span class="err">だいたいなんでも！</span><span class="p">)</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="n">cal</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="m">2015</span><span class="p">,</span> <span class="m">3</span> <span class="p">-</span> <span class="m">1</span><span class="p">,</span> <span class="m">29</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="m">25</span><span class="p">)</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>です。サイズの制限はありますが、ごにょっとすれば大体なんでも送れます。なんでも送ればいいというわけでもないですが。</p>
-
-<p>キーはStringで渡すときに指定して、取り出すときにそれを使います。</p>
-
-<p>では実際にコードを見てみましょう。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin:FormActivity" data-lang="kotlin:FormActivity"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin:FormActivity" data-lang="kotlin:FormActivity">class FormActivity : AppCompatActivity() {
-    private val name by lazy {
-        intent.getStringExtra(INTENT_KEY_NAME)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_form)
-        setupTextView()
-        setupButton()
-    }
-
-    private fun setupTextView() {
-        textView.text = name
-    }
-
-    private fun setupButton() {
-        blueImageView.setOnClickListener {
-            startActivity(MainActivity.createIntent(this@FormActivity))
-        }
-    }
-
-    companion object {
-        private const val INTENT_KEY_NAME = &#34;intent_key_name&#34;
-        fun createIntent(context: Context, name: String): Intent {
-            val intent = Intent(context, FormActivity::class.java)
-            intent.putExtra(INTENT_KEY_NAME, name)
-            return intent
-        }
-    }
-}</code></pre></td></tr></table>
-</div>
-</div>
-<p>まずは <code>createIntent</code> を見ていただくとわかると思いますが引数が変わっています。
-先ほどはcontextだけでしたが <code>name</code> を新規で渡すようになりました。
-そしてintentにputしてそのIntentを返しています。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin:MainActivity" data-lang="kotlin:MainActivity"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin:MainActivity" data-lang="kotlin:MainActivity">            startActivity(FormActivity.createIntent(this@MainActivity,&#34;ヤマダユキ&#34;))</code></pre></td></tr></table>
-</div>
-</div>
-<p>MainActivity からこのように呼ばれると intent_key_name の名前空間に　”ヤマダユキ”　が入ります。</p>
-
-<p>そしてFormActivityが起動されたら</p>
+<p>です。これを足してDateを正しい日付にします。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin">    <span class="k">private</span> <span class="k">val</span> <span class="py">name</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
-        <span class="n">intent</span><span class="p">.</span><span class="n">getStringExtra</span><span class="p">(</span><span class="n">INTENT_KEY_NAME</span><span class="p">)</span>
-    <span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">val</span> <span class="py">date</span> <span class="p">=</span> <span class="n">Date</span><span class="p">(</span><span class="n">nodeList</span><span class="p">.</span><span class="n">sendTimeStamp</span> <span class="p">+</span> <span class="n">nemStartTimeLong</span><span class="p">)</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>この部分でnameに先ほど入れた”ヤマダユキ”が呼び出され代入されます。</p>
+<p>これで表示等には困らないでしょう！よかったよかった</p>
 
-<p>この by lazy ですが　nameが必要になった時に初めて中かっこの中の処理を実行する、といったものです。</p>
-
-<p>さて、もう気づいたかと思いますが <code>createIntent</code> を使うことによってnameという引数を絶対に忘れることなくIntentを起動できるようになりました。もしこれがcreateIntentを使わないやり方で起動しようとすると nameを置き忘れたり、そもそもIntentのキーを間違えたり、はたまた変更箇所が増えたり、、と色々問題が出てきそうですね。</p>
-
-<p>ぜひスマートに画面遷移していきましょう。</p>
+<p>皆さん参考までに～</p>
 
 			</article>
 		</section>
 		<section class="ui secondary attached segment dream-tags">
 
-	<a class="ui label blue " href="/tags/android" title="android">android</a>
+	<a class="ui label brown " href="/tags/android" title="android">android</a>
 
 	<a class="ui label violet " href="/tags/androidtips" title="androidtips">androidtips</a>
 
 	<a class="ui label violet " href="/tags/django" title="django">django</a>
 
-	<a class="ui label yellow " href="/tags/flutter" title="flutter">flutter</a>
+	<a class="ui label violet " href="/tags/flutter" title="flutter">flutter</a>
 
 	<a class="ui label pink " href="/tags/fluttertips" title="fluttertips">fluttertips</a>
 
-	<a class="ui label green " href="/tags/kotlin" title="kotlin">kotlin</a>
+	<a class="ui label brown " href="/tags/kotlin" title="kotlin">kotlin</a>
 
-	<a class="ui label teal " href="/tags/nem" title="nem">nem</a>
+	<a class="ui label blue " href="/tags/nem" title="nem">nem</a>
 
-	<a class="ui label orange " href="/tags/python" title="python">python</a>
+	<a class="ui label yellow " href="/tags/python" title="python">python</a>
 
 
-		</section><section class="ui secondary  attached segment share row box"><div class="author"><img class="avatar" src="/img/avatar3.svg">
+		</section><section class="ui secondary  attached segment share row box"><div class="author"><img class="avatar" src="/img/avatar2.svg">
 	
 </div>
 <div class="info grow flexbox">
@@ -746,7 +566,7 @@ class MainActivity : AppCompatActivity() {
 			'width=626,height=436'); return false;">
 		<button class="ui facebook button"><i class="facebook icon"></i>Share</button>
 	</div>
-	<div class="twitter none flexbox" onclick="window.open('https://twitter.com/intent/tweet?text=Read &quot;AndroidTips-002-画面移動してみる &quot; by @YukiYamadaJP https:\/\/sasakiyuki.github.io\/posts\/android_tips_002\/','_self')">
+	<div class="twitter none flexbox" onclick="window.open('https://twitter.com/intent/tweet?text=Read &quot;トランザクションアナウンスにはNISのタイムスタンプを使う必要がある &quot; by @YukiYamadaJP https:\/\/sasakiyuki.github.io\/posts\/nem_tips_001_transaction_timstamp\/','_self')">
 		<button class="ui twitter button"><i class="twitter icon"></i>Tweet</button>
 	</div>
 </section>
@@ -758,8 +578,8 @@ class MainActivity : AppCompatActivity() {
 		<div class="ui secondary bottom attached stacked segment disqus"><div id="disqus_thread"></div>
 <script>
 	var disqus_config = function () {
-		this.page.url = 'https:\/\/sasakiyuki.github.io\/posts\/android_tips_002\/';
-		this.page.identifier = 'c29ed6c4d610a9db0542b3d203cf5169';
+		this.page.url = 'https:\/\/sasakiyuki.github.io\/posts\/nem_tips_001_transaction_timstamp\/';
+		this.page.identifier = '729be9920409fab1fe69807ad2a3d509';
 	};
 	(function() {
    	var d = document, s = d.createElement('script');
