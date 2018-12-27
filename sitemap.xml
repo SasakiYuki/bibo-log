@@ -18,6 +18,11 @@
   </url>
   
   <url>
+    <loc>https://sasakiyuki.github.io/posts/game_2018_of_the_year/</loc>
+    <lastmod>2018-12-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sasakiyuki.github.io/posts/nem_tips_001_transaction_timstamp/</loc>
     <lastmod>2018-12-17T00:00:00+00:00</lastmod>
   </url>
@@ -118,6 +123,12 @@
   </url>
   
   <url>
+    <loc>https://sasakiyuki.github.io/tags/game/</loc>
+    <lastmod>2018-12-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://sasakiyuki.github.io/tags/kotlin/</loc>
     <lastmod>2018-11-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -144,6 +155,12 @@
   <url>
     <loc>https://sasakiyuki.github.io/tags/</loc>
     <lastmod>2018-11-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sasakiyuki.github.io/tags/%E3%82%AF%E3%82%BD%E3%82%B2%E9%83%A8/</loc>
+    <lastmod>2018-12-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
