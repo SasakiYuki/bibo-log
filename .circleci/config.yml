@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: felicianotech/docker-hugo:0.54.0
+      - image: felicianotech/docker-hugo:latest
     steps:
       - checkout
       - run: git config --global user.name "SasakiYuki"
