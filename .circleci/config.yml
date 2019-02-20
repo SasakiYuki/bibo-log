@@ -7,10 +7,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: "Run Hugo"
         command: HUGO_ENV=production hugo -v -s src/
       - run:
-        name: "Test Website"
         command: htmlproofer src/public --allow-hash-href --check-html --empty-alt-ignore --disable-external
       - run: git config --global user.name "SasakiYuki"
       - run: git config --global user.email "wacorggen@gmail.com"
