@@ -1,26 +1,26 @@
-version: 2
+version:                2
 jobs:
   build:
       docker:
-      - image: felicianotech/docker-hugo:0.50
-    working_directory: ~/project
+      - image:          felicianotech/docker-hugo:0.50
+    working_directory:  ~/project
     steps:
       - checkout
             - run:
-          name: "Run Hugo"
-          command: HUGO_ENV=production hugo -v -s src/
+          name:         "Run Hugo"
+          command:      HUGO_ENV=production hugo -v -s src/
       - run:
-          name: "Test Website"
-          command: htmlproofer src/public --allow-hash-href --check-html --empty-alt-ignore --disable-external
-      - run: git config --global user.name "SasakiYuki"
-      - run: git config --global user.email "wacorggen@gmail.com"
-      - run: git submodule sync
-      - run: git submodule update --init --recursive
-      - run: git submodule foreach git pull origin master
-      - run: git clone git@github.com:SasakiYuki/SasakiYuki.github.io.git public
-      - run: hugo
+          name:         "Test Website"
+          command:      htmlproofer src/public --allow-hash-href --check-html --empty-alt-ignore --disable-external
+      - run:            git config --global user.name "SasakiYuki"
+      - run:            git config --global user.email "wacorggen@gmail.com"
+      - run:            git submodule sync
+      - run:            git submodule update --init --recursive
+      - run:            git submodule foreach git pull origin master
+      - run:            git clone git@github.com:SasakiYuki/SasakiYuki.github.io.git public
+      - run:            hugo
       #- run:
-      #    name: "Test Website"
-      #    command: htmlproofer ~/project/public --allow-hash-href --check-html --empty-alt-ignore
+      #    name:        "Test Website"
+      #    command:     htmlproofer ~/project/public --allow-hash-href --check-html --empty-alt-ignore
       - deploy:
-          command: cd public && git add -A . && git diff --cached --exit-code --quiet || git commit -m "Rebuilding site" && git push origin master
+          command:      cd public && git add -A . && git diff --cached --exit-code --quiet || git commit -m "Rebuilding site" && git push origin master
