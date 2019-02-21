@@ -1,1 +1,52 @@
-./posts.toml
+baseURL = "https://sasakiyuki.github.io/"
+languageCode = "ja-jp"
+defaultContentLanguage = "jp"
+title = "ヤマダユキの備忘log"
+theme = "dream-plus"
+paginate = 4
+enableRobotsTXT = true
+disqusShortname = "dream-plus"
+
+ignoreFiles = ["content/404.md", "content/about.md", "content/cards/\\.*"]
+
+pygmentsCodeFences = true
+pygmentsUseClasses = true
+pygmentsOptions = "linenos=table"
+
+#Enable Hugo Emoji Conversion
+enableEmoji=true
+
+[params]
+	favicon = "/img/defaultFav.ico"
+
+	#Set whether you're hosting "cards" or "post"
+	contentType = "posts"
+	siteStartYear = 2018
+	[params.author]
+		name = "YukiYamada"
+		description = "Just a random blog for random stuff, mostly tech-related."
+		avatar = "https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png"
+		motto = "Android Developer.Learning Android Kotlin-Spring Python-Django."
+
+	[params.features]
+		twitterEmoji = true
+		toc = true
+		shareCard = true
+		enableToc = true
+		customCSS = ["https://cdn.rawgit.com/UtkarshVerma/hugo-dream-plus/ae11561d/exampleSite/static/css/highlight.css"]
+
+	[params.background]
+		colorBG = true
+
+	[params.tags]
+		enabled = true
+
+	[params.categories]
+		enabled = true
+
+[social]
+	email = "wacorggen@gmail.com"
+	github = "SasakiYuki"
+	medium = "wacorggen"
+	twitter = "YukiYamadaJP"
+	siteStartYear = 2018
