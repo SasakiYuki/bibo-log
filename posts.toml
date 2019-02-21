@@ -17,33 +17,32 @@ pygmentsOptions = "linenos=table"
 enableEmoji=true
 
 [params]
-	author = "YukiYamada"
-	description = "Just a random blog for random stuff, mostly tech-related."
-	avatar = "https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png"
-	motto = "Android Developer.Learning Android Kotlin-Spring Python-Django."
-	enableToc = true
-	enableShareCard = true
-
-
 	favicon = "/img/defaultFav.ico"
-
-  	#Background settings
-	enableColorBG= true
-
-	#Post-displaying Settings
-	enableTags = true
-	enableCategories = true
-
-	customCSS = ["https://cdn.rawgit.com/UtkarshVerma/hugo-dream-plus/ae11561d/exampleSite/static/css/highlight.css"]
-
-	#Cards or posts shown per page
-	itemsPerPage = 4
 
 	#Set whether you're hosting "cards" or "post"
 	contentType = "posts"
+	siteStartYear = 2018
+	[params.author]
+		name = "YukiYamada"
+		description = "Just a random blog for random stuff, mostly tech-related."
+		avatar = "https://raw.githubusercontent.com/SasakiYuki/bibo-log/master/static/images/icon/snowman_white.png"
+		motto = "Android Developer.Learning Android Kotlin-Spring Python-Django."
 
-	#Enable Twitter Emoji
-	twitterEmoji=true
+	[params.features]
+		twitterEmoji = true
+		toc = true
+		shareCard = true
+		enableToc = true
+		customCSS = ["https://cdn.rawgit.com/UtkarshVerma/hugo-dream-plus/ae11561d/exampleSite/static/css/highlight.css"]
+
+	[params.background]
+		colorBG = true
+
+	[params.tags]
+		enabled = true
+
+	[params.categories]
+		enabled = true
 
 [social]
 	email = "wacorggen@gmail.com"
