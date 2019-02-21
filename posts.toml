@@ -8,6 +8,8 @@ pygmentsCodeFences = true
 pygmentsUseClasses = true
 pygmentsOptions = "linenos=table"
 
+ignoreFiles = ["content/404.md", "content/about.md", "content/cards/\\.*"]
+
 disqusShortname = "dream-plus"
 
 enableRobotsTXT = true
