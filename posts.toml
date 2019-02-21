@@ -3,16 +3,15 @@ languageCode = "ja-jp"
 defaultContentLanguage = "jp"
 title = "ヤマダユキの備忘log"
 theme = "dream-plus"
+paginate = 4
+enableRobotsTXT = true
+disqusShortname = "dream-plus"
+
+ignoreFiles = ["content/404.md", "content/about.md", "content/cards/\\.*"]
 
 pygmentsCodeFences = true
 pygmentsUseClasses = true
 pygmentsOptions = "linenos=table"
-
-ignoreFiles = ["content/404.md", "content/about.md", "content/cards/\\.*"]
-
-disqusShortname = "dream-plus"
-
-enableRobotsTXT = true
 
 #Enable Hugo Emoji Conversion
 enableEmoji=true
